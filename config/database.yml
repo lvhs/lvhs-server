@@ -51,6 +51,7 @@ test:
 #
 production:
   <<: *default
+  url: <%= ENV['DATABASE_URL'] %>
   database: lvhs_production
   username: lvhs
   password: <%= ENV['LVHS_DATABASE_PASSWORD'] %>
