@@ -35,15 +35,15 @@ class Api::V1::ApiController < ActionController::API
     render json: { error: e.to_s, error_codes: error_codes, remaining_attempts: remaining_attempts }, status: 403
   end
 
-  rescue_from Net::SMTPAuthenticationError,
-              Net::SMTPServerBusy,
-              Net::SMTPSyntaxError,
-              Net::SMTPFatalError,
-              Net::SMTPUnknownError do |e|
-    logger.error e
-    logger.debug e.backtrace.join("\n")
-    render json: { error: e.to_s }, status: 500
-  end
+  #rescue_from Net::SMTPAuthenticationError,
+  #            Net::SMTPServerBusy,
+  #            Net::SMTPSyntaxError,
+  #            Net::SMTPFatalError,
+  #            Net::SMTPUnknownError do |e|
+  #  logger.error e
+  #  logger.debug e.backtrace.join("\n")
+  #  render json: { error: e.to_s }, status: 500
+  #end
 
   def self.response_example(code, response_data)
     json = JSON.pretty_generate(response_data)
