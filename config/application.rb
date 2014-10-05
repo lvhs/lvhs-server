@@ -23,7 +23,7 @@ module Lvhs
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
 
     # Set timezone
-    config.time_zone = 'Tokyo'
+    config.time_zone = 'Asia/Tokyo'
     config.active_record.default_timezone = :local
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.

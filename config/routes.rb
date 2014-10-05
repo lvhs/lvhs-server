@@ -1,4 +1,17 @@
 Rails.application.routes.draw do
+  root 'teaser/home#index'
+
+  namespace :api do
+    namespace :v1 do
+      resources :home, only: [:index] do
+      end
+
+      resources :artist, only: [:show] do
+      end
+    end
+  end
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
