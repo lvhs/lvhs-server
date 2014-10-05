@@ -47,6 +47,8 @@ end
 
 # Use unicorn as the app server
 # gem 'unicorn'
+gem 'puma'
+gem 'foreman'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -65,3 +67,10 @@ gem 'apns'
 
 # http://qiita.com/yuki24/items/feb72ee1f280434d5a5f
 gem 'did_you_mean', group: [:development, :test]
+
+# heroku variable manager
+gem 'figaro'
+
+gem 'kaminari'
+
+gem 'newrelic_rpm'

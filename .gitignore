@@ -17,3 +17,6 @@
 
 .secret
 vendor/bundler
+
+# Ignore application configuration
+/config/application.yml
