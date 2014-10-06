@@ -11,6 +11,10 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :app do
+    root :to => "home#index"
+    resources :artist, only: [:show]
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

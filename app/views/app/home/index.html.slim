@@ -1,0 +1,7 @@
+.container
+  .row
+    - artist_hash = { "myfirststory" => "My First Story", "anotherstory" => "Another Story", "wrongcity" => "Wrong City", "swankydank" => "Swanky Dank", "loth" => "LOTH" }
+    - %w(myfirststory anotherstory wrongcity swankydank loth).each do |artist|
+      .col-md-10.col-md-offset-1 style="margin-top: 10px;"
+        = image_tag "artist/#{artist}.jpg", :width => "100%"
+        h3 style="color: #fff; position: absolute; bottom: 5%; left: 10%; text-shadow: 0 0 2px #333; " #{artist_hash[artist]}

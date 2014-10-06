@@ -76,3 +76,5 @@ gem 'figaro'
 gem 'kaminari'
 
 gem 'newrelic_rpm'
+gem 'bootstrap-sass'
+gem 'autoprefixer-rails'
