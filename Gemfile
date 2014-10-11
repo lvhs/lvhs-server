@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby "2.1.2"
+ruby '2.1.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.4'
@@ -22,27 +22,9 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
-gem 'sdoc', '~> 0.4.0',          group: :doc
+gem 'sdoc', '~> 0.4.0', group: :doc
 
-gem "rails-api"
-
-# Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-group :development, :test do
-  gem 'spring'
-  gem 'spring-commands-rspec'
-  gem 'rspec-rails'
-  gem 'guard-rspec'
-  gem 'spork-rails'
-  gem 'guard-spork'
-  gem 'childprocess'
-  gem 'rubocop'
-  gem 'bugspots' # https://github.com/igrigorik/bugspots
-end
-
-group :test do
-  gem 'selenium-webdriver'
-  gem 'capybara'
-end
+gem 'rails-api'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -64,11 +46,8 @@ gem 'oj'
 gem 'slim-rails'
 
 # http://qiita.com/sue738/items/c2ce141cf24f9f1dbf01
-gem 'apns'
+#gem 'apns'
 #gem 'gcm'
-
-# http://qiita.com/yuki24/items/feb72ee1f280434d5a5f
-gem 'did_you_mean', group: [:development, :test]
 
 # heroku variable manager
 gem 'figaro'
@@ -78,3 +57,45 @@ gem 'kaminari'
 gem 'newrelic_rpm'
 gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
+
+gem 'rails_config'
+
+gem 'draper'
+
+# Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+group :development, :test do
+  gem 'spring'
+  gem 'spring-commands-rspec'
+  gem 'rspec-rails'
+  gem 'guard-rspec'
+  gem 'spork-rails'
+  gem 'guard-spork'
+  gem 'childprocess'
+
+  gem 'rubocop'
+  gem 'bugspots'     # https://github.com/igrigorik/bugspots
+  gem 'did_you_mean' # http://qiita.com/yuki24/items/feb72ee1f280434d5a5f
+
+  # https://www.infinum.co/the-capsized-eight/articles/top-8-tools-for-ruby-on-rails-code-optimization-and-cleanup
+  gem 'traceroute'
+  gem 'rack-mini-profiler'
+  gem 'bullet'
+  gem 'brakeman', :require => false
+  gem 'rails_best_practices'
+  gem 'rubycritic', :require => false
+
+  # http://logictkt.hatenablog.com/entry/2014/10/09/210737
+  gem 'awesome_print'
+  gem 'rails-erd'
+  gem 'letter_opener_web'
+  gem 'better_errors'
+end
+
+group :test do
+  gem 'selenium-webdriver'
+  gem 'capybara'
+
+  gem 'colored'
+  gem 'deadweight', :require => 'deadweight/hijack/rails'
+end
+

@@ -3,10 +3,13 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :home, only: [:index] do
-      end
+      resources :home, only: [:index]
 
-      resources :artist, only: [:show] do
+      resources :artist, only: [:show]
+
+      # CA Reward
+      namespace :ca do
+        resources :pointback, only: [:index]
       end
     end
   end
@@ -14,6 +17,11 @@ Rails.application.routes.draw do
   namespace :app do
     root :to => "home#index"
     resources :artist, only: [:show]
+
+    # CA Reward
+    namespace :ca do
+      resources :error, only: [:index]
+    end
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
