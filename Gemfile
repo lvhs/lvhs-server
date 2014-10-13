@@ -67,6 +67,8 @@ gem 'activeadmin', github: 'activeadmin'
 gem 'devise'
 gem 'cancancan'
 
+gem 'rails_12factor', group: :production
+
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 group :development, :test do
   gem 'spring'
