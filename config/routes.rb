@@ -1,11 +1,14 @@
 Rails.application.routes.draw do
+  devise_for :staffs, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
+
   root 'teaser/home#index'
 
   namespace :api do
     namespace :v1 do
       resources :home, only: [:index]
 
-      resources :artist, only: [:show]
+      resources :artists, only: [:show]
 
       # CA Reward
       namespace :ca do
@@ -15,12 +18,30 @@ Rails.application.routes.draw do
   end
 
   namespace :app do
-    root :to => "home#index"
-    resources :artist, only: [:show]
+    root :to => 'home#index'
+
+    resources :artists, only: [:show]
 
     # CA Reward
     namespace :ca do
       resources :error, only: [:index]
+    end
+  end
+
+  namespace :ope do
+    root :to => 'home#index'
+
+    resources :admin, only: [:index] do
+      collection do
+        resources :label
+      end
+    end
+
+    resources :artists, only: [:show, :create, :update, :delete] do
+      member do
+        resources :youtube
+        resources :stats, only: [:index]
+      end
     end
   end
 

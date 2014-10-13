@@ -1,3 +1,24 @@
+domain: 'lvhs.jp'
+
 ca:
     api_key:  '4245437727b92542'
     media_id: '3893'
+
+twitter:
+    id: 'livehous'
+    app_name: 'lvhs'
+    consumer_key: 'EGzgxTbElhj89aNINpiPaUi1E'
+    consumer_secret: 'ai75r82vckTNGa0MeFNM5i0U8x0hi6qHboMqIX4VwEwV2d1XCy'
+    access_token: '2843135600-HFfmFDLwSahwndozvtQPqdcU4Gm2XNsMeSOiyRO'
+    access_token_secret: 'SWwdPzBJqvZmunPccsHanqzN8cVCDMXfhvsPhwsQf1ZMo'
+
+    app_only_authentication: 'https://api.twitter.com/oauth2/token'
+    request_token_url: 'https://api.twitter.com/oauth/request_token'
+    authorize_url: 'https://api.twitter.com/oauth/authorize'
+    access_token_url: 'https://api.twitter.com/oauth/access_token'
+
+    callback_url: ''
+
+facebook:
+    app_id: '658555114258291'
+    app_secret: '79e9bb429372e2bab42381c62ea49cc9'

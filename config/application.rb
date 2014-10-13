@@ -34,5 +34,7 @@ module Lvhs
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
     config.i18n.default_locale = :ja
 
+    # Middleware
+    config.middleware.use ActionDispatch::Flash
   end
 end

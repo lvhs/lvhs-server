@@ -62,6 +62,10 @@ gem 'rails_config'
 
 gem 'draper'
 
+# Ope
+gem 'activeadmin', github: 'activeadmin'
+gem 'devise'
+
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 group :development, :test do
   gem 'spring'

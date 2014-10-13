@@ -10,6 +10,7 @@
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
 require 'securerandom'
+require 'socket'
 
 def secure_token
   token_file = Rails.root.join('.secret')
@@ -24,4 +25,23 @@ def secure_token
   end
 end
 
+def cookie_domain
+  if ENV['SERVER_DOMAIN']
+    ".#{ ENV['SERVER_DOMAIN'] }"
+  else
+    nil
+  end
+end
+
+def cookie_param
+  param = {
+    key: ENV['SESSION_KEY'] || "_lvhs_session_#{Rails.env}",
+    expire_after: 1.months
+  }
+  domain = cookie_domain
+  param[:cookie_domain] = domain if domain
+  param
+end
+
 Lvhs::Application.config.secret_key_base = secure_token
+Lvhs::Application.config.session_store(:cookie_store, cookie_param)
