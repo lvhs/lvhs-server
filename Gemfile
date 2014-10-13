@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 ruby '2.1.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.4'
+gem 'rails', '4.1.6'
 # Use mysql as the database for Active Record
 gem 'mysql2'
 # Use SCSS for stylesheets
@@ -65,6 +65,7 @@ gem 'draper'
 # Ope
 gem 'activeadmin', github: 'activeadmin'
 gem 'devise'
+gem 'cancancan'
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 group :development, :test do
@@ -84,7 +85,7 @@ group :development, :test do
   gem 'traceroute'
   gem 'rack-mini-profiler'
   gem 'bullet'
-  gem 'brakeman', :require => false
+  #gem 'brakeman', :require => false
   gem 'rails_best_practices'
   gem 'rubycritic', :require => false
 

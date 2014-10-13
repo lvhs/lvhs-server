@@ -1,9 +1,10 @@
 ActiveAdmin.register Staff do
-  permit_params :email, :password, :password_confirmation
+  permit_params :email, :password, :password_confirmation, :role
 
   index do
     selectable_column
     id_column
+    column :role
     column :email
     column :current_sign_in_at
     column :sign_in_count
@@ -12,6 +13,7 @@ ActiveAdmin.register Staff do
   end
 
   filter :email
+  filter :role
   filter :current_sign_in_at
   filter :sign_in_count
   filter :created_at
@@ -21,6 +23,7 @@ ActiveAdmin.register Staff do
       f.input :email
       f.input :password
       f.input :password_confirmation
+      f.input :role
     end
     f.actions
   end
