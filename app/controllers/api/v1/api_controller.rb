@@ -57,7 +57,7 @@ code: #{code}
   private
 
   def client_ip
-    request.headers["HTTP_X_PLATINUM_REAL_IP"]
+    request.headers["HTTP_X_LVHS_REAL_IP"]
   end
 
   def transactions_filter_with_lock
@@ -65,27 +65,29 @@ code: #{code}
     ActiveRecord::Base.transaction do
       begin
         yield
-      rescue LockError::FailedAction => e
-        lock_record = e.record
-        customer_service_token = lock_record.customer_service_token rescue nil
-        logger.info "Failed action happend",
-                    failed_member: customer_service_token,
-                    lock_error: :failed_action,
-                    failed_action: lock_record.failed_action
-      rescue LockError::MemberLocked => e
-        lock_record = e.record
-        customer_service_token = lock_record.customer_service_token rescue nil
-        logger.info "Accessed by locked member",
-                    failed_member: customer_service_token,
-                    lock_error: :member_locked,
-                    failed_action: lock_record.failed_action
-      rescue LockError::IpAddressLocked => e
-        lock_record = e.record
-        customer_service_token = lock_record.member.customer_service_token rescue nil
-        logger.info "Acceessed by IP address locked member",
-                    failed_member: customer_service_token,
-                    lock_error: :ip_address_locked,
-                    failed_action: lock_record.action
+      #rescue LockError::FailedAction => e
+      #  lock_record = e.record
+      #  customer_service_token = lock_record.customer_service_token rescue nil
+      #  logger.info "Failed action happend",
+      #              failed_member: customer_service_token,
+      #              lock_error: :failed_action,
+      #              failed_action: lock_record.failed_action
+      #rescue LockError::MemberLocked => e
+      #  lock_record = e.record
+      #  customer_service_token = lock_record.customer_service_token rescue nil
+      #  logger.info "Accessed by locked member",
+      #              failed_member: customer_service_token,
+      #              lock_error: :member_locked,
+      #              failed_action: lock_record.failed_action
+      #rescue LockError::IpAddressLocked => e
+      #  lock_record = e.record
+      #  customer_service_token = lock_record.member.customer_service_token rescue nil
+      #  logger.info "Acceessed by IP address locked member",
+      #              failed_member: customer_service_token,
+      #              lock_error: :ip_address_locked,
+      #              failed_action: lock_record.action
+      rescue => e
+        puts e
       end
     end
     raise ActiveRecord::RecordInvalid, lock_record if lock_record
