@@ -11,7 +11,7 @@ Lvhs::Application.routes.draw do
       resources :artists, only: [:show]
 
       # CA Reward
-      namespace :ca do
+      namespace :car do
         resources :pointback, only: [:index]
       end
     end
@@ -23,7 +23,7 @@ Lvhs::Application.routes.draw do
     resources :artists, only: [:show]
 
     # CA Reward
-    namespace :ca do
+    namespace :car do
       resources :error, only: [:index]
     end
   end
