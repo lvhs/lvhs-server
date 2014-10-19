@@ -104,5 +104,7 @@ group :test do
 
   gem 'colored'
   gem 'deadweight', :require => 'deadweight/hijack/rails'
+  gem 'test-unit'
+  # gem 'test-unit-full'
 end
 

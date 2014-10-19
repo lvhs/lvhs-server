@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="SJIS-win"?>
+<response>
+<total_cnt>1</total_cnt>
+<data_cnt>1</data_cnt>
+<m_owner_id>807</m_owner_id>
+<registered_cnt>1</registered_cnt>
+<lottery_cnt>0</lottery_cnt>
+<lottery_people_cnt>0</lottery_people_cnt>
+<is_lottery_participation>0</is_lottery_participation>
+<user_rank>10</user_rank>
+<list_view>
+<ad>
+<c_id><![CDATA[3670]]></c_id>
+<scheme />
+<ad_id><![CDATA[3670-3893]]></ad_id>
+<c_owner_id><![CDATA[857]]></c_owner_id>
+<content_name><![CDATA[今日のアプリ]]></content_name>
+<content_owner_name />
+<career><![CDATA[1111]]></career>
+<cate_id><![CDATA[41]]></cate_id>
+<site_type><![CDATA[10]]></site_type>
+<banner_text_1><![CDATA[今日のアプリ]]></banner_text_1>
+<banner_img_1><![CDATA[http://img.mobadme.jp:80/restimgs/mobadme/banner/00/03/670_1.png]]></banner_img_1>
+<banner_img_2><![CDATA[http://img.mobadme.jp:80/restimgs/mobadme/banner/00/03/670_2.png]]></banner_img_2>
+<banner_img_alt><![CDATA[無料]]></banner_img_alt>
+<content_exp><![CDATA[今日のアプリは最新のアプリケーション情報や、iPhoneに最適化されたWEBサイト、お得な情報盛りだくさんのポータルアプリです。新着・ランキング・ピックアップと様々なカテゴライズで情報は毎日追加されます。]]></content_exp>
+<attribute><![CDATA[7]]></attribute>
+<appli_url><![CDATA[https://itunes.apple.com/jp/app/jin-rinoapuri/id497912832]]></appli_url>
+<platform><![CDATA[2]]></platform>
+<distributors><![CDATA[1]]></distributors>
+<max_point><![CDATA[20]]></max_point>
+<reward_cate_id><![CDATA[000000]]></reward_cate_id>
+<kbn><![CDATA[1]]></kbn>
+<count_type_for_user><![CDATA[アプリインストール後、起動で成果となります。]]></count_type_for_user>
+<banner_id><![CDATA[RxdI15]]></banner_id>
+<pb_wait_time><![CDATA[15分程度]]></pb_wait_time>
+<ad_qr_img><![CDATA[http://sp.ca-reward.jp/reward/web/img/qr_img_RxdI15.png]]></ad_qr_img>
+<ad_tag_of_point_back><![CDATA[http://ad.mobadme.jp/cl/click.php?c_id=3670&m_id=3893&t_id=i1&guid=ON&user_id=AAA&guid=ON]]></ad_tag_of_point_back>
+<site_name><![CDATA[LIVE HOUSE【iOS】]]></site_name>
+<point_unit><![CDATA[円]]></point_unit>
+<is_app><![CDATA[1]]></is_app>
+<is_install_action><![CDATA[1]]></is_install_action>
+<charge_type><![CDATA[2]]></charge_type>
+<charge_exp><![CDATA[無料]]></charge_exp>
+<action_cate_id><![CDATA[3]]></action_cate_id>
+<cate_name><![CDATA[インストール後、起動]]></cate_name>
+<disp_expired_end_date><![CDATA[0000-00-00 00:00:00]]></disp_expired_end_date>
+<ranking_update_date><![CDATA[1970-01-01 09:00:00]]></ranking_update_date>
+<delivery_target><![CDATA[9223372036854775807]]></delivery_target>
+<amb_id />
+<has_video><![CDATA[0]]></has_video>
+<video_ad_c_id><![CDATA[0]]></video_ad_c_id>
+<video_finish_url />
+<has_ltv><![CDATA[0]]></has_ltv>
+<content_manage_category><![CDATA[1]]></content_manage_category>
+<rank_point_rate><![CDATA[100]]></rank_point_rate>
+
+<user_rank />
+<user_dg />
+<user_gg />
+<p>
+ <item_id><![CDATA[item_id1]]></item_id>
+ <pid><![CDATA[1]]></pid>
+ <career><![CDATA[1000]]></career>
+ <amount><![CDATA[0]]></amount>
+ <rate><![CDATA[0]]></rate>
+ <amount_point><![CDATA[20]]></amount_point>
+ <rate_point><![CDATA[0]]></rate_point>
+ <price><![CDATA[0]]></price>
+ <requisite_id><![CDATA[1]]></requisite_id>
+</p>
+<p>
+ <item_id><![CDATA[item_id2]]></item_id>
+ <pid><![CDATA[1]]></pid>
+ <career><![CDATA[0001]]></career>
+ <amount><![CDATA[0]]></amount>
+ <rate><![CDATA[0]]></rate>
+ <amount_point><![CDATA[20]]></amount_point>
+ <rate_point><![CDATA[0]]></rate_point>
+ <price><![CDATA[0]]></price>
+ <requisite_id><![CDATA[1]]></requisite_id>
+</p>
+<total_p_cnt>2</total_p_cnt>
+</ad>
+</list_view>
+<pickup_data />
+</response>
