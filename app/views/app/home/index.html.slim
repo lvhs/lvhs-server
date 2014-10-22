@@ -1,7 +1,7 @@
-.container-fluid
+.container-fluid style="padding-left:0; padding-right: 0;"
   .row
-    - artist_hash = { "myfirststory" => "My First Story", "anotherstory" => "Another Story", "wrongcity" => "Wrong City", "swankydank" => "Swanky Dank", "loth" => "LOTH" }
-    - %w(myfirststory anotherstory wrongcity swankydank loth).each do |artist|
+    - @artists.each do |artist|
       .col-md-12
-        = image_tag "artist/#{artist}.jpg", :width => "100%"
-        h3 style="color: #fff; position: absolute; bottom: 5%; left: 10%; text-shadow: 0 0 2px #333; " #{artist_hash[artist]}
+        a href="/app/artists/#{ artist.id }"
+          = image_tag "artist/#{ artist.key }.jpg", :width => "100%"
+        h3 style="color: #fff; position: absolute; bottom: 5%; left: 10%; text-shadow: 0 0 2px #333; " #{ artist.name }
