@@ -15,3 +15,6 @@
 //= require turbolinks
 //= require_tree .
 //= require bootstrap-sprockets
+$(document).on('page:load', function () {
+  location.href = 'turbolinks://pageload';
+});

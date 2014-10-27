@@ -3,6 +3,7 @@ Lvhs::Application.routes.draw do
   ActiveAdmin.routes(self)
 
   root 'teaser/home#index'
+  resources :support, only: [:index], controller: 'teaser/support'
 
   namespace :api do
     namespace :v1 do
@@ -18,7 +19,7 @@ Lvhs::Application.routes.draw do
   end
 
   namespace :app do
-    root :to => 'home#index'
+    root to: 'home#index'
 
     resources :artists, only: [:show]
 
@@ -29,7 +30,7 @@ Lvhs::Application.routes.draw do
   end
 
   namespace :ope do
-    root :to => 'home#index'
+    root to: 'home#index'
 
     resources :admin, only: [:index] do
       collection do

@@ -1,6 +1,6 @@
 class App::HomeController < App::BaseController
   def index
-    #render json: { ok: true }, status: 200
+    @artists = Artist.all
   end
 end
 
