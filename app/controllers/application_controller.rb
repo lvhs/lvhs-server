@@ -7,9 +7,9 @@ class ApplicationController < ActionController::Base
   skip_before_filter :verify_authenticity_token, if: -> { controller_name == 'sessions' && action_name == 'create' }
 
   def check_uiid
-    if Rails.env.production? && get_uiid == nil
-      render text: 'Error', status: 403
-    end
+    #if Rails.env.production? && get_uiid == nil
+    #  render text: 'Error', status: 403
+    #end
   end
 
   def get_uiid
