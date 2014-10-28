@@ -437,6 +437,7 @@ DEPENDENCIES
   letter_opener_web
   mysql2
   newrelic_rpm
+  nokogiri
   oj
   puma
   rack-mini-profiler
