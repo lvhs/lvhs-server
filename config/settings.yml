@@ -1,29 +1,64 @@
 domain: 'lvhs.jp'
 
 car:
-    api_key:  '4245437727b92542'
-    media_id: '3893'
-    ip:
-      - '202.234.38.240'
-      - '59.106.126.70'
-      - '59.106.126.73'
-      - '59.106.126.74'
+  api_key:  '4245437727b92542'
+  media_id: '3893'
+  ip:
+    - '202.234.38.240'
+    - '59.106.126.70'
+    - '59.106.126.73'
+    - '59.106.126.74'
+
+cloudflare:
+  ip_range:
+    ipv4:
+      - '199.27.128.0/21'
+      - '173.245.48.0/20'
+      - '103.21.244.0/22'
+      - '103.22.200.0/22'
+      - '103.31.4.0/22'
+      - '141.101.64.0/18'
+      - '108.162.192.0/18'
+      - '190.93.240.0/20'
+      - '188.114.96.0/20'
+      - '197.234.240.0/22'
+      - '198.41.128.0/17'
+      - '162.158.0.0/15'
+      - '104.16.0.0/12'
+    ipv6:
+      - '2400:cb00::/32'
+      - '2606:4700::/32'
+      - '2803:f800::/32'
+      - '2405:b500::/32'
+      - '2405:8100::/32'
 
 twitter:
-    id: 'livehous'
-    app_name: 'lvhs'
-    consumer_key: 'EGzgxTbElhj89aNINpiPaUi1E'
-    consumer_secret: 'ai75r82vckTNGa0MeFNM5i0U8x0hi6qHboMqIX4VwEwV2d1XCy'
-    access_token: '2843135600-HFfmFDLwSahwndozvtQPqdcU4Gm2XNsMeSOiyRO'
-    access_token_secret: 'SWwdPzBJqvZmunPccsHanqzN8cVCDMXfhvsPhwsQf1ZMo'
+  id: 'livehous'
+  app_name: 'lvhs'
+  consumer_key: 'EGzgxTbElhj89aNINpiPaUi1E'
+  consumer_secret: 'ai75r82vckTNGa0MeFNM5i0U8x0hi6qHboMqIX4VwEwV2d1XCy'
+  access_token: '2843135600-HFfmFDLwSahwndozvtQPqdcU4Gm2XNsMeSOiyRO'
+  access_token_secret: 'SWwdPzBJqvZmunPccsHanqzN8cVCDMXfhvsPhwsQf1ZMo'
 
-    app_only_authentication: 'https://api.twitter.com/oauth2/token'
-    request_token_url: 'https://api.twitter.com/oauth/request_token'
-    authorize_url: 'https://api.twitter.com/oauth/authorize'
-    access_token_url: 'https://api.twitter.com/oauth/access_token'
+  app_only_authentication: 'https://api.twitter.com/oauth2/token'
+  request_token_url: 'https://api.twitter.com/oauth/request_token'
+  authorize_url: 'https://api.twitter.com/oauth/authorize'
+  access_token_url: 'https://api.twitter.com/oauth/access_token'
 
-    callback_url: ''
+  callback_url: ''
 
 facebook:
-    app_id: '658555114258291'
-    app_secret: '79e9bb429372e2bab42381c62ea49cc9'
+  app_id: '658555114258291'
+  app_secret: '79e9bb429372e2bab42381c62ea49cc9'
+
+#dropbox:
+#  app_key: 'rfmc2bj987j80tl'
+#  app_secret: 'bm4zas4pn0yq90g'
+#  access_token: 'WaleFabQlMgAAAAAAAAABqA54UZ6Fl3W9-IbSHCmljPu5UoyCdYAdVBIIBCkFiH2'
+
+dropbox:
+  base_url: 'https://dl.dropboxusercontent.com/u/'
+  id: '19314247'
+  app_key: 'krqou86ttb2nbyt'
+  app_secret: 'o0x9lml93qavo31'
+  access_token: 'r1fe5f1lDZgAAAAAAAAGBMjfN_-bk6GLhqnsuHR7JVFPHQMy8EUIupE0Fdiros_M'

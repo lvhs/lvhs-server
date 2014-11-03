@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 ruby '2.1.4'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.6'
+gem 'rails', '4.1.7'
 # Use mysql as the database for Active Record
 gem 'mysql2'
 # Use SCSS for stylesheets
@@ -64,10 +64,13 @@ gem 'draper'
 
 gem 'nokogiri'
 
+gem 'venice'
+
 # Ope
 gem 'activeadmin', github: 'activeadmin'
 gem 'devise'
 gem 'cancancan'
+gem 'dropbox-sdk'
 
 gem 'rails_12factor', group: :production
 
@@ -87,7 +90,7 @@ group :development, :test do
 
   # https://www.infinum.co/the-capsized-eight/articles/top-8-tools-for-ruby-on-rails-code-optimization-and-cleanup
   gem 'traceroute'
-  gem 'rack-mini-profiler'
+  #gem 'rack-mini-profiler'
   gem 'bullet'
   #gem 'brakeman', :require => false
   gem 'rails_best_practices'

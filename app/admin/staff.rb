@@ -1,4 +1,6 @@
 ActiveAdmin.register Staff do
+  menu :if => proc { current_staff.admin? }
+
   permit_params :email, :password, :password_confirmation, :role
 
   index do
