@@ -5,6 +5,7 @@ Lvhs::Application.routes.draw do
   root 'teaser/home#index'
   resources :support, only: [:index], controller: 'teaser/support'
   resources :terms, only: [:index], controller: 'teaser/terms'
+  resources :privacy, only: [:index], controller: 'teaser/privacy'
 
   namespace :api do
     namespace :v1 do
@@ -23,6 +24,8 @@ Lvhs::Application.routes.draw do
     root to: 'home#index'
 
     resources :artists, only: [:show]
+
+    resources :purchase, only: [:create]
 
     # CA Reward
     namespace :car do

@@ -1,5 +1,7 @@
 class Artist < ActiveRecord::Base
   belongs_to :label
+  has_many :item
+
   validate :key_should_be_particular_format
 
   def key_should_be_particular_format
