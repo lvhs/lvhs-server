@@ -22,6 +22,7 @@ class DropboxApiClient
     def upload(path, file_obj, overwrite: false, parent_rev: nil)
       unless path.start_with?(BASE_PATH)
         path = File.join BASE_PATH, path
+      end
 
       begin
         # Upload the POST'd file to Dropbox, keeping the same name
