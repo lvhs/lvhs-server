@@ -13,7 +13,7 @@ ActiveAdmin.register Item do
   end
 
   form do |f|
-    f.inputs "讌ｽ譖ｲ繧堤匳骭ｲ縺吶ｋ" do
+    f.inputs "楽曲を登録する" do
       f.input :artist, include_blank: false
       f.input :name
       f.input :media_type, as: :select, collection: %i(music video), include_blank: false
