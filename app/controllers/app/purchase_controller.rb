@@ -1,4 +1,4 @@
-class App::ArtistsController < ApplicationController
+class App::PurchaseController < App::BaseController
   def create
     @item = Item.find(item_params)
     render_error if @item.nil? || @device.nil?
