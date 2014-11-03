@@ -1,5 +1,5 @@
 ActiveAdmin.register Artist do
-  permit_params :label_id, :name, :key, :description
+  permit_params :label_id, :name, :key, :description, :official_url
   #belongs_to :label
 
   index do
