@@ -101,6 +101,8 @@ group :development, :test do
   gem 'rails-erd'
   gem 'letter_opener_web'
   gem 'better_errors'
+
+  gem 'factory_girl'
 end
 
 group :test do

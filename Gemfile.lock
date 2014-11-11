@@ -142,6 +142,8 @@ GEM
     erubis (2.7.0)
     escape_utils (1.0.1)
     execjs (2.2.1)
+    factory_girl (4.5.0)
+      activesupport (>= 3.0.0)
     fast_blank (0.0.2)
     ffi (1.9.6)
     figaro (1.0.0)
@@ -435,6 +437,7 @@ DEPENDENCIES
   draper
   dropbox-sdk
   escape_utils
+  factory_girl
   fast_blank
   figaro
   foreman
