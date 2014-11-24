@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 20141103063618) do
   end
 
   create_table "devices", force: true do |t|
-    t.string   "key",        null: false
+    t.string   "key"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -12,14 +12,12 @@ class Ability
   end
 
   def general
-
   end
 
   def label
-
+    can :manage, [Artist, Item]
   end
 
   def guest
-
   end
 end

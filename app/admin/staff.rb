@@ -1,5 +1,9 @@
 ActiveAdmin.register Staff do
-  menu :if => proc { current_staff.admin? }
+  menu if: proc { current_staff.admin? },
+       label: 'スタッフ',
+       priority: 101,
+       parent: '管理用'
+
 
   permit_params :email, :password, :password_confirmation, :role
 

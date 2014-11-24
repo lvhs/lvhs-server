@@ -1,4 +1,6 @@
 ActiveAdmin.register Item do
+  menu label: '楽曲', priority: 11
+
   permit_params :artist_id, :name, :description, :media_type, :billing_method
   #belongs_to :label
 
@@ -13,7 +15,7 @@ ActiveAdmin.register Item do
   end
 
   form do |f|
-    f.inputs "楽曲を入力してください" do
+    f.inputs "楽曲情報を入力してください" do
       f.input :artist, include_blank: false
       f.input :name
       f.input :media_type, as: :select, collection: %i(music video), include_blank: false
