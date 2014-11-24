@@ -29,6 +29,7 @@ Lvhs::Application.routes.draw do
 
     # CA Reward
     namespace :car do
+      resources :list, only: [:index]
       resources :error, only: [:index]
     end
   end

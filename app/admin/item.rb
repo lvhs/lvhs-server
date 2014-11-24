@@ -13,12 +13,14 @@ ActiveAdmin.register Item do
   end
 
   form do |f|
-    f.inputs "楽曲を登録する" do
+    f.inputs "楽曲を入力してください" do
       f.input :artist, include_blank: false
       f.input :name
       f.input :media_type, as: :select, collection: %i(music video), include_blank: false
       f.input :description
       f.input :billing_method, as: :select, collection: %i(free in_app_purchase reward both), include_blank: false
+      f.input :image_url, as: :file
+      f.input :youtube_url
     end
     f.actions
   end
