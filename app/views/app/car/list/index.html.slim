@@ -1,0 +1,9 @@
+.container-fluid
+  - @ads.each do |ad|
+    .row
+      h3 = ad.content_name
+      a href="#{ ad.appli_url }"
+        img src="#{ ad.banner_img_1 }" alt="#{ ad.banner_img_alt }"
+      div
+        a href="#{ ad.appli_url }" = ad.banner_text_1
+

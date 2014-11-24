@@ -3,4 +3,3 @@ class App::HomeController < App::BaseController
     @artists = Artist.all
   end
 end
-
