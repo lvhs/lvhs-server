@@ -1,6 +1,7 @@
 class App::BaseController < ApplicationController
   before_filter :init_device
 
+  # TODO: 暗号化
   def init_device
     uiid = get_uiid
     render_error('missing uuid') if uiid.nil?
