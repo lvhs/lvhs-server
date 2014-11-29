@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141129061233) do
+ActiveRecord::Schema.define(version: 20141129155135) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -38,11 +38,13 @@ ActiveRecord::Schema.define(version: 20141129061233) do
     t.string   "name"
     t.string   "key"
     t.text     "description"
-    t.integer  "label_id",     null: false
+    t.integer  "artist_group_id",             null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "official_url"
     t.string   "image_url"
+    t.integer  "status",          default: 0
+    t.datetime "published_at"
   end
 
   create_table "devices", force: true do |t|
@@ -53,16 +55,18 @@ ActiveRecord::Schema.define(version: 20141129061233) do
 
   create_table "items", force: true do |t|
     t.string   "name"
-    t.integer  "media_type",     null: false
+    t.integer  "media_type",     default: 1, null: false
     t.text     "description"
-    t.integer  "artist_id",      null: false
+    t.integer  "artist_id",                  null: false
     t.integer  "price"
-    t.integer  "billing_method", null: false
-    t.date     "valid_for"
+    t.integer  "billing_method", default: 3, null: false
+    t.datetime "finished_at"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "image_url"
     t.string   "youtube_url"
+    t.integer  "status",         default: 0
+    t.datetime "published_at"
   end
 
   create_table "purchased_items", force: true do |t|
@@ -86,7 +90,7 @@ ActiveRecord::Schema.define(version: 20141129061233) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "role",                                null: false
-    t.integer  "label_id"
+    t.integer  "artist_group_id"
   end
 
   add_index "staffs", ["email"], name: "index_staffs_on_email", unique: true, using: :btree

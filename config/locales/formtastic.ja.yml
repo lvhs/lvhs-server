@@ -1,0 +1,34 @@
+ja:
+  formtastic:
+    :yes: 'はい'
+    :no: 'いいえ'
+    :create: '%{model}を登録する'
+    :update: '%{model}を更新する'
+    :submit: '%{model}を送信する'
+    :cancel: '%{model}をキャンセルする'
+    :reset: '%{model}をリセットする'
+    :required: '必須'
+    titles:
+      post_details: "Post details"
+      labels:
+        post:
+          title: "Your Title"
+          body: "Write something..."
+          edit:
+            title: "Edit title"
+      hints:
+        post:
+          title: "Choose a good title for your post."
+          body: "Write something inspiring here."
+      placeholders:
+        post:
+          title: "Title your post"
+          slug: "Leave blank for an automatically generated slug"
+        user:
+          email: "you@yours.com"
+      actions:
+        create: "%{model}繧堤匳骭ｲ縺吶ｋ"
+        update: "Save changes"
+        reset: "Reset form"
+        cancel: "Cancel and go back"
+        dummie: "Launch!"

@@ -26,10 +26,9 @@ ActiveAdmin.register Staff do
 
   form do |f|
     f.inputs "Admin Details" do
-      f.input :email
-      f.input :password
-      f.input :password_confirmation
-      f.input :role
+      f.input :email, label: 'メールアドレス'
+      f.input :password, label: 'パスワード'
+      f.input :password_confirmation, label: 'パスワード(確認用)'
     end
     f.actions
   end

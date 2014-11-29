@@ -50,23 +50,6 @@ Lvhs::Application.routes.draw do
     end
   end
 
-  namespace :ope do
-    root to: 'home#index'
-
-    resources :admin, only: [:index] do
-      collection do
-        resources :label
-      end
-    end
-
-    resources :artists, only: [:show, :create, :update, :delete] do
-      member do
-        resources :youtube
-        resources :stats, only: [:index]
-      end
-    end
-  end
-
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

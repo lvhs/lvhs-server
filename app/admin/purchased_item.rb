@@ -1,4 +1,5 @@
 ActiveAdmin.register PurchasedItem do
+  menu label: '購入履歴', priority: 20
 
   index do
     selectable_column

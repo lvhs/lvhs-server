@@ -13,7 +13,7 @@ ActiveAdmin.register_page "Dashboard" do
     div do
       ul do
         li link_to("アーティスト一覧", admin_artists_path)
-        li link_to("楽曲一覧", admin_items_path)
+        li link_to("動画一覧", admin_items_path)
       end
     end
 
