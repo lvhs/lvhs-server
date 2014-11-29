@@ -36,7 +36,7 @@ ActiveAdmin.register Item do
 
   controller do
     def label
-      Label.new(current_staff.label)
+      ActiveAdminLabel.new(current_staff.label)
     end
 
     def new
@@ -44,7 +44,7 @@ ActiveAdmin.register Item do
       new!
     end
 
-    class Label
+    class ActiveAdminLabel
       def initialize(label)
         @label = label
       end

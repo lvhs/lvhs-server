@@ -6,15 +6,4 @@ ActiveAdmin.register_page 'Stat' do
       column('売上') { 100 }
     end
   end
-
-  controller do
-    def show
-      @page_title = 'hogehoge'
-    end
-
-    def content
-      @page_title = 'hogehoge'
-      content!
-    end
-  end
 end

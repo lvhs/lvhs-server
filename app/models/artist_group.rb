@@ -1,4 +1,4 @@
-class Label < ActiveRecord::Base
+class ArtistGroup < ActiveRecord::Base
   has_many :artist
   has_many :staff
   has_many :item, through: :artist
