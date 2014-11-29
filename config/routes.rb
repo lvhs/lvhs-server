@@ -1,4 +1,16 @@
 Lvhs::Application.routes.draw do
+
+  class UseSubdomain
+    def initialize(domain)
+      @domain = domain
+    end
+
+    def matches?(request)
+      Rails.env.development? ||
+        (request.subdomain.present? && request.subdomain == @domain)
+    end
+  end
+
   devise_for :staffs, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
@@ -7,30 +19,34 @@ Lvhs::Application.routes.draw do
   resources :terms, only: [:index], controller: 'teaser/terms'
   resources :privacy, only: [:index], controller: 'teaser/privacy'
 
-  namespace :api do
-    namespace :v1 do
-      resources :home, only: [:index]
+  constraints UseSubdomain.new('api') do
+    namespace :api do
+      namespace :v1 do
+        resources :home, only: [:index]
 
-      resources :artists, only: [:show]
+        resources :artists, only: [:show]
 
-      # CA Reward
-      namespace :car do
-        resources :pointback, only: [:index]
+        # CA Reward
+        namespace :car do
+          resources :pointback, only: [:index]
+        end
       end
     end
   end
 
-  namespace :app do
-    root to: 'home#index'
+  constraints UseSubdomain.new('app') do
+    namespace :app do
+      root to: 'home#index'
 
-    resources :artists, only: [:show]
+      resources :artists, only: [:show]
 
-    resources :purchase, only: [:create]
+      resources :purchase, only: [:create]
 
-    # CA Reward
-    namespace :car do
-      resources :list, only: [:index]
-      resources :error, only: [:index]
+      # CA Reward
+      namespace :car do
+        resources :list, only: [:index]
+        resources :error, only: [:index]
+      end
     end
   end
 
