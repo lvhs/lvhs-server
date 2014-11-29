@@ -14,4 +14,9 @@ class Item < ActiveRecord::Base
   scope :music,  ->{ where(media_type: :music) }
   scope :video,  ->{ where(media_type: :video) }
   scope :artist, ->(params){ joins(:artist).merge(Artist.where params) }
+
+  def free?
+    status == :free || finised_at <= Time.now
+  end
+
 end

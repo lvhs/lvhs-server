@@ -11,6 +11,8 @@ class Artist < ActiveRecord::Base
     .where('published_at = NULL or published_at <= ?', Time.now)
   }
 
+  private
+
   def key_should_be_particular_format
     unless key[/\A[a-z0-9_-]+\z/]
       errors.add(:key, 'は英数字と記号(-_)のみ使用できます。')

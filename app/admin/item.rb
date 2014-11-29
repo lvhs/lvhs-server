@@ -61,5 +61,26 @@ ActiveAdmin.register Item do
       end
     end
 
+    def create
+      item = params["item"]
+      item["youtube_url"] = format_youtube_url(item["youtube_url"]) unless item["youtube_url"].blank?
+      unless item["image_url"].blank?
+        #DropboxApiClient.upload("artist/#{params[:artist_id]}/items/"
+      # #<ActionDispatch::Http::UploadedFile:0x007f07a8dc5738 @tempfile=#<Tempfile:/tmp/RackMultipart20141130-22877-guu4mk>, @original_filename="IMG_1705_Fotor.png", @content_type="image/png", @headers="Content-Disposition: form-data; name=\"item[image_url]\"; filename=\"IMG_1705_Fotor.png\"\r\nContent-Type: image/png\r\n">
+      end
+      #throw 'hoge'
+      puts create!
+    end
+
+    def format_youtube_url(url)
+      if %r{youtube\.com/watch\?.*v=(?<id>[a-zA-Z0-1\-_]+)} =~ url
+        id
+      elsif %r{youtu\.be/(?<id>[a-zA-Z0-1\-_])} =~ url
+        id
+      else
+        nil
+      end
+    end
+
   end
 end
