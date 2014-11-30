@@ -110,6 +110,9 @@ ja:
         sign_in_with_omniauth_provider: "%{provider}のアカウントを使ってログイン"
         resend_confirmation_instructions: "ユーザ確認手順を再送する"
         resend_unlock_instructions: "ロックの解除方法を再送する"
+      sessions:
+        staff:
+          signed_in: 'ログインに成功しました'
     access_denied:
       message: "アクションを実行する権限がありません"
     index_list:
@@ -118,7 +121,3 @@ ja:
       grid: "グリッド"
       blog: "ブログ"
 
-    devise:
-      sessions:
-        staff:
-          signed_in: 'ログインに成功しました'

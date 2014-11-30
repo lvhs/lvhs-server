@@ -1,8 +1,18 @@
 ActiveAdmin.register Artist, label: 'アーティスト' do
   menu label: 'アーティスト', priority: 10
 
-  permit_params :artist_group_id, :name, :key, :description, :official_url
+  permit_params :artist_group_id, :name, :key, :description, :official_url, :status, :published_at, :image_url
   #belongs_to :label
+  #
+  after_save do |artist|
+    unless params[:artist][:image].blank?
+      image = params[:artist][:image]
+      /^image\/(?<ext>\w+)/ =~ image.content_type
+      path = "artist/#{artist.id}/jacket.#{ext}"
+      DropboxApiClient.upload(path, image.tempfile, overwrite: true)
+      artist.update_attributes! image_url: path
+    end
+  end
 
   index title: 'アーティスト一覧' do
     selectable_column
@@ -32,7 +42,7 @@ ActiveAdmin.register Artist, label: 'アーティスト' do
       f.input :official_url,
         placeholder: 'http://myfirststory.net',
         label: 'オフィシャルサイトURL'
-      f.input :image_url, as: :file, label: 'アーティスト画像 *'
+      f.input :image, as: :file, label: 'アーティスト画像 *'
       f.input :status, label: "公開設定", as: :radio, collection: { '公開' => :available, '非公開' => :unavailable }, default: :unavailable
       f.input :published_at, label: "公開日", as: :just_datetime_picker
     end

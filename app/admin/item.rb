@@ -2,8 +2,18 @@ ActiveAdmin.register Item do
   menu label: '動画', priority: 11
   config.filters = false
 
-  permit_params :artist_id, :name, :description, :media_type, :billing_method, :published_at, :status, :youtube_url
+  permit_params :artist_id, :name, :description, :media_type, :billing_method, :published_at, :status, :youtube_url, :image_url
   #belongs_to :label
+
+  after_save do |item|
+    unless params[:item][:image].blank?
+      image = params[:item][:image]
+      /^image\/(?<ext>\w+)/ =~ image.content_type
+      path = "artist/#{item.artist_id}/items/#{item.id}/cover.#{ext}"
+      DropboxApiClient.upload(path, image.tempfile, overwrite: true)
+      item.update_attributes! image_url: path
+    end
+  end
 
   index title: '動画一覧' do
     selectable_column
@@ -43,7 +53,7 @@ ActiveAdmin.register Item do
       #f.input :billing_method, as: :select, collection: %i(free in_app_purchase reward both), include_blank: false
       f.input :published_at, label: "公開日時 *", as: :just_datetime_picker
       f.input :finished_at, label: "有料販売 終了日時 *", as: :just_datetime_picker
-      f.input :image_url, as: :file, label: 'ジャケット画像 *'
+      f.input :image, as: :file, label: 'ジャケット画像 *'
       f.input :youtube_url,
         placeholder: 'https://www.youtube.com/watch?v=v6kwUZQN7mU',
         label: 'youtube動画URL *'
@@ -62,20 +72,22 @@ ActiveAdmin.register Item do
     end
 
     def create
-      item = params["item"]
-      item["youtube_url"] = format_youtube_url(item["youtube_url"]) unless item["youtube_url"].blank?
-      unless item["image_url"].blank?
-        #DropboxApiClient.upload("artist/#{params[:artist_id]}/items/"
-      # #<ActionDispatch::Http::UploadedFile:0x007f07a8dc5738 @tempfile=#<Tempfile:/tmp/RackMultipart20141130-22877-guu4mk>, @original_filename="IMG_1705_Fotor.png", @content_type="image/png", @headers="Content-Disposition: form-data; name=\"item[image_url]\"; filename=\"IMG_1705_Fotor.png\"\r\nContent-Type: image/png\r\n">
-      end
-      #throw 'hoge'
-      puts create!
+      item = params[:item]
+      item[:youtube_url] = format_youtube_url(item[:youtube_url]) unless item[:youtube_url].blank?
+      create!
+    end
+
+    def update
+      item = params[:item]
+      item[:youtube_url] = format_youtube_url(item[:youtube_url]) unless item[:youtube_url].blank?
+      update!
     end
 
     def format_youtube_url(url)
-      if %r{youtube\.com/watch\?.*v=(?<id>[a-zA-Z0-1\-_]+)} =~ url
+      p "format_youtube_url"
+      if %r{youtube\.com/watch\?.*v=(?<id>[a-zA-Z0-9\-_]+)} =~ url
         id
-      elsif %r{youtu\.be/(?<id>[a-zA-Z0-1\-_])} =~ url
+      elsif %r{youtu\.be/(?<id>[a-zA-Z0-9\-_]+)} =~ url
         id
       else
         nil

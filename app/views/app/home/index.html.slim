@@ -1,7 +1,10 @@
 .container-fluid style="padding-left:0; padding-right: 0; overflow: hidden;"
   .row
-    - @artists.each do |artist|
+    - @artists.available.each do |artist|
       .col-md-12
         a href="/app/artists/#{ artist.id }"
-          = image_tag "artist/#{ artist.key }.jpg", :width => "100%"
+          - if artist.image_url.blank?
+            = image_tag "artist/#{ artist.key }.jpg", :width => "100%"
+          - else
+            = image_tag "https://dl.dropboxusercontent.com/u/19314247/lvhs/#{artist.image_url}", :width => "100%"
         h3 style="color: #fff; position: absolute; bottom: 5%; left: 10%; text-shadow: 0 0 2px #333; " #{ artist.name }

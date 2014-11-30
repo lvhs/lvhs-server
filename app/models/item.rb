@@ -16,7 +16,8 @@ class Item < ActiveRecord::Base
   scope :artist, ->(params){ joins(:artist).merge(Artist.where params) }
 
   def free?
-    status == :free || finised_at <= Time.now
+    p status
+    status == :free || (!finished_at.nil? && finished_at <= Time.now)
   end
 
 end

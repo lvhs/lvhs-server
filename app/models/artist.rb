@@ -7,8 +7,8 @@ class Artist < ActiveRecord::Base
   validate :key_should_be_particular_format
 
   scope :available, ->{
-    where(status: :available)
-    .where('published_at = NULL or published_at <= ?', Time.now)
+    where(status: 1)
+    .where('published_at is null or published_at <= ?', Time.now)
   }
 
   private
