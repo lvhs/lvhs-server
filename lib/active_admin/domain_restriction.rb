@@ -4,7 +4,6 @@ module ActiveAdmin
 
     included do
       prepend_before_filter :restrict_to_ope_domain
-      before_filter :ja_title
     end
 
     private
@@ -13,10 +12,6 @@ module ActiveAdmin
       if Rails.env.production? && request.subdomain != 'ope'
         render_404
       end
-    end
-
-    def ja_title
-      @page_title = 'hoge'
     end
   end
 end
