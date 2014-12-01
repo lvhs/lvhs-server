@@ -7,8 +7,8 @@ class Item < ActiveRecord::Base
   just_define_datetime_picker :finished_at, :add_to_cattr_accessor => true
 
   scope :available, ->{
-    where(status: :available)
-    .where('published_at = NULL or published_at <= ?', Time.now)
+    where(status: 1)
+    .where('published_at is null or published_at <= ?', Time.now)
   }
 
   scope :music,  ->{ where(media_type: :music) }
