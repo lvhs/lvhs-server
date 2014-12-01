@@ -2,7 +2,7 @@ ActiveAdmin.register Item do
   menu label: '動画', priority: 11
   config.filters = false
 
-  permit_params :artist_id, :name, :description, :media_type, :billing_method, :published_at, :status, :youtube_url, :youtube_id, :image_path, :image_url
+  permit_params :artist_id, :name, :description, :media_type, :billing_method, :published_at, :status, :youtube_id, :image_path, :image_url
   #belongs_to :label
 
   after_save do |item|
@@ -54,7 +54,7 @@ ActiveAdmin.register Item do
       f.input :published_at, label: "公開日時 *", as: :just_datetime_picker
       f.input :finished_at, label: "有料販売 終了日時 *", as: :just_datetime_picker
       f.input :image, as: :file, label: 'ジャケット画像 *'
-      f.input :youtube_url,
+      f.input :youtube_id,
         placeholder: 'https://www.youtube.com/watch?v=v6kwUZQN7mU',
         label: 'youtube動画URL *'
       f.input :status, label: "公開設定 *", as: :radio, collection: { '公開' => :available, '非公開' => :unavailable }, default: :unavailable
@@ -73,13 +73,13 @@ ActiveAdmin.register Item do
 
     def create
       item = params[:item]
-      item[:youtube_id] = get_youtube_id(item[:youtube_url]) unless item[:youtube_url].blank?
+      item[:youtube_id] = get_youtube_id(item[:youtube_id]) unless item[:youtube_id].blank?
       create!
     end
 
     def update
       item = params[:item]
-      item[:youtube_id] = get_youtube_id(item[:youtube_url]) unless item[:youtube_url].blank?
+      item[:youtube_id] = get_youtube_id(item[:youtube_id]) unless item[:youtube_id].blank?
       update!
     end
 
