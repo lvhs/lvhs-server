@@ -19,7 +19,7 @@
               a href="purchase://music?id=#{ item.id }"
                 = image_tag "pay-icon.png", style: "float: right;"
             - else
-              a href="player://music?id=#{ item.youtube_url }"
+              a href="player://music?id=#{ item.youtube_id }"
                 - if item.free?
                   = image_tag "free-icon.png", style: "float: right;"
                 - else
@@ -40,7 +40,7 @@
               a href="purchase://movie?id=#{ item.id }"
                 = image_tag "pay-icon.png", style: "float: right;"
             - else
-              a href="player://movie?id=#{ item.youtube_url }"
+              a href="player://movie?id=#{ item.youtube_id }"
                 - if item.free?
                   = image_tag "free-icon.png", style: "float: right;"
                 - else

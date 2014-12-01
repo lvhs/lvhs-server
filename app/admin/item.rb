@@ -2,7 +2,7 @@ ActiveAdmin.register Item do
   menu label: '動画', priority: 11
   config.filters = false
 
-  permit_params :artist_id, :name, :description, :media_type, :billing_method, :published_at, :status, :youtube_url, :image_url
+  permit_params :artist_id, :name, :description, :media_type, :billing_method, :published_at, :status, :youtube_url, :youtube_id, :image_path, :image_url
   #belongs_to :label
 
   after_save do |item|
@@ -11,7 +11,7 @@ ActiveAdmin.register Item do
       /^image\/(?<ext>\w+)/ =~ image.content_type
       path = "artist/#{item.artist_id}/items/#{item.id}/cover.#{ext}"
       DropboxApiClient.upload(path, image.tempfile, overwrite: true)
-      item.update_attributes! image_url: path
+      item.update_attributes! image_path: path
     end
   end
 
@@ -73,18 +73,17 @@ ActiveAdmin.register Item do
 
     def create
       item = params[:item]
-      item[:youtube_url] = format_youtube_url(item[:youtube_url]) unless item[:youtube_url].blank?
+      item[:youtube_id] = get_youtube_id(item[:youtube_url]) unless item[:youtube_url].blank?
       create!
     end
 
     def update
       item = params[:item]
-      item[:youtube_url] = format_youtube_url(item[:youtube_url]) unless item[:youtube_url].blank?
+      item[:youtube_id] = get_youtube_id(item[:youtube_url]) unless item[:youtube_url].blank?
       update!
     end
 
-    def format_youtube_url(url)
-      p "format_youtube_url"
+    def get_youtube_id(url)
       if %r{youtube\.com/watch\?.*v=(?<id>[a-zA-Z0-9\-_]+)} =~ url
         id
       elsif %r{youtu\.be/(?<id>[a-zA-Z0-9\-_]+)} =~ url

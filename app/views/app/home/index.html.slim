@@ -3,8 +3,8 @@
     - @artists.available.each do |artist|
       .col-md-12
         a href="/app/artists/#{ artist.id }"
-          - if artist.image_url.blank?
+          - if artist.image_path.blank?
             = image_tag "artist/#{ artist.key }.jpg", :width => "100%"
           - else
-            = image_tag "https://dl.dropboxusercontent.com/u/19314247/lvhs/#{artist.image_url}", :width => "100%"
+            = image_tag "https://dl.dropboxusercontent.com/u/19314247/lvhs/#{artist.image_path}", :width => "100%"
         h3 style="color: #fff; position: absolute; bottom: 5%; left: 10%; text-shadow: 0 0 2px #333; " #{ artist.name }
