@@ -14,19 +14,8 @@ module ActiveAdmin
       end
     end
 
-    def heroku?
-      ENV['PLATFORM'] == 'heroku'
-    end
-
     def subdomain
-      puts request.subdomain
-      logger.info request.subdomain
       request.subdomain
-      #if heroku?
-      #  request.subdomain.split(".")[1..-1].join(".")
-      #else
-      #  request.subdomain
-      #end
     end
   end
 end
