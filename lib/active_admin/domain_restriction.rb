@@ -19,11 +19,14 @@ module ActiveAdmin
     end
 
     def subdomain
-      if heroku?
-        request.subdomain.split(".")[1..-1].join(".")
-      else
-        request.subdomain
-      end
+      puts request.subdomian
+      logger.info request.subdomain
+      request.subdomain
+      #if heroku?
+      #  request.subdomain.split(".")[1..-1].join(".")
+      #else
+      #  request.subdomain
+      #end
     end
   end
 end
