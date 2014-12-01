@@ -88,6 +88,8 @@ ActiveAdmin.register Item do
         id
       elsif %r{youtu\.be/(?<id>[a-zA-Z0-9\-_]+)} =~ url
         id
+      elsif %r{^[a-zA-Z0-9\-_]{11}$} =~ url
+        url
       else
         nil
       end
