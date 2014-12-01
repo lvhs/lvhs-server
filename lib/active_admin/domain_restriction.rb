@@ -19,7 +19,7 @@ module ActiveAdmin
     end
 
     def subdomain
-      puts request.subdomian
+      puts request.subdomain
       logger.info request.subdomain
       request.subdomain
       #if heroku?
