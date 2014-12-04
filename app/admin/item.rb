@@ -20,7 +20,7 @@ ActiveAdmin.register Item do
     id_column
     column 'タイトル', :name
     #column '説明文', :description
-    column('アーティスト') { |item| item.artist.name }
+    column('アーティスト') { |item| item.artist.nil? ? "" : item.artist.name }
     column '公開日時', :published_at
     column '有効期限', :finished_at
     column '状態' do |item|

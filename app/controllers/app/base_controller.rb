@@ -4,9 +4,8 @@ class App::BaseController < ApplicationController
   # TODO: 暗号化
   def init_device
     uiid = get_uiid
-    render_error('missing uuid') if uiid.nil?
+    return if uiid.nil?
     @device = find_or_create_device(uiid)
-    render_error('missing device') if @device.nil?
   end
 
   private
