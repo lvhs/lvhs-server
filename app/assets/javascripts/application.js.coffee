@@ -15,3 +15,5 @@
 #= require turbolinks
 #= require_tree ./application
 #= require bootstrap-sprockets
+$ ->
+  $('img.lazy').lazyload?()
