@@ -6,15 +6,17 @@ gem 'rails', '4.2.0'
 # Use mysql as the database for Active Record
 gem 'mysql2'
 # Use SCSS for stylesheets
-#gem 'sass-rails', '~> 5.0'
-gem 'sass-rails', '~> 4.0.3'
+gem 'sass-rails'
+gem 'bourbon' # http://bourbon.io/
+gem 'neat' # http://neat.bourbon.io/
 gem 'compass-rails'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '~> 4.1.0'
+gem 'coffee-rails'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer',  platforms: :ruby
+gem 'slim-rails'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -41,14 +43,18 @@ gem 'foreman'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+# performance
 gem 'escape_utils'
 gem 'fast_blank'
 gem 'oj'
-gem 'slim-rails'
 
+# push notification
 # http://qiita.com/sue738/items/c2ce141cf24f9f1dbf01
 #gem 'apns'
 #gem 'gcm'
+
+# In App Purchase
+gem 'venice'
 
 # heroku variable manager
 gem 'figaro'
@@ -65,12 +71,9 @@ gem 'draper'
 
 gem 'nokogiri'
 
-gem 'venice'
-
 # Ope
-#gem 'activeadmin', github: 'activeadmin'
+gem 'activeadmin', github: 'activeadmin'
 gem 'inherited_resources', github: 'josevalim/inherited_resources', branch: 'rails-4-2'
-gem 'activeadmin', github: 'lazaronixon/activeadmin', branch: 'master'
 gem 'devise'
 gem 'cancancan'
 gem 'dropbox-sdk'
