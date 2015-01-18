@@ -1,0 +1,92 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="apple-itunes-app" content="app-id=923819273">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>LIVEHOUSE ~無料音楽動画アプリ、ライブハウス~</title>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <%= stylesheet_link_tag 'teaser/main' %>
+  </head>
+  <body>
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '658555114258291',
+          xfbml      : true,
+          version    : 'v2.2'
+        });
+      };
+      (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+           js = d.createElement(s); js.id = id;
+         js.src = "//connect.facebook.net/en_US/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+    <div id="content">
+      <div id="chevron" class="fa fa-chevron-down"></div>
+      <div id="splash">
+        <div id="left">
+          <div class="inner">
+            <h1 class="tac">LIVEHOUSE</h1>
+            <p class="tac">~無料音楽動画アプリ、ライブハウス~</p>
+            <p style="margin-top: 16px; margin-bottom: 16px;">
+              人気アーティストのライブ動画やプライベート動画、ミュージックビデオ、新曲などがどこよりも早く見れる！！
+            </p>
+            <p>
+              【 LIVEHOUSEの特徴 】
+            </p>
+            <p style="margin-left: 8px;">
+              ■ 無料で見れる
+            </p>
+            <p style="margin-left: 10px;">
+              LIVEHOUSEは完全無料のアプリです！
+            </p>
+            <p style="margin-left: 8px;">
+              ■ 人気アーティスト集合
+            </p>
+            <p style="margin-left: 10px;">
+              今音楽チャートを賑わせているバンドが大集合！
+            </p>
+          </div>
+          <a href="https://itunes.apple.com/app/id923819273"><%= image_tag 'teaser/appstore.svg', class: 'appstore', alt: 'Download on the Apple App Store' %></a>
+        </div>
+        <div id="right">
+          <div class="iphone">
+            <%= image_tag 'teaser/01.png' %>
+          </div>
+        </div>
+      </div>
+
+      <div id="icon-row">
+        <div id="icon-container">
+          <%= image_tag 'teaser/icon.png' %>
+        </div>
+      </div>
+
+      <div id="screenshots">
+        <%= image_tag 'teaser/02.png' %>
+      </div>
+
+      <p id="description"></p>
+
+      <p>
+        <a href="https://itunes.apple.com/app/id923819273"><%= image_tag 'teaser/appstore.svg', class: 'appstore', alt: 'Download on the Apple App Store' %></a>
+      </p>
+
+      <p></p>
+
+      <div id="like-container">
+        <div class="fb-like" data-share="true" data-width="450" data-show-faces="true"> </div>
+      </div>
+      <%= javascript_include_tag 'okvideo' %>
+      <script>
+        $.okvideo({ video: 'https://www.youtube.com/watch?v=pRG7FJobkv4' });
+      </script>
+      <p></p>
+      <p id="copyright">©Japan Music System</p>
+    </div>
+  </body>
+</html>
