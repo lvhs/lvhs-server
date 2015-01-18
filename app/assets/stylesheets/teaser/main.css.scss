@@ -112,13 +112,10 @@ h1, h2, h3, h4, h5, h6 {
   position: relative;
 }
 #icon-row #icon-container {
-  position: absolute;
+  position: relative;
   width: 80px;
   height: 80px;
-  left: 50%;
-  top: 50%;
-  margin-left: -50px;
-  margin-top: -50px;
+  margin: -40px auto;
   //border: 10px solid #5cc957;
 }
 #icon-row img {
