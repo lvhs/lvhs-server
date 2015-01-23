@@ -1,7 +1,11 @@
 .container-fluid style="padding-left:0; padding-right: 0; overflow: hidden;"
   .row
     .col-md-12 style="padding: 0;"
-      = image_tag "artist/#{ @artist.key }.jpg", :width => "100%"
+      /= image_tag "artist/#{ @artist.key }.jpg", :width => "100%"
+      - if @artist.image_path.blank?
+        = image_tag 'common/loading.png', 'data-original' => image_url("artist/#{ @artist.key }.jpg"), :width => "100%", class: 'lazy'
+      - else
+        = image_tag 'common/loading.png', 'data-original' => image_url("https://dl.dropboxusercontent.com/u/19314247/lvhs/#{@artist.image_path}"), width: "100%", class: 'lazy'
       h3 style="color: #fff; position: absolute; bottom: 5%; left: 10%; text-shadow: 0 0 2px #333; " #{ @artist.name }
 
   - if @artist.item.available.any? { |i| i.media_type == 'video' }
@@ -13,7 +17,10 @@
       - @artist.item.available.each do |item|
         - if item.media_type == 'video'
           .col-md-12 style=" box-sizing: border-box;background-color: rgba(0,0,0,.6); padding: 18px; padding-left: 30px; padding-right: 2px; color: #fff; font-size: 1.5rem; width: 100%;"
-            = image_tag "jacket/#{ @artist.key }/02-#{ @artist.key }.jpg", width: '15%'
+            - if item.image_path.blank?
+              = image_tag "jacket/#{ @artist.key }/02-#{ @artist.key }.jpg", width: '15%'
+            - else
+              = image_tag "https://dl.dropboxusercontent.com/u/19314247/lvhs/#{@artist.image_path}", width: '15%'
             span style="padding-left: 20px;" = item.name
             a href="player://movie?iid=#{ item.id }&yid=#{ item.youtube_id }"
               = image_tag "free-icon.png", style: "float: right; height: 35px;"
