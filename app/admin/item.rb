@@ -10,8 +10,8 @@ ActiveAdmin.register Item do
       image = params[:item][:image]
       /^image\/(?<ext>\w+)/ =~ image.content_type
       path = "artist/#{item.artist_id}/items/#{item.id}/cover.#{ext}"
-      DropboxApiClient.upload(path, image.tempfile, overwrite: true)
-      item.update_attributes! image_path: path
+      #DropboxApiClient.upload(path, image.tempfile, overwrite: true)
+      #item.update_attributes! image_path: path
     end
   end
 

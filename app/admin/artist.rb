@@ -9,8 +9,8 @@ ActiveAdmin.register Artist, label: 'アーティスト' do
       image = params[:artist][:image]
       /^image\/(?<ext>\w+)/ =~ image.content_type
       path = "artist/#{artist.id}/jacket.#{ext}"
-      DropboxApiClient.upload(path, image.tempfile, overwrite: true)
-      artist.update_attributes! image_path: path
+      #DropboxApiClient.upload(path, image.tempfile, overwrite: true)
+      #artist.update_attributes! image_path: path
     end
   end
 
