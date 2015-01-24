@@ -78,6 +78,8 @@ gem 'devise'
 gem 'cancancan'
 gem 'dropbox-sdk'
 
+gem "rmagick", "2.13.2", :require => 'RMagick'
+
 gem 'rails_12factor', group: :production
 gem 'just-datetime-picker'
 
