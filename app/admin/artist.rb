@@ -16,11 +16,53 @@ ActiveAdmin.register Artist, label: 'アーティスト' do
 
   index title: 'アーティスト一覧' do
     selectable_column
-    id_column
+    #id_column
+    column('編集') { |artist| link_to "編集", admin_artist_path(artist) }
     column('所属事務所') { |artist| artist.artist_group.name }
     column 'アーティスト名', :name
     column 'アーティストID(URL表示用)', :key
     #column '説明文', :description
+  end
+
+  show title: 'アーティスト編集' do |artist|
+    panel artist.name do
+      div class: "attributes_table" do
+        table for: artist do
+          tr class: "row" do
+            th "アーティストID(URL表示用)"
+            td artist.key
+          end
+          tr class: "row" do
+            th "オフィシャルサイトURL"
+            td artist.official_url.blank? ? "" : link_to(artist.official_url, artist.official_url)
+          end
+          tr class: "row" do
+            th "所属事務所"
+            td artist.artist_group.name
+          end
+          tr class: "row" do
+            th "作成日"
+            td artist.created_at
+          end
+          tr class: "row" do
+            th "更新日"
+            td artist.updated_at
+          end
+          tr class: "row" do
+            th "アーティスト画像"
+            td artist.image_path.nil? ? "" : image_tag("https://dl.dropboxusercontent.com/u/19314247/lvhs/#{artist.image_path}", height: "100%")
+          end
+          tr class: "row" do
+            th "公開設定"
+            td artist.status == "available" ? "公開中" : "非公開"
+          end
+          tr class: "row" do
+            th "公開日"
+            td artist.published_at
+          end
+        end
+      end
+    end
   end
 
   form title: 'アーティスト登録' do |f|
@@ -32,12 +74,11 @@ ActiveAdmin.register Artist, label: 'アーティスト' do
       end
       f.input :name,
         placeholder: 'MyFirstStory',
-        label: 'アーティスト名(URL表示用) *',
-        hint: '(例:http://lvhs.jp/myfirststory)'
+        label: 'アーティスト名 *'
       f.input :key,
         placeholder: 'myfirststory',
-        label: 'アーティストID *',
-        hint: '半角英数字(小文字)と記号(-_)を入力できます。'
+        label: 'アーティストID(URL表示用) *',
+        hint: "半角英数字(小文字)と記号(-_)を入力できます。(例:http://lvhs.jp/myfirststory)"
       #f.input :description, label: '説明文'
       f.input :official_url,
         placeholder: 'http://myfirststory.net',
