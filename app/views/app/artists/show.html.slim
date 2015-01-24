@@ -3,9 +3,9 @@
     .col-md-12 style="padding: 0;"
       /= image_tag "artist/#{ @artist.key }.jpg", :width => "100%"
       - if @artist.image_path.blank?
-        = image_tag 'common/loading.png', 'data-original' => image_url("artist/#{ @artist.key }.jpg"), :width => "100%", class: 'lazy'
+        = image_tag "artist/#{ @artist.key }.jpg", :width => "100%"
       - else
-        = image_tag 'common/loading.png', 'data-original' => image_url("https://dl.dropboxusercontent.com/u/19314247/lvhs/#{@artist.image_path}"), width: "100%", class: 'lazy'
+        = image_tag "https://dl.dropboxusercontent.com/u/19314247/lvhs/#{@artist.image_path}", width: "100%"
       h3 style="color: #fff; position: absolute; bottom: 5%; left: 10%; text-shadow: 0 0 2px #333; " #{ @artist.name }
 
   - if @artist.item.available.any? { |i| i.media_type == 'video' }
