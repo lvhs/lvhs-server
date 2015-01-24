@@ -17,7 +17,8 @@ ActiveAdmin.register Item do
 
   index title: '動画一覧' do
     selectable_column
-    id_column
+    #id_column
+    column('編集') { |item| link_to "編集", admin_item_path(item) }
     column 'タイトル', :name
     #column '説明文', :description
     column('アーティスト') { |item| item.artist.nil? ? "" : item.artist.name }
@@ -25,8 +26,10 @@ ActiveAdmin.register Item do
     column '有効期限', :finished_at
     column '状態' do |item|
       case item.status
-      when :available
-        if item.published_at > Time.now
+      when "available"
+        if item.published_at.nil?
+          '公開'
+        elsif item.published_at > Time.now
           '公開前'
         elsif item.finished_at <= Time.now
           '販売終了'
@@ -35,6 +38,55 @@ ActiveAdmin.register Item do
         end
       else
         '非公開'
+      end
+    end
+  end
+
+  show title: '動画編集' do |item|
+    panel item.name do
+      div class: "attributes_table" do
+        table for: item do
+          tr class: "row" do
+            th "アーティスト"
+            td item.artist.name
+          end
+          tr class: "row" do
+            th "課金方法"
+            td item.billing_method == "free" ? "無料" : "有料"
+          end
+          tr class: "row" do
+            th "作成日"
+            td item.created_at
+          end
+          tr class: "row" do
+            th "更新日"
+            td item.updated_at
+          end
+          tr class: "row" do
+            th "動画画像"
+            td item.image_path.nil? ? "" : image_tag("https://dl.dropboxusercontent.com/u/19314247/lvhs/#{item.image_path}", height: "100%")
+          end
+          tr class: "row" do
+            th "youtube"
+            td link_to("https://www.youtube.com/watch?v=#{item.youtube_id}", "https://www.youtube.com/watch?v=#{item.youtube_id}")
+          end
+          tr class: "row" do
+            th "公開設定"
+            td item.status == "available" ? "公開中" : "非公開"
+          end
+          tr class: "row" do
+            th "公開日"
+            td item.published_at
+          end
+          tr class: "row" do
+            th "配信終了日"
+            td item.finished_at
+          end
+          tr class: "row" do
+            th link_to("編集", edit_admin_item_path(item))
+            td
+          end
+        end
       end
     end
   end

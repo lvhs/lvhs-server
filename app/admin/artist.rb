@@ -60,6 +60,10 @@ ActiveAdmin.register Artist, label: 'アーティスト' do
             th "公開日"
             td artist.published_at
           end
+          tr class: "row" do
+            th link_to("編集", edit_admin_artist_path(artist))
+            td
+          end
         end
       end
     end
