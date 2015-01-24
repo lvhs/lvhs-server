@@ -4,7 +4,6 @@ ActiveAdmin.register Staff do
        priority: 101,
        parent: '管理用'
 
-
   permit_params :email, :password, :password_confirmation, :role
 
   index do
@@ -25,12 +24,11 @@ ActiveAdmin.register Staff do
   filter :created_at
 
   form do |f|
-    f.inputs "Admin Details" do
+    f.inputs 'Admin Details' do
       f.input :email, label: 'メールアドレス'
       f.input :password, label: 'パスワード'
       f.input :password_confirmation, label: 'パスワード(確認用)'
     end
     f.actions
   end
-
 end

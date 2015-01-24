@@ -7,7 +7,6 @@ class CA
       attr_reader :total_cnt, :data_cnt, :m_owner_id, :ads
 
       def initialize(res)
-
         xml = Nokogiri::XML(
           File.read(res, encoding: Encoding::Shift_JIS).sub('SJIS-win', 'UTF-8'),
           nil,

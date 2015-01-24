@@ -1,5 +1,5 @@
 class App::PurchaseController < App::BaseController
-  protect_from_forgery :except => :create
+  protect_from_forgery except: :create
 
   def create
     @item = Item.find_by(item_params)

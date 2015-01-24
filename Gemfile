@@ -50,8 +50,8 @@ gem 'oj'
 
 # push notification
 # http://qiita.com/sue738/items/c2ce141cf24f9f1dbf01
-#gem 'apns'
-#gem 'gcm'
+# gem 'apns'
+# gem 'gcm'
 
 # In App Purchase
 gem 'venice'
@@ -73,12 +73,11 @@ gem 'nokogiri'
 
 # Ope
 gem 'activeadmin', github: 'activeadmin'
-gem 'inherited_resources', github: 'josevalim/inherited_resources', branch: 'rails-4-2'
 gem 'devise'
 gem 'cancancan'
-gem 'dropbox-sdk'
+gem 'aws-sdk-core'
 
-gem "rmagick", "2.13.2", :require => 'RMagick'
+gem 'rmagick', '2.13.2', require: 'RMagick'
 
 gem 'rails_12factor', group: :production
 gem 'just-datetime-picker'
@@ -105,11 +104,11 @@ group :development, :test do
 
   # https://www.infinum.co/the-capsized-eight/articles/top-8-tools-for-ruby-on-rails-code-optimization-and-cleanup
   gem 'traceroute'
-  #gem 'rack-mini-profiler'
+  # gem 'rack-mini-profiler'
   gem 'bullet'
-  #gem 'brakeman', :require => false
+  # gem 'brakeman', :require => false
   gem 'rails_best_practices'
-  gem 'rubycritic', :require => false
+  gem 'rubycritic', require: false
 
   # http://logictkt.hatenablog.com/entry/2014/10/09/210737
   gem 'awesome_print'
@@ -125,8 +124,7 @@ group :test do
   gem 'capybara'
 
   gem 'colored'
-  gem 'deadweight', :require => 'deadweight/hijack/rails'
+  gem 'deadweight', require: 'deadweight/hijack/rails'
   gem 'test-unit'
   # gem 'test-unit-full'
 end
-

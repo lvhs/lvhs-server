@@ -50,15 +50,3 @@ twitter:
 facebook:
   app_id: '658555114258291'
   app_secret: '79e9bb429372e2bab42381c62ea49cc9'
-
-#dropbox:
-#  app_key: 'rfmc2bj987j80tl'
-#  app_secret: 'bm4zas4pn0yq90g'
-#  access_token: 'WaleFabQlMgAAAAAAAAABqA54UZ6Fl3W9-IbSHCmljPu5UoyCdYAdVBIIBCkFiH2'
-
-dropbox:
-  base_url: 'https://dl.dropboxusercontent.com/u/'
-  id: '19314247'
-  app_key: 'krqou86ttb2nbyt'
-  app_secret: 'o0x9lml93qavo31'
-  access_token: 'r1fe5f1lDZgAAAAAAAAGBMjfN_-bk6GLhqnsuHR7JVFPHQMy8EUIupE0Fdiros_M'

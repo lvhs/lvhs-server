@@ -1,7 +1,6 @@
 require 'json'
 
 class Api::V1::ApiController < ActionController::API
-
   around_filter :transactions_filter_with_lock
 
   rescue_from Exception do |e|
@@ -16,11 +15,11 @@ class Api::V1::ApiController < ActionController::API
     render json: { error: e.to_s }, status: 404
   end
 
-  #rescue_from Apipie::Error, ActionController::RoutingError do |e|
+  # rescue_from Apipie::Error, ActionController::RoutingError do |e|
   #  logger.error e
   #  logger.debug e.backtrace.join("\n")
   #  render json: { error: e.to_s }, status: 403
-  #end
+  # end
 
   rescue_from ActiveRecord::RecordInvalid do |e|
     logger.error e
@@ -35,7 +34,7 @@ class Api::V1::ApiController < ActionController::API
     render json: { error: e.to_s, error_codes: error_codes, remaining_attempts: remaining_attempts }, status: 403
   end
 
-  #rescue_from Net::SMTPAuthenticationError,
+  # rescue_from Net::SMTPAuthenticationError,
   #            Net::SMTPServerBusy,
   #            Net::SMTPSyntaxError,
   #            Net::SMTPFatalError,
@@ -43,7 +42,7 @@ class Api::V1::ApiController < ActionController::API
   #  logger.error e
   #  logger.debug e.backtrace.join("\n")
   #  render json: { error: e.to_s }, status: 500
-  #end
+  # end
 
   def self.response_example(code, response_data)
     json = JSON.pretty_generate(response_data)
@@ -57,7 +56,7 @@ code: #{code}
   private
 
   def client_ip
-    request.headers["HTTP_X_LVHS_REAL_IP"]
+    request.headers['HTTP_X_LVHS_REAL_IP']
   end
 
   def transactions_filter_with_lock
@@ -65,21 +64,21 @@ code: #{code}
     ActiveRecord::Base.transaction do
       begin
         yield
-      #rescue LockError::FailedAction => e
+      # rescue LockError::FailedAction => e
       #  lock_record = e.record
       #  customer_service_token = lock_record.customer_service_token rescue nil
       #  logger.info "Failed action happend",
       #              failed_member: customer_service_token,
       #              lock_error: :failed_action,
       #              failed_action: lock_record.failed_action
-      #rescue LockError::MemberLocked => e
+      # rescue LockError::MemberLocked => e
       #  lock_record = e.record
       #  customer_service_token = lock_record.customer_service_token rescue nil
       #  logger.info "Accessed by locked member",
       #              failed_member: customer_service_token,
       #              lock_error: :member_locked,
       #              failed_action: lock_record.failed_action
-      #rescue LockError::IpAddressLocked => e
+      # rescue LockError::IpAddressLocked => e
       #  lock_record = e.record
       #  customer_service_token = lock_record.member.customer_service_token rescue nil
       #  logger.info "Acceessed by IP address locked member",
@@ -90,6 +89,6 @@ code: #{code}
         puts e
       end
     end
-    raise ActiveRecord::RecordInvalid, lock_record if lock_record
+    fail ActiveRecord::RecordInvalid, lock_record if lock_record
   end
 end

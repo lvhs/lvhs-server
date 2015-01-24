@@ -5,7 +5,7 @@ class Ability
   def initialize(staff)
     @staff = staff
     send staff.role.to_sym
-    can :manage, ActiveAdmin::Page, :name => "Dashboard"
+    can :manage, ActiveAdmin::Page, name: 'Dashboard'
   end
 
   def admin
@@ -17,7 +17,7 @@ class Ability
 
   def label
     can :manage, [Artist, Item]
-    can :read, ActiveAdmin::Page, :name => "Stat"
+    can :read, ActiveAdmin::Page, name: 'Stat'
     can [:read, :update], Staff, id: @staff.id
   end
 

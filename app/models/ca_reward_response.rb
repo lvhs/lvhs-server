@@ -6,16 +6,16 @@ class CARewardResponse
 
   def initialize(res)
     xml = Nokogiri::XML.parse(
-      File.read(res, :encoding => Encoding::Shift_JIS),
+      File.read(res, encoding: Encoding::Shift_JIS),
       nil,
       'UTF-8'
     )
 
     json = Hash.from_xml(xml.to_s)
-    @total_cnt  = json["response"]["total_cnt"]
-    @data_cnt   = json["response"]["data_cnt"]
-    @m_owner_id = json["response"]["m_owner_id"]
-    ad = json["response"]["list_view"]["ad"]
+    @total_cnt  = json['response']['total_cnt']
+    @data_cnt   = json['response']['data_cnt']
+    @m_owner_id = json['response']['m_owner_id']
+    ad = json['response']['list_view']['ad']
 
     @ad_list = if ad.nil?
                  []

@@ -1,7 +1,7 @@
 require 'dropbox_sdk'
 
 class DropboxApiClient
-  BASE_PATH = "/Public/lvhs"
+  BASE_PATH = '/Public/lvhs'
   BASE_URL = Settings.dropbox.base_url
   ID = Settings.dropbox.id
   APP_KEY = Settings.dropbox.app_key
@@ -27,16 +27,16 @@ class DropboxApiClient
       begin
         # Upload the POST'd file to Dropbox, keeping the same name
         resp = client.put_file(path, file_obj, overwrite, parent_rev)
-        #render :text => "Upload successful.  File now at #{resp['path']}"
+        # render :text => "Upload successful.  File now at #{resp['path']}"
         resp
       rescue DropboxAuthError => e
         # An auth error means the access token is probably bad
         logger.info "Dropbox auth error: #{e}"
-        #render :text => "Dropbox auth error"
+        # render :text => "Dropbox auth error"
         nil
       rescue DropboxError => e
         logger.info "Dropbox API error: #{e}"
-        #render :text => "Dropbox API error"
+        # render :text => "Dropbox API error"
         nil
       end
     end

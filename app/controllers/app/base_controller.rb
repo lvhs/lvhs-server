@@ -15,7 +15,7 @@ class App::BaseController < ApplicationController
   end
 
   def get_uiid
-    if session.has_key?(:uiid)
+    if session.key?(:uiid)
       logger.info 'retrieve uiid from session'
       uiid = session[:uiid]
     else

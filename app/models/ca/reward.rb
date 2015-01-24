@@ -26,11 +26,11 @@ class CA
       :video_type
     ]
 
-    @@encode_user_id = ->id{ Digest::SHA512.hexdigest id }
+    @@encode_user_id = ->id { Digest::SHA512.hexdigest id }
 
     def initialize(user_id)
       @user_id     = user_id
-      @enc_user_id = self.encode_user_id user_id
+      @enc_user_id = encode_user_id user_id
       @api_key     = Settings.car.api_key
       @media_id    = Settings.car.media_id
       @base_url    = "#{ BASE_URL }?user_id=#{ USER_ID_PLACEHOLDER }&m_id=#{ @media_id }&api_key=#{ @api_key }&page_limit=10"
@@ -93,8 +93,8 @@ class CA
     end
 
     def append_param!(url, key, params)
-      if params.has_key? key
-        url << "&#{ key.to_s }=#{ params[key] }"
+      if params.key? key
+        url << "&#{ key }=#{ params[key] }"
       end
       url
     end

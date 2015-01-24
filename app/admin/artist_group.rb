@@ -13,7 +13,7 @@ ActiveAdmin.register ArtistGroup do
   end
 
   form do |f|
-    f.inputs "" do
+    f.inputs '' do
       f.input :name
     end
     f.actions

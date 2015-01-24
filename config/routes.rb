@@ -1,5 +1,4 @@
 Lvhs::Application.routes.draw do
-
   class UseSubdomain
     def initialize(domain)
       @domain = domain
