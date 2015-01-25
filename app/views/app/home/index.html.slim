@@ -6,5 +6,5 @@
           - if artist.image_path.blank?
             = image_tag 'common/loading.png', 'data-original' => image_url("artist/#{ artist.key }.jpg"), :width => "100%", class: 'lazy'
           - else
-            = image_tag 'common/loading.png', 'data-original' => image_url("https://dl.dropboxusercontent.com/u/19314247/lvhs/#{artist.image_path}"), width: "100%", class: 'lazy'
+            = image_tag 'common/loading.png', 'data-original' => image_url(static_url(artist.image_path)), width: "100%", class: 'lazy'
         h3 style="color: #fff; position: absolute; bottom: 5%; left: 10%; text-shadow: 0 0 2px #333; " #{ artist.name }

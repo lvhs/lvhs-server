@@ -1,16 +1,19 @@
+require 'aws/s3/client_extensions'
+
+include ApplicationHelper
 ActiveAdmin.register Artist, label: 'アーティスト' do
   menu label: 'アーティスト', priority: 10
 
   permit_params :artist_group_id, :name, :key, :description, :official_url, :status, :published_at, :image_url
   # belongs_to :label
-  #
+
   after_save do |artist|
     unless params[:artist][:image].blank?
       image = params[:artist][:image]
       /^image\/(?<ext>\w+)/ =~ image.content_type
       path = "artist/#{artist.id}/jacket.#{ext}"
-      #DropboxApiClient.upload(path, image.tempfile, overwrite: true)
-      #artist.update_attributes! image_path: path
+      Aws::S3::Client.put_object(path, image.tempfile)
+      artist.update_attributes! image_path: path
     end
   end
 
@@ -50,7 +53,7 @@ ActiveAdmin.register Artist, label: 'アーティスト' do
           end
           tr class: 'row' do
             th 'アーティスト画像'
-            td artist.image_path.nil? ? '' : image_tag("https://dl.dropboxusercontent.com/u/19314247/lvhs/#{artist.image_path}", height: '100%')
+            td artist.image_path.nil? ? '' : image_tag(static_url(artist.image_path), height: '100%')
           end
           tr class: 'row' do
             th '公開設定'

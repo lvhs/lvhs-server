@@ -1,3 +1,6 @@
+require 'aws/s3/client_extensions'
+
+include ApplicationHelper
 ActiveAdmin.register Item do
   menu label: '動画', priority: 11
   config.filters = false
@@ -10,8 +13,8 @@ ActiveAdmin.register Item do
       image = params[:item][:image]
       /^image\/(?<ext>\w+)/ =~ image.content_type
       path = "artist/#{item.artist_id}/items/#{item.id}/cover.#{ext}"
-      #DropboxApiClient.upload(path, image.tempfile, overwrite: true)
-      #item.update_attributes! image_path: path
+      Aws::S3::Client.put_object(path, image.tempfile)
+      item.update_attributes! image_path: path
     end
   end
 
@@ -64,7 +67,7 @@ ActiveAdmin.register Item do
           end
           tr class: 'row' do
             th '動画画像'
-            td item.image_path.nil? ? '' : image_tag("https://dl.dropboxusercontent.com/u/19314247/lvhs/#{item.image_path}", height: '100%')
+            td item.image_path.nil? ? '' : image_tag(static_url(item.image_path), height: '100%')
           end
           tr class: 'row' do
             th 'youtube'
