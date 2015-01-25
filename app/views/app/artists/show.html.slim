@@ -16,14 +16,14 @@
 
       - @artist.item.available.each do |item|
         - if item.media_type == 'video'
-          .col-md-12 style=" box-sizing: border-box;background-color: rgba(0,0,0,.6); padding: 18px; padding-left: 30px; padding-right: 2px; color: #fff; font-size: 1.5rem; width: 100%;"
+          .col-md-12 style="box-sizing: border-box; background-color: rgba(0,0,0,.6); padding: 18px; padding-left: 10px; padding-right: 2px; color: #fff; font-size: 1.5rem; width: 100%;"
             - if item.image_path.blank?
-              = image_tag "jacket/#{ @artist.key }/02-#{ @artist.key }.jpg", width: '15%'
+              = image_tag "noimage-s.png", width: '15%'
             - else
               = image_tag static_url(item.image_path), width: '15%'
-            span style="padding-left: 20px;" = item.name
+            span style="padding-left: 10px;" = item.name
             a href="player://movie?iid=#{ item.id }&yid=#{ item.youtube_id }"
-              = image_tag "free-icon.png", style: "float: right; height: 35px;"
+              = image_tag "free-icon.png", style: "height: 35px; position: absolute; right: 10px; top: 23px;"
 
   - unless @artist.official_url.nil?
     // OFFICIAL INFO
