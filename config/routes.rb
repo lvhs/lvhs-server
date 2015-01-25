@@ -28,7 +28,20 @@ Lvhs::Application.routes.draw do
         # CA Reward
         namespace :car do
           resources :pointback, only: [:index]
+          resources :list,      only: [:index]
+          resources :error,     only: [:index]
         end
+      end
+    end
+
+    namespace :app do
+      resources :artists,  only: [:show]
+      resources :purchase, only: [:create]
+
+      # CA Reward
+      namespace :car do
+        resources :list,  only: [:index]
+        resources :error, only: [:index]
       end
     end
   end

@@ -1,3 +1,5 @@
+require 'httpclient'
+
 class CA
   class Reward
     attr_reader :user_id, :enc_user_id
@@ -33,15 +35,13 @@ class CA
       @enc_user_id = encode_user_id user_id
       @api_key     = Settings.car.api_key
       @media_id    = Settings.car.media_id
-      @base_url    = "#{ BASE_URL }?user_id=#{ USER_ID_PLACEHOLDER }&m_id=#{ @media_id }&api_key=#{ @api_key }&page_limit=10"
+      @base_url    = "#{ BASE_URL }?user_id=#{ @user_id }&m_id=#{ @media_id }&api_key=#{ @api_key }&page_limit=10"
       @page        = 1
     end
 
     def get(params = {})
       params[:page] ||= @page
-      url = build_url params
-      file = Rails.root.join 'car.xml'
-      res = CA::Reward::Response.new file
+      res = CA::Reward::Response.new(cache_write(fetch_content!(build_url(params))))
     end
 
     def first?
@@ -72,6 +72,37 @@ class CA
 
     def encode_user_id(id)
       @@encode_user_id.call id
+    end
+
+    def cache_option
+      {
+        namespace: "ca/reward/list/#{@user_id}",
+        compress: true,
+        expires_in: 300
+      }
+    end
+
+    def cache_write(data)
+      Rails.cache.write(@user_id, data, cache_option)
+      data
+    end
+
+    def cache_fetch
+      Rails.cache.fetch(@user_id, cache_option) or raise NotAvailable
+    end
+
+    def client
+      unless @client
+        @client = HTTPClient.new
+        @client.connect_timeout = 1
+        @client.send_timeout    = 1
+        @client.receive_timeout = 1
+      end
+      @client
+    end
+
+    def fetch_content!(url)
+      client.get_content(url)
     end
 
     class << self

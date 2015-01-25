@@ -7,19 +7,25 @@ class CA
       attr_reader :total_cnt, :data_cnt, :m_owner_id, :ads
 
       def initialize(res)
+        puts 'response'
         xml = Nokogiri::XML(
-          File.read(res, encoding: Encoding::Shift_JIS).sub('SJIS-win', 'UTF-8'),
+          res.encode('UTF-8', 'SJIS'),
           nil,
           'UTF-8'
         )
 
+        puts 'response1'
         json = Hash.from_xml(xml.to_s)
+        puts 'response2'
         res = json['response']
+        puts 'response3'
         %w(total_cnt data_cnt m_owner_id).each do |key|
           instance_variable_set("@#{ key }", res[key]) unless res[key].nil?
         end
+        puts 'response4'
 
         *ad = res['list_view']['ad']
+        puts 'response5'
         @ads =  ad.map { |a| CA::Reward::Ad.new a }
       end
     end

@@ -83,6 +83,7 @@ gem 'rails_12factor', group: :production
 gem 'just-datetime-picker'
 
 gem 'yaml_db'
+gem 'httpclient'
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 group :development, :test do
