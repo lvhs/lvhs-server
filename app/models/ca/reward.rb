@@ -32,19 +32,19 @@ class CA
 
     def initialize(user_id, option = {})
       @user_id     = "#{user_id}:#{option[:iid]}"
-      @enc_user_id = encode_user_id user_id
+      @enc_user_id = encode_user_id @user_id
       @api_key     = Settings.car.api_key
       @media_id    = Settings.car.media_id
-      @base_url    = "#{ BASE_URL }?user_id=USER_ID&m_id=#{ @media_id }&api_key=#{ @api_key }&page_limit=50&attribute=8"
+      @base_url    = "#{ BASE_URL }?user_id=USER_ID&enc_user_id=ENC_USER_ID&m_id=#{ @media_id }&api_key=#{ @api_key }&page_limit=50&attribute=8"
       @page        = 1
     end
 
     def get(params = {})
       params[:page] ||= @page
       res = cache_fetch || cache_write(fetch_content!(build_url(params)));
-      CA::Reward::Response.new(res, @user_id)
+      CA::Reward::Response.new(res, @user_id, @enc_user_id)
     rescue
-      CA::Reward::Response.new(cache_write(fetch_content!(build_url(params))), @user_id)
+      CA::Reward::Response.new(cache_write(fetch_content!(build_url(params))), @user_id, @enc_user_id)
     end
 
     def first?
