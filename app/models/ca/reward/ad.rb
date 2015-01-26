@@ -17,7 +17,7 @@ class CA
         end
 
         p = *data['p']
-        @cv_points =  p.map { |i| CA::Reward::CvPoint.new i }
+        @cv_points = p.map { |i| CA::Reward::CvPoint.new i }
       end
     end
   end

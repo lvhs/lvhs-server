@@ -30,18 +30,21 @@ class CA
 
     @@encode_user_id = ->id { Digest::SHA512.hexdigest id }
 
-    def initialize(user_id)
-      @user_id     = user_id
+    def initialize(user_id, option = {})
+      @user_id     = "#{user_id}:#{option[:iid]}"
       @enc_user_id = encode_user_id user_id
       @api_key     = Settings.car.api_key
       @media_id    = Settings.car.media_id
-      @base_url    = "#{ BASE_URL }?user_id=#{ @user_id }&m_id=#{ @media_id }&api_key=#{ @api_key }&page_limit=10"
+      @base_url    = "#{ BASE_URL }?user_id=USER_ID&m_id=#{ @media_id }&api_key=#{ @api_key }&page_limit=50&attribute=8"
       @page        = 1
     end
 
     def get(params = {})
       params[:page] ||= @page
-      res = CA::Reward::Response.new(cache_write(fetch_content!(build_url(params))))
+      res = cache_fetch || cache_write(fetch_content!(build_url(params)));
+      CA::Reward::Response.new(res, @user_id)
+    rescue
+      CA::Reward::Response.new(cache_write(fetch_content!(build_url(params))), @user_id)
     end
 
     def first?
@@ -78,17 +81,17 @@ class CA
       {
         namespace: "ca/reward/list/#{@user_id}",
         compress: true,
-        expires_in: 300
+        expires_in: 3600*3
       }
     end
 
     def cache_write(data)
-      Rails.cache.write(@user_id, data, cache_option)
+      Rails.cache.write("ca_reward-#{@page}", data, cache_option)
       data
     end
 
     def cache_fetch
-      Rails.cache.fetch(@user_id, cache_option) or raise NotAvailable
+      Rails.cache.fetch("ca_reward-#{@page}", cache_option) or raise NotAvailable
     end
 
     def client

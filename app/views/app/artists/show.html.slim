@@ -22,14 +22,15 @@
             - else
               = image_tag static_url(item.image_path), width: '15%'
             span style="padding-left: 10px;" = item.name
-            a href="player://movie?iid=#{ item.id }&yid=#{ item.youtube_id }"
-              = image_tag "play-icon.png", style: "height: 35px; position: absolute; right: 10px; top: 23px;"
-            /- if item.free?
-            /  a href="player://movie?iid=#{ item.id }&yid=#{ item.youtube_id }"
-            /    = image_tag "free-icon.png", style: "height: 35px; position: absolute; right: 10px; top: 23px;"
-            /- else
-            /  a href="purchase://movie?iid=#{ item.id }&yid=#{ item.youtube_id }&reward=%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92DL%E3%81%97%E3%81%A6%E8%B3%BC%E5%85%A5"
-            /    = image_tag "buy.png", style: "height: 35px; position: absolute; right: 10px; top: 23px;"
+            - if item.free?
+              a href="player://movie?iid=#{ item.id }&yid=#{ item.youtube_id }"
+                = image_tag "free-icon.png", style: "height: 35px; position: absolute; right: 10px; top: 23px;"
+            - elsif !@device.nil? && PurchasedItem.find_by(key: @device.key, item_id: item.id)
+              a href="player://movie?iid=#{ item.id }&yid=#{ item.youtube_id }"
+                = image_tag "play-icon.png", style: "height: 35px; position: absolute; right: 10px; top: 23px;"
+            - else
+              a href="/app/car/list?iid=#{ item.id }&yid=#{ item.youtube_id }"
+                = image_tag "get.png", style: "height: 35px; position: absolute; right: 10px; top: 23px;"
 
   - unless @artist.official_url.nil?
     // OFFICIAL INFO
