@@ -12,7 +12,8 @@
         a.pull-left href="#{ ad.ad_tag_of_point_back }" style="margin-right: 10px; margin-bottom: 8px;"
           img src="#{ ad.banner_img_1 }" alt="#{ ad.banner_img_alt }" style="width: 80px;"
         div
-          p style="font-weight: bold; font-size: 120%;" = ad.banner_text_1
+          a href="#{ ad.ad_tag_of_point_back }"
+            p style="font-weight: bold; font-size: 120%; text-decoration: underline; color: #fff;" = ad.banner_text_1
           == ad.count_type_for_user
         /.col-xs-12
         /  == ad.content_exp

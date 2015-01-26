@@ -32,9 +32,9 @@ class CA
 
     def initialize(user_id, option = {})
       @user_id     = "#{user_id}:#{option[:iid]}"
-      @enc_user_id = encode_user_id @user_id
       @api_key     = Settings.car.api_key
       @media_id    = Settings.car.media_id
+      @enc_user_id = encode_user_id "#{@api_key}#{@user_id}"
       @base_url    = "#{ BASE_URL }?user_id=USER_ID&enc_user_id=ENC_USER_ID&m_id=#{ @media_id }&api_key=#{ @api_key }&page_limit=50&attribute=8"
       @page        = 1
     end
