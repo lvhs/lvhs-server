@@ -120,8 +120,6 @@ group :development, :test do
   gem 'better_errors'
 
   gem 'factory_girl'
-
-  gem 'debugger-ruby_core_source'
 end
 
 group :test do
