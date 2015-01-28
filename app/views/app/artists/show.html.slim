@@ -22,7 +22,7 @@
             - else
               = image_tag static_url(item.image_path), width: '15%'
             span style="padding-left: 10px;" = item.name
-            - if item.free?
+            - if item.free? || @app_bundle_version == Settings.review_bundle_version
               a href="player://movie?aid=#{@artist.id}&iid=#{ item.id }&yid=#{ item.youtube_id }"
                 = image_tag "free-icon.png", style: "height: 35px; position: absolute; right: 10px; top: 23px;"
             - elsif !@device.nil? && PurchasedItem.find_by(key: @device.key, item_id: item.id)
@@ -43,4 +43,3 @@
 
       .col-md-12 style="background-color: rgba(0,0,0,.6); padding: 18px; text-align: center; box-sizing: border-box;"
         a href="http://myfirststory.net" style="color: #fff; line-height: 74px; font-size: 2rem;" = @artist.official_url
-

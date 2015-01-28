@@ -1,6 +1,6 @@
 module ApplicationHelper
   def static_host
-    "http://static.lvhs.jp"
+    Settings.static_host
   end
 
   def static_url(path)

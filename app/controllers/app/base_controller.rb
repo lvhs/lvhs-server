@@ -1,11 +1,23 @@
 class App::BaseController < ApplicationController
-  before_filter :init_device
+  before_filter :init_controller
+
+  def init_controller
+    init_device
+    @app_bundle_version = bundle_version
+  end
 
   # TODO: 暗号化
   def init_device
-    uiid = get_uiid
     return if uiid.nil?
     @device = find_or_create_device(uiid)
+  end
+
+  def uiid
+    @uiid = get_or_set_uiid
+  end
+
+  def bundle_version
+    @bundle_version = get_or_set_bundle_version
   end
 
   private
@@ -14,15 +26,12 @@ class App::BaseController < ApplicationController
     render json: { status: 'error', message: msg }, status: 403
   end
 
-  def get_uiid
-    if session.key?(:uiid)
-      logger.info 'retrieve uiid from session'
-      uiid = session[:uiid]
-    else
-      logger.info 'set uiid from header'
-      uiid = request.headers['x-uiid']
-      session[:uiid] = uiid
-    end
+  def get_or_set_uiid
+    session[:uiid] ||= request.headers['x-uiid']
+  end
+
+  def get_or_set_bundle_version
+    session[:bundle_version] ||= request.headers['x-bundle-version']
   end
 
   def find_or_create_device(uiid)
