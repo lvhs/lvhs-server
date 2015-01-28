@@ -2,7 +2,8 @@ class App::PurchaseController < App::BaseController
   protect_from_forgery except: :create
 
   def create
-    @item = Item.find_by(item_params)
+    p = item_params
+    @item = Item.find_by(id: p[:iid])
     render_error if @item.nil? || @device.nil?
     PurchasedItem.create! key: @device.key, item_id: @item.id
     render json: { status: 'ok' }, status: 200
@@ -11,6 +12,6 @@ class App::PurchaseController < App::BaseController
   private
 
   def item_params
-    params.permit(:id)
+    params.permit(:iid, :pid)
   end
 end

@@ -22,15 +22,22 @@
             - else
               = image_tag static_url(item.image_path), width: '15%'
             span style="padding-left: 10px;" = item.name
-            - if item.free? || @app_bundle_version == Settings.review_bundle_version
+
+            - if @app_bundle_version == Settings.review_bundle_version && PurchasedItem.find_by(key: @device.key, item_id: item.id).nil? && item.id == 71
+              a href="purchase:///movie?aid=#{@artist.id}&iid=#{ item.id }&pid=jp.lvhs.livehouse.m00000001"
+                = image_tag "buy.png", style: "height: 35px; position: absolute; right: 10px; top: 23px;"
+
+            - elsif item.free? || @app_bundle_version == Settings.review_bundle_version
               a href="player://movie?aid=#{@artist.id}&iid=#{ item.id }&yid=#{ item.youtube_id }"
                 = image_tag "play-icon.png", style: "height: 35px; position: absolute; right: 10px; top: 23px;"
+
             - elsif !@device.nil? && PurchasedItem.find_by(key: @device.key, item_id: item.id)
               a.player-btn href="player://movie?aid=#{@artist.id}&iid=#{ item.id }&yid=#{ item.youtube_id }"
                 = image_tag "play-icon.png", style: "height: 35px; position: absolute; right: 10px; top: 23px;"
               - if !@player.nil?
                 javascript:
                   $(".player-btn").trigger('click')
+
             - else
               a href="/app/car/list?aid=#{@artist.id}&iid=#{ item.id }&yid=#{ item.youtube_id }"
                 = image_tag "get.png", style: "height: 35px; position: absolute; right: 10px; top: 23px;"
