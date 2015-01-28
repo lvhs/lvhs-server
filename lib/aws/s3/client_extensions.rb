@@ -6,7 +6,7 @@ class Aws::S3::Client
     end
 
     def param(p)
-      @param ||= { bucket: 'lvhs' }
+      @param ||= { bucket: 'static.lvhs.jp' }
       @param.merge p
     end
 
