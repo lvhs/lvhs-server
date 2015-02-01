@@ -12,11 +12,11 @@ build:
     - wercker/install-packages@0.0.4
 
     - install-packages:
-      packages: cmake
+        packages: cmake
 
     # Uncomment this to force RVM to use a specific Ruby version
     - rvm-use:
-      version: 2.2.0
+        version: 2.2.0
 
     # A step that executes `bundle install` command
     - bundle-install
@@ -27,11 +27,11 @@ build:
     # A custom script step, name value is used in the UI
     # and the code value contains the command that get executed
     - script:
-      name: echo ruby information
-      code: |
-        echo "ruby version $(ruby --version) running"
-        echo "from location $(which ruby)"
-        echo -p "gem list: $(gem list)"
+        name: echo ruby information
+        code: |
+          echo "ruby version $(ruby --version) running"
+          echo "from location $(which ruby)"
+          echo -p "gem list: $(gem list)"
 
     # Add more steps here:
     # - script:
