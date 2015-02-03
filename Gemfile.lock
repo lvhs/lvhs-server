@@ -357,6 +357,10 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rainbow (2.0.0)
     rake (10.4.2)
+    rambulance (0.3.0)
+      actionpack
+      activesupport
+      railties
     ransack (1.6.3)
       actionpack (>= 3.0)
       activerecord (>= 3.0)
@@ -560,6 +564,7 @@ DEPENDENCIES
   rails_12factor
   rails_best_practices
   rails_config
+  rambulance
   rmagick (= 2.13.2)
   rspec-rails
   rubocop

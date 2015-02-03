@@ -43,6 +43,9 @@ gem 'foreman'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+# error handring
+gem 'rambulance'
+
 # performance
 gem 'escape_utils'
 gem 'fast_blank'
