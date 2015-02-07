@@ -1,5 +1,4 @@
 class App::Car::ListController < App::BaseController
-
   def index
     # FIXME
     if Rails.env.development?
@@ -24,5 +23,4 @@ class App::Car::ListController < App::BaseController
   def list_params
     params.permit(:aid, :iid, :yid)
   end
-
 end

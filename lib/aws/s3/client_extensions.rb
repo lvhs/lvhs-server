@@ -1,8 +1,7 @@
 class Aws::S3::Client
   class << self
-
     def client
-      @client ||= self.new
+      @client ||= new
     end
 
     def param(p)

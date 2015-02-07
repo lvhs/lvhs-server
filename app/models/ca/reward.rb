@@ -41,7 +41,7 @@ class CA
 
     def get(params = {})
       params[:page] ||= @page
-      res = cache_fetch || cache_write(fetch_content!(build_url(params)));
+      res = cache_fetch || cache_write(fetch_content!(build_url(params)))
       CA::Reward::Response.new(res, @user_id, @enc_user_id)
     rescue
       CA::Reward::Response.new(cache_write(fetch_content!(build_url(params))), @user_id, @enc_user_id)
@@ -81,7 +81,7 @@ class CA
       {
         namespace: "ca/reward/list/#{@user_id}",
         compress: true,
-        expires_in: 3600*3
+        expires_in: 3600 * 3
       }
     end
 
@@ -91,7 +91,7 @@ class CA
     end
 
     def cache_fetch
-      Rails.cache.fetch("ca_reward-#{@page}", cache_option) or raise NotAvailable
+      Rails.cache.fetch("ca_reward-#{@page}", cache_option) || fail(NotAvailable)
     end
 
     def client
