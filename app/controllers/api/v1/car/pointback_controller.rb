@@ -6,9 +6,11 @@ class Api::V1::Car::PointbackController < Api::V1::ApiController
       p = pointback_params
       id, p[:item_id] = p[:id].split(':')
       p[:cname].encode!('UTF-8', 'Shift_JIS')
+      device = Device.find(id)
+      p[:device_id] = device.id
       p.delete(:id)
       RewardHistory.create! p
-      PurchasedItem.create! key: Device.find(id).key, item_id: p[:item_id]
+      PurchasedItem.create! key: device.key, item_id: p[:item_id]
       render text: 'OK', status: 200
     else
       redirect_to app_car_error_index_path
