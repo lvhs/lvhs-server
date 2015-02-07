@@ -17,7 +17,7 @@ class App::Car::ListController < App::BaseController
     res = CA::Reward.new(id.to_s, iid: iid).get
     reward_histories = RewardHistory.where(device_id: @device.id)
     rewarded_cids = reward_histories.select(:cid).map {|h| h.cid }
-    @ads = res.ads.select { |ad| !rewarded_cids.include? ad }
+    @ads = res.ads.select { |ad| !rewarded_cids.include? ad.c_id }
   end
 
   private
