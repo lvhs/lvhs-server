@@ -18,4 +18,8 @@ class Item < ActiveRecord::Base
   def free?
     billing_method == 'free' || (!finished_at.nil? && finished_at <= Time.now)
   end
+
+  def new?
+    [published_at, created_at].compact.max > Time.current - 1.week
+  end
 end

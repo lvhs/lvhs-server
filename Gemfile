@@ -9,6 +9,7 @@ gem 'mysql2'
 gem 'sass-rails'
 gem 'bourbon' # http://bourbon.io/
 gem 'neat' # http://neat.bourbon.io/
+gem 'refills'
 gem 'compass-rails'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -123,6 +124,10 @@ group :development, :test do
   gem 'better_errors'
 
   gem 'factory_girl'
+end
+
+group :development do
+  gem 'pry-rails'
 end
 
 group :test do

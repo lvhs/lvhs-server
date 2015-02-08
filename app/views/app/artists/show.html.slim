@@ -16,11 +16,16 @@
 
     - @artist.item.available.each do |item|
       - if item.media_type == 'video'
-        div style="padding: 18px 10px; box-sizing: border-box; background-color: rgba(0,0,0,.6); color: #fff; font-size: 1.5rem;"
+        div.ribbon-box  style="padding: 18px 10px; box-sizing: border-box; background-color: rgba(0,0,0,.6); color: #fff; font-size: 1.5rem;"
+
+          - if item.new?
+            .ribbon-wrapper
+              .ribbon New
+
           div style="display: table; width: 100%; overflow: hidden;"
             div style="display: table-cell; width: 46px; overflow: hidden; margin: 0;"
               - if item.image_path.blank?
-                = image_tag "noimage-s.png", width: '100%'
+                = image_tag "no-image.png", width: '100%'
               - else
                 = image_tag static_url(item.image_path), width: '100%'
 
