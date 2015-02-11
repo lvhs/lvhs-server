@@ -17,3 +17,6 @@
 #= require bootstrap-sprockets
 $ ->
   $('img.lazy').lazyload?()
+  $('.blink')
+    .on 'touchstart', -> $(@).css opacity: 0.5
+    .on 'touchend', -> $(@).css opacity: 1

@@ -1,6 +1,6 @@
 require 'httpclient'
 
-class CA
+module CA
   class Reward
     attr_reader :user_id, :enc_user_id
 
@@ -9,23 +9,14 @@ class CA
     USER_ID_PLACEHOLDER = '##UID##'
 
     @@optional_params = [
-      :page,
-      :order,
-      :carrier,
-      :point_min,
-      :point_max,
-      :change_min,
-      :change_max,
+      :page, :order, :carrier, :point_min, :point_max, :change_min, :change_max,
+      :attribute, :nac, :compress, :video_type,
       :action_type,  # 成果承認のタイプ 1: 手動 2: 自動
       :rank,        # 1: 昇順ソート 2: 降順ソート
       :result_rank, # 1: 昇順ソート 2: 降順ソート
       :point_sort,  # 1: 昇順ソート 2: 降順ソート
       :new_sort,    # 1: 昇順ソート 2: 降順ソート
-      :attribute,
-      :platform,    # 1: Web 2: iOS 3: Android
-      :nac,
-      :compress,
-      :video_type
+      :platform     # 1: Web 2: iOS 3: Android
     ]
 
     @@encode_user_id = ->id { Digest::SHA512.hexdigest id }
@@ -127,9 +118,7 @@ class CA
     end
 
     def append_param!(url, key, params)
-      if params.key? key
-        url << "&#{ key }=#{ params[key] }"
-      end
+      url << "&#{ key }=#{ params[key] }" if params.key?(key)
       url
     end
   end

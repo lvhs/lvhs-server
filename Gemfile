@@ -72,6 +72,11 @@ gem 'autoprefixer-rails'
 gem 'rails_config'
 
 gem 'draper'
+gem 'cells'
+gem 'enumerize'
+gem 'active_hash'
+# https://github.com/activerecord-hackery/squeel
+# gem 'squeel'
 
 gem 'nokogiri'
 

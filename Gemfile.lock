@@ -39,6 +39,8 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.1)
+    active_hash (1.4.0)
+      activesupport (>= 2.2.2)
     activejob (4.2.0)
       activesupport (= 4.2.0)
       globalid (>= 0.3.0)
@@ -109,6 +111,10 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    cells (3.11.3)
+      actionpack (>= 3.0)
+      railties (>= 3.0)
+      uber (~> 0.0.8)
     celluloid (0.16.0)
       timers (~> 4.0.0)
     childprocess (0.5.5)
@@ -176,6 +182,8 @@ GEM
       activemodel (>= 3.0)
       activesupport (>= 3.0)
       request_store (~> 1.0)
+    enumerize (0.9.0)
+      activesupport (>= 3.2)
     equalizer (0.0.9)
     erubis (2.7.0)
     escape_utils (1.0.1)
@@ -483,6 +491,7 @@ GEM
       coffee-rails
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
+    uber (0.0.13)
     uglifier (2.7.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
@@ -522,6 +531,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_hash
   activeadmin!
   autoprefixer-rails
   awesome_print
@@ -534,6 +544,7 @@ DEPENDENCIES
   byebug
   cancancan
   capybara
+  cells
   childprocess
   coffee-rails
   colored
@@ -542,6 +553,7 @@ DEPENDENCIES
   devise
   did_you_mean
   draper
+  enumerize
   escape_utils
   factory_girl
   fast_blank
