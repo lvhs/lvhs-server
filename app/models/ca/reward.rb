@@ -1,6 +1,6 @@
 require 'httpclient'
 
-module CA
+class CA
   class Reward
     attr_reader :user_id, :enc_user_id
 

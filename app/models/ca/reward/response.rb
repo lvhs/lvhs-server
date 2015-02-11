@@ -1,7 +1,7 @@
 require 'nokogiri'
 require 'active_support/core_ext/hash/conversions'
 
-module CA
+class CA
   class Reward
     class Response
       attr_reader :total_cnt, :data_cnt, :m_owner_id, :ads

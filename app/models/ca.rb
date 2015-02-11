@@ -1,2 +1,2 @@
-module CA
+class CA
 end
