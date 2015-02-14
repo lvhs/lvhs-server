@@ -15,6 +15,8 @@
 #= require turbolinks
 #= require_tree ./application
 #= require bootstrap-sprockets
+#= require nprogress
+#= require nprogress-turbolinks
 $ ->
   $('img.lazy').lazyload?()
   $('.blink')

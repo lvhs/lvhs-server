@@ -12,6 +12,8 @@
  *
  *= require_tree ./application
  *= require_self
+ *= require nprogress
+ *= require nprogress-bootstrap
  */
 @import "bourbon";
 @import "base/base";

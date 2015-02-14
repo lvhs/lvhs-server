@@ -11,6 +11,7 @@ gem 'bourbon' # http://bourbon.io/
 gem 'neat' # http://neat.bourbon.io/
 gem 'refills'
 gem 'compass-rails'
+gem 'nprogress-rails'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
@@ -101,6 +102,7 @@ group :development, :test do
 
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
+  gem 'web-console-rake'
 
   gem 'spring'
   gem 'spring-commands-rspec'
