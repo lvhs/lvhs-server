@@ -5,6 +5,7 @@ class Artist < ActiveRecord::Base
   just_define_datetime_picker :published_at, add_to_cattr_accessor: true
 
   validate :key_should_be_particular_format
+  validates :key, uniqueness: true
 
   scope :available, ->{
     where(status: 1)

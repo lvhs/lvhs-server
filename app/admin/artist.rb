@@ -9,10 +9,17 @@ ActiveAdmin.register Artist, label: 'アーティスト' do
 
   after_save do |artist|
     unless params[:artist][:image].blank?
+
       image = params[:artist][:image]
       /^image\/(?<ext>\w+)/ =~ image.content_type
-      path = "artist/#{artist.id}/jacket.#{ext}"
+      path = "artist/#{artist.id}/jacket_org.#{ext}"
       Aws::S3::Client.put_object(path, image.tempfile)
+
+      img = Magick::Image.from_blob(image.tempfile.read).first
+      path = "artist/#{artist.id}/jacket.#{ext}"
+      img.resize_to_fit!(630, 420)
+      Aws::S3::Client.put_object(path, img.to_blob)
+
       artist.update_attributes! image_path: path
     end
   end

@@ -10,10 +10,17 @@ ActiveAdmin.register Item do
 
   after_save do |item|
     unless params[:item][:image].blank?
+
       image = params[:item][:image]
       /^image\/(?<ext>\w+)/ =~ image.content_type
-      path = "artist/#{item.artist_id}/items/#{item.id}/cover.#{ext}"
+      path = "artist/#{item.artist_id}/items/#{item.id}/cover_org.#{ext}"
       Aws::S3::Client.put_object(path, image.tempfile)
+
+      img = Magick::Image.from_blob(image.tempfile.read).first
+      path = "artist/#{item.artist_id}/items/#{item.id}/cover.#{ext}"
+      img.resize_to_fit!(200, 200)
+      Aws::S3::Client.put_object(path, img.to_blob)
+
       item.update_attributes! image_path: path
     end
   end
