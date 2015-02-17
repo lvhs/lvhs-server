@@ -1,7 +1,7 @@
 require 'json'
 
 class Api::V1::ApiController < ActionController::API
-  around_filter :transactions_filter_with_lock
+  around_action :transactions_filter_with_lock
 
   rescue_from Exception do |e|
     logger.error e
@@ -86,7 +86,7 @@ code: #{code}
       #              lock_error: :ip_address_locked,
       #              failed_action: lock_record.action
       rescue => e
-        puts e
+        logger.info(e)
       end
     end
     fail ActiveRecord::RecordInvalid, lock_record if lock_record

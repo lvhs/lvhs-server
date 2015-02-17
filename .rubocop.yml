@@ -1,3 +1,11 @@
+AllCops:
+  Exclude:
+    - 'vendor/bundler/**/*'
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'script/**/*'
+  RunRailsCops: true
+
 # Configuration parameters: AllowSafeAssignment.
 Lint/AssignmentInCondition:
   Enabled: false

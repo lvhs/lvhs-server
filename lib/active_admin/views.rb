@@ -6,7 +6,7 @@ module ActiveAdmin
       end
 
       def date_column(attribute)
-        column(attribute) { |model|model[attribute].strftime('%Y年%m月%d日 %H:%M:%S') }
+        column(attribute) { |model| model[attribute].strftime('%Y年%m月%d日 %H:%M:%S') }
       end
     end
 

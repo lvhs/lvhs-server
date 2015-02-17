@@ -1,5 +1,5 @@
 class App::BaseController < ApplicationController
-  before_filter :init_controller
+  before_action :init_controller
 
   def init_controller
     init_device
