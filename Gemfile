@@ -107,7 +107,7 @@ group :development, :test do
   gem 'spring'
   gem 'spring-commands-rspec'
   gem 'rspec-rails'
-  gem 'guard-rspec'
+  gem 'guard-rspec', require: false
   gem 'spork-rails'
   gem 'guard-spork'
   gem 'childprocess'
@@ -140,6 +140,7 @@ end
 group :test do
   gem 'selenium-webdriver'
   gem 'capybara'
+  gem 'turnip'
 
   gem 'colored'
   gem 'deadweight', require: 'deadweight/hijack/rails'
