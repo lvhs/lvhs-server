@@ -32,11 +32,11 @@
               span = item.name
 
             div style="display: table-cell; width: 60px; margin: 0;"
-              - if @app_bundle_version == Settings.review_bundle_version && PurchasedItem.find_by(key: @device.key, item_id: item.id).nil? && item.id == 71
-                a href="purchase:///movie?aid=#{@artist.id}&iid=#{ item.id }&pid=jp.lvhs.livehouse.m00000001"
+              - if PurchasedItem.find_by(key: @device.key, item_id: item.id).nil? && item.id == 71
+                a href="purchase:///movie?aid=#{@artist.id}&iid=#{ item.id }&pid=jp.lvhs.livehouse.m00000001&rwd=1"
                   = image_tag "get.png", style: "height: 35px;", class: 'blink'
 
-              - elsif item.free? || @app_bundle_version == Settings.review_bundle_version
+              - elsif item.free?
                 a href="player://movie?aid=#{@artist.id}&iid=#{ item.id }&yid=#{ item.youtube_id }"
                   = image_tag "play-icon.png", style: "height: 35px;", class: 'blink'
 
