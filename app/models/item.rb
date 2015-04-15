@@ -1,3 +1,5 @@
+require 'video_manager'
+
 class Item < ActiveRecord::Base
   belongs_to :artist
   enum media_type: %i(music video)
@@ -17,6 +19,10 @@ class Item < ActiveRecord::Base
 
   def free?
     billing_method == 'free' || (!finished_at.nil? && finished_at <= Time.now)
+  end
+
+  def vid
+    VideoManager.vid(id)
   end
 
   def new?
