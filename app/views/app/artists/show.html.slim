@@ -37,19 +37,19 @@
                   = image_tag "get.png", style: "height: 35px;", class: 'blink'
 
               - elsif item.free?
-                a href="player://movie?aid=#{@artist.id}&iid=#{ item.id }&yid=#{ item.youtube_id }"
+                a href="player://movie?aid=#{@artist.id}&iid=#{ item.id }&vid=#{ item.vid }"
                   = image_tag "play-icon.png", style: "height: 35px;", class: 'blink'
 
               /- elsif !@device.nil? && PurchasedItem.find_by(key: @device.key, item_id: item.id)
               - else
-                a.player-btn href="player://movie?aid=#{@artist.id}&iid=#{ item.id }&yid=#{ item.youtube_id }"
+                a.player-btn href="player://movie?aid=#{@artist.id}&iid=#{ item.id }&vid=#{ item.vid }"
                   = image_tag "play-icon.png", style: "height: 35px;", class: 'blink'
                 - if !@player.nil?
                   javascript:
                     $(".player-btn").trigger('click')
 
               /- else
-                a href="/app/car/list?aid=#{@artist.id}&iid=#{ item.id }&yid=#{ item.youtube_id }"
+                a href="/app/car/list?aid=#{@artist.id}&iid=#{ item.id }&vid=#{ item.vid }"
                   = image_tag "get.png", style: "height: 35px;", class: 'blink'
 
 
