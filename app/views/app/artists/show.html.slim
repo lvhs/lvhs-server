@@ -32,8 +32,8 @@
               span = item.name
 
             div style="display: table-cell; width: 60px; margin: 0;"
-              - if !item.free? && PurchasedItem.find_by(key: @device.key, item_id: item.id).nil? && item.id == 71
-                a href="purchase:///movie?aid=#{@artist.id}&iid=#{ item.id }&pid=jp.lvhs.livehouse.m00000001&rwd=1"
+              - if !item.free? && PurchasedItem.find_by(key: @device.key, item_id: item.id).nil? && item.purchasable?
+                a href="purchase:///movie?aid=#{@artist.id}&iid=#{ item.id }&pid=#{item.pid}&rwd=1"
                   = image_tag "get.png", style: "height: 35px;", class: 'blink'
 
               - elsif item.free?

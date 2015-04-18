@@ -1,4 +1,5 @@
 require 'video_manager'
+require 'product_manager'
 
 class Item < ActiveRecord::Base
   belongs_to :artist
@@ -19,6 +20,14 @@ class Item < ActiveRecord::Base
 
   def free?
     billing_method == 'free' || (!finished_at.nil? && finished_at <= Time.now)
+  end
+
+  def purchasable?
+    ProductManager.purchasable? id
+  end
+
+  def pid
+    ProductManager.pid id
   end
 
   def vid
