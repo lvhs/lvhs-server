@@ -5,7 +5,11 @@ ActiveAdmin.register Item do
   menu label: '動画', priority: 11
   config.filters = false
 
-  permit_params :artist_id, :name, :description, :media_type, :billing_method, :published_at, :status, :youtube_id, :image_path, :image_url
+  permit_params %i(
+    artist_id name description media_type billing_method
+    published_at status youtube_id image_path image_url
+    vimeo_id apple_product_id
+  )
   # belongs_to :label
 
   after_save do |item|
