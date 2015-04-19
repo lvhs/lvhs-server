@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150126065248) do
+ActiveRecord::Schema.define(version: 20150419145309) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -54,19 +54,21 @@ ActiveRecord::Schema.define(version: 20150126065248) do
   end
 
   create_table "items", force: :cascade do |t|
-    t.string   "name",           limit: 255
-    t.integer  "media_type",     limit: 4,     default: 1, null: false
-    t.text     "description",    limit: 65535
-    t.integer  "artist_id",      limit: 4,                 null: false
-    t.integer  "price",          limit: 4
-    t.integer  "billing_method", limit: 4,     default: 3, null: false
+    t.string   "name",             limit: 255
+    t.integer  "media_type",       limit: 4,     default: 1, null: false
+    t.text     "description",      limit: 65535
+    t.integer  "artist_id",        limit: 4,                 null: false
+    t.integer  "price",            limit: 4
+    t.integer  "billing_method",   limit: 4,     default: 3, null: false
     t.datetime "finished_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "image_path",     limit: 255
-    t.string   "youtube_id",     limit: 255
-    t.integer  "status",         limit: 4,     default: 0
+    t.string   "image_path",       limit: 255
+    t.string   "youtube_id",       limit: 255
+    t.integer  "status",           limit: 4,     default: 0
     t.datetime "published_at"
+    t.string   "vimeo_id",         limit: 255
+    t.string   "apple_product_id", limit: 255
   end
 
   create_table "purchased_items", force: :cascade do |t|

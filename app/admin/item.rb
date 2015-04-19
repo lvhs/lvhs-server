@@ -76,10 +76,22 @@ ActiveAdmin.register Item do
             th '動画画像'
             td item.image_path.nil? ? '' : image_tag(static_url(item.image_path), height: '100%')
           end
+
+          # tr class: 'row' do
+          #   th 'youtube'
+          #   td link_to("https://www.youtube.com/watch?v=#{item.youtube_id}", "https://www.youtube.com/watch?v=#{item.youtube_id}")
+          # end
+
           tr class: 'row' do
-            th 'youtube'
-            td link_to("https://www.youtube.com/watch?v=#{item.youtube_id}", "https://www.youtube.com/watch?v=#{item.youtube_id}")
+            th 'vimeo'
+            td link_to("https://vimeo.com/#{item.vimeo_id}", "https://vimeo.com/#{item.vimeo_id}")
           end
+
+          tr class: 'row' do
+            th 'apple product id'
+            td item.apple_product_id
+          end
+
           tr class: 'row' do
             th '公開設定'
             td item.status == 'available' ? '公開中' : '非公開'
@@ -116,9 +128,14 @@ ActiveAdmin.register Item do
       f.input :published_at, label: '公開日時 *', as: :just_datetime_picker
       f.input :finished_at, label: '有料販売 終了日時 *', as: :just_datetime_picker
       f.input :image, as: :file, label: 'ジャケット画像 *'
-      f.input :youtube_id,
-              placeholder: 'https://www.youtube.com/watch?v=v6kwUZQN7mU',
-              label: 'youtube動画URL *'
+      # f.input :youtube_id,
+      #         placeholder: 'https://www.youtube.com/watch?v=v6kwUZQN7mU',
+      #         label: 'youtube動画URL *'
+      f.input :vimeo_id,
+              placeholder: 'https://vimeo.com/125334173',
+              label: 'vimeo動画URL *'
+      f.input :apple_product_id,
+              label: 'Apple 製品 ID'
       f.input :status, label: '公開設定 *', as: :radio, collection: { '公開' => :available, '非公開' => :unavailable }, default: :unavailable
     end
     f.actions
@@ -136,12 +153,14 @@ ActiveAdmin.register Item do
     def create
       item = params[:item]
       item[:youtube_id] = get_youtube_id(item[:youtube_id]) unless item[:youtube_id].blank?
+      item[:vimeo_id] = get_vimeo_id(item[:vimeo_id]) unless item[:vimeo_id].blank?
       create!
     end
 
     def update
       item = params[:item]
       item[:youtube_id] = get_youtube_id(item[:youtube_id]) unless item[:youtube_id].blank?
+      item[:vimeo_id] = get_vimeo_id(item[:vimeo_id]) unless item[:vimeo_id].blank?
       update!
     end
 
@@ -149,6 +168,16 @@ ActiveAdmin.register Item do
       if %r{youtube\.com/watch\?.*v=(?<id>[a-zA-Z0-9\-_]+)} =~ url
         id
       elsif %r{youtu\.be/(?<id>[a-zA-Z0-9\-_]+)} =~ url
+        id
+      elsif %r{^[a-zA-Z0-9\-_]{11}$} =~ url
+        url
+      else
+        nil
+      end
+    end
+
+    def get_vimeo_id(url)
+      if %r{vimeo\.com/\?.*v=(?<id>[a-zA-Z0-9\-_]+)} =~ url
         id
       elsif %r{^[a-zA-Z0-9\-_]{11}$} =~ url
         url
