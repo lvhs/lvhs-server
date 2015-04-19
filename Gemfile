@@ -53,6 +53,12 @@ gem 'escape_utils'
 gem 'fast_blank'
 gem 'oj'
 
+# request session (https://github.com/steveklabnik/request_store)
+gem 'request_store'
+
+# simple http client (https://github.com/httprb/http.rb)
+gem 'http'
+
 # push notification
 # http://qiita.com/sue738/items/c2ce141cf24f9f1dbf01
 # gem 'apns'
@@ -127,6 +133,8 @@ group :development, :test do
 
   # http://logictkt.hatenablog.com/entry/2014/10/09/210737
   gem 'awesome_print'
+  gem 'annotate'
+  gem 'squasher' # unify migration files (https://github.com/jalkoby/squasher)
   gem 'rails-erd'
   gem 'letter_opener_web'
   gem 'better_errors'

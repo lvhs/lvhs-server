@@ -61,6 +61,9 @@ GEM
       ice_nine (~> 0.11.0)
       memoizable (~> 0.4.0)
     addressable (2.3.7)
+    annotate (2.6.8)
+      activerecord (>= 3.2, <= 4.3)
+      rake (~> 10.4)
     arbre (1.0.3)
       activesupport (>= 3.0.0)
     arel (6.0.0)
@@ -232,6 +235,12 @@ GEM
     highline (1.6.21)
     hike (1.2.3)
     hitimes (1.2.2)
+    http (0.8.3)
+      addressable (~> 2.3)
+      http-form_data (~> 1.0.1)
+      http_parser.rb (~> 0.6.0)
+    http-form_data (1.0.1)
+    http_parser.rb (0.6.0)
     httpclient (2.6.0.1)
     i18n (0.7.0)
     ice_nine (0.11.1)
@@ -477,6 +486,7 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
+    squasher (0.1.4)
     temple (0.7.5)
     terminal-table (1.4.5)
     test-unit (3.0.9)
@@ -537,6 +547,7 @@ PLATFORMS
 DEPENDENCIES
   active_hash
   activeadmin!
+  annotate
   autoprefixer-rails
   awesome_print
   aws-sdk-core
@@ -565,6 +576,7 @@ DEPENDENCIES
   foreman
   guard-rspec
   guard-spork
+  http
   httpclient
   jbuilder (~> 2.0)
   jquery-rails
@@ -589,6 +601,7 @@ DEPENDENCIES
   rails_config
   rambulance
   refills
+  request_store
   rmagick (= 2.13.2)
   rspec-rails
   rubocop
@@ -600,6 +613,7 @@ DEPENDENCIES
   spork-rails
   spring
   spring-commands-rspec
+  squasher
   test-unit
   traceroute
   turbolinks
