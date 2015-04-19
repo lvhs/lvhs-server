@@ -181,7 +181,7 @@ ActiveAdmin.register Item do
     end
 
     def get_vimeo_id(url)
-      if %r{vimeo\.com/\?.*v=(?<id>[a-zA-Z0-9\-_]+)} =~ url
+      if %r{vimeo\.com/(?<id>[a-zA-Z0-9\-_]+)} =~ url
         id
       elsif %r{^[a-zA-Z0-9\-_]{11}$} =~ url
         url
