@@ -173,7 +173,7 @@ ActiveAdmin.register Item do
         id
       elsif %r{youtu\.be/(?<id>[a-zA-Z0-9\-_]+)} =~ url
         id
-      elsif %r{^[a-zA-Z0-9\-_]{11}$} =~ url
+      elsif id_format?(url)
         url
       else
         nil
@@ -183,11 +183,15 @@ ActiveAdmin.register Item do
     def get_vimeo_id(url)
       if %r{vimeo\.com/(?<id>[a-zA-Z0-9\-_]+)} =~ url
         id
-      elsif %r{^[a-zA-Z0-9\-_]{11}$} =~ url
+      elsif id_format?(url)
         url
       else
         nil
       end
+    end
+
+    def id_format?(str)
+      %r{^[a-zA-Z0-9\-_]+$} =~ str
     end
   end
 end
