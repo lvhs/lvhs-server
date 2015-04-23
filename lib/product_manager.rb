@@ -4,7 +4,7 @@ module ProductManager
     161 => 'jp.lvhs.livehouse.m00000002',
     171 => 'jp.lvhs.livehouse.m00000003',
     181 => 'jp.lvhs.livehouse.m00000004',
-    191 => 'jp.lvhs.livehouse.m00000005',
+    191 => 'jp.lvhs.livehouse.m00000007',
     201 => 'jp.lvhs.livehouse.m00000006',
   }
 
