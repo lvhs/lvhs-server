@@ -22,10 +22,12 @@
               .ribbon New
 
           div style="display: table; width: 100%; overflow: hidden;"
-            div style="display: table-cell; width: 46px; overflow: hidden; margin: 0;"
-              - if item.image_path.blank?
-                = image_tag "no-image.png", width: '100%'
-              - else
+
+            - if item.image_path.blank?
+              div style="display: table-cell; width: 46px; overflow: hidden; margin: 0; background-color: #fff; padding: 0 2px 2px 2px;"
+                = image_tag 'no-image.png', width: '100%'
+            - else
+              div style="display: table-cell; width: 46px; overflow: hidden; margin: 0;"
                 = image_tag static_url(item.image_path), width: '100%'
 
             div style="display: table-cell; margin: 0; padding: 0 8px; vertical-align: middle;"
@@ -34,11 +36,11 @@
             div style="display: table-cell; width: 60px; margin: 0;"
               - if !item.free? && PurchasedItem.find_by(key: @device.key, item_id: item.id).nil? && item.purchasable?
                 a href="purchase:///movie?aid=#{@artist.id}&iid=#{ item.id }&pid=#{item.pid}&rwd=1"
-                  = image_tag "get.png", style: "height: 35px;", class: 'blink'
+                  = image_tag 'get.png', style: "height: 35px;", class: 'blink'
 
               - elsif item.free?
                 a href="player://movie?aid=#{@artist.id}&iid=#{ item.id }&vid=#{ item.vid }"
-                  = image_tag "play-icon.png", style: "height: 35px;", class: 'blink'
+                  = image_tag 'play-icon.png', style: 'height: 35px;', class: 'blink'
 
               /- elsif !@device.nil? && PurchasedItem.find_by(key: @device.key, item_id: item.id)
               - else
