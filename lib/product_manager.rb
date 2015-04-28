@@ -1,4 +1,5 @@
 module ProductManager
+
   MASTER = {
     71  => 'jp.lvhs.livehouse.m00000001',
     161 => 'jp.lvhs.livehouse.m00000002',
@@ -7,6 +8,8 @@ module ProductManager
     191 => 'jp.lvhs.livehouse.m00000007',
     201 => 'jp.lvhs.livehouse.m00000006',
     211 => 'jp.lvhs.livehouse.m00000008',
+    231 => 'jp.lvhs.livehouse.m00000009',
+    221 => 'jp.lvhs.livehouse.m00000010',
   }
 
   class << self
