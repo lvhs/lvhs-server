@@ -24,9 +24,11 @@
           div style="display: table; width: 100%; overflow: hidden;"
 
             - if item.image_path.blank?
+              /div style="display: table-cell; width: 46px; overflow: hidden; margin: 0;"
+              /  div style="background-color: #fff; padding: 0 2px 0 2px;"
+              /    = image_tag 'no-image.png', width: '100%', style: 'margin: 0;'
               div style="display: table-cell; width: 46px; overflow: hidden; margin: 0;"
-                div style="background-color: #fff; padding: 0 2px 0 2px;"
-                  = image_tag 'no-image.png', width: '100%', style: 'margin: 0;'
+                = image_tag static_url("//i.vimeocdn.com/video/#{ item.vid }_200x150.jpg"), width: '100%'
             - else
               div style="display: table-cell; width: 46px; overflow: hidden; margin: 0;"
                 = image_tag static_url(item.image_path), width: '100%'
