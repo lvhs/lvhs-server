@@ -7,11 +7,11 @@
       = image_tag static_url(@artist.image_path), width: "100%"
     h3 style="color: #fff; position: absolute; bottom: 5%; left: 10%; text-shadow: 0 0 2px #333; " #{ @artist.name }
 
+  // MOVIE
+  .row style="margin-top: 18px;"
+    .col-md-12 style="margin-bottom: 10px;"
+      = image_tag "video-title.png", width: "100%"
   - if @artist.item.available.any? { |i| i.media_type == 'video' }
-    // MOVIE
-    .row style="margin-top: 18px;"
-      .col-md-12 style="margin-bottom: 10px;"
-        = image_tag "video-title.png", width: "100%"
 
     - @artist.item.available.each do |item|
       - if item.media_type == 'video'
@@ -59,6 +59,10 @@
                 a href="/app/car/list?aid=#{@artist.id}&iid=#{ item.id }&vid=#{ item.vid }"
                   = image_tag "get.png", style: "height: 35px;", class: 'blink'
 
+  - else
+    .row style="margin-top: 18px;"
+      .col-md-12 style="background-color: rgba(0,0,0,.6); padding: 18px; text-align: center; box-sizing: border-box;"
+        p style="color: #fff; line-height: 74px; font-size: 2rem;" COMING SOON
 
   - unless @artist.official_url.nil?
     // OFFICIAL INFO
