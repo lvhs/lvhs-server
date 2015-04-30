@@ -61,10 +61,10 @@ html
       #icon-row
         #icon-container
           = image_tag 'teaser/icon.png'
-      #screenshots
+      #screenshots.text-center
         = image_tag 'teaser/02.png'
       p#description
-      p
+      p.text-center
         a[href="https://itunes.apple.com/app/id923819273"]
           = image_tag 'teaser/appstore.svg', class: 'appstore', alt: 'Download on the Apple App Store'
       p
@@ -75,5 +75,5 @@ html
       javascript:
         $.okvideo({ video: 'https://www.youtube.com/watch?v=pRG7FJobkv4' });
       p
-      p#copyright
+      p#copyright.text-center
         | ©Japan Music System
