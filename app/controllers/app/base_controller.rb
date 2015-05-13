@@ -38,7 +38,12 @@ class App::BaseController < ApplicationController
   end
 
   def get_or_set_bundle_version
-    session[:bundle_version] ||= request.headers['x-bundle-version']
+    bundle_version = request.headers['x-bundle-version']
+    session[:bundle_version] ||= bundle_version
+    if session[:bundle_version].present? && bundle_version.present? && session[:bundle_version] != bundle_version
+      session[:bundle_version] = bundle_version
+    end
+    session[:bundle_version]
   end
 
   def find_or_create_device(uiid)
