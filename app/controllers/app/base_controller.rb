@@ -20,6 +20,12 @@ class App::BaseController < ApplicationController
     @bundle_version = get_or_set_bundle_version
   end
 
+  def in_review?
+    bundle_version == Settings.review_bundle_version
+  end
+
+  helper_method :in_review?
+
   private
 
   def render_error(msg = '')
