@@ -26,7 +26,7 @@
             - if item.image_path.blank?
               - if true # vimeo thumbnail
                 div style="display: table-cell; width: 46px; overflow: hidden; margin: 0;"
-                  = image_tag "//i.vimeocdn.com/video/#{ item.vid }_200x150.jpg", width: '100%'
+                  = image_tag "//i.vimeocdn.com/video/#{ StaticManager.thumb_id(item.vid) }_200x150.jpg", width: '100%'
               - else # default movie thumbnail
                 div style="display: table-cell; width: 46px; overflow: hidden; margin: 0;"
                   div style="background-color: #fff; padding: 0 2px 0 2px;"
@@ -39,7 +39,7 @@
               span = item.name
 
             div style="display: table-cell; width: 60px; margin: 0;"
-              - if !item.free? && PurchasedItem.find_by(key: @device.key, item_id: item.id).nil? && item.purchasable?
+              - if !item.free? && PurchasedItem.find_by(key: "@device.key", item_id: item.id).nil? && item.purchasable?
                 a href="purchase:///movie?btitle=120円で見る&rtitle=無料アプリDLして無料で見る&aid=#{@artist.id}&iid=#{ item.id }&pid=#{item.pid}#{in_review? ? '' : '&rwd=1'}"
                   = image_tag 'get.png', style: "height: 35px;", class: 'blink'
 
