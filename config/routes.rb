@@ -30,6 +30,8 @@ Lvhs::Application.routes.draw do
 
       resources :artists, only: [:show]
 
+      resources :products, only: [:index]
+
       resources :purchase, only: [:create]
 
       # CA Reward
