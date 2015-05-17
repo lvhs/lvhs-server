@@ -28,5 +28,12 @@ class App::Car::ListController < App::BaseController
     reward_histories = RewardHistory.where(device_id: @device.id)
     rewarded_cids = reward_histories.select(:cid).map { |h| h.cid }
     res.ads.select { |ad| !rewarded_cids.include? ad.c_id }
+    app_install_only!(res)
+  end
+
+  private
+
+  def app_install_only!(res)
+    res.ads.select! { |ad| ad.cv_points.any?{ |cp| cp.requisite_id == "1" } }
   end
 end
