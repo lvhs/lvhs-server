@@ -3,7 +3,8 @@ class App::PurchaseController < App::BaseController
 
   def create
     p = item_params
-    @item = Item.find_by(id: p[:iid])
+    iid = p[:iid] || ProductManager.iid(p[:pid])
+    @item = Item.find_by(id: iid)
     render_error if @item.nil? || @device.nil?
     PurchasedItem.create! key: @device.key, item_id: @item.id
     render json: { status: 'ok' }, status: 200

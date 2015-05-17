@@ -23,5 +23,9 @@ module ProductManager
     def pid(id)
       MASTER[id]
     end
+
+    def iid(id)
+      MASTER.to_a.map{|a| a.reverse }.to_h[id]
+    end
   end
 end
