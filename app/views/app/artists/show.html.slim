@@ -40,7 +40,8 @@
 
             div style="display: table-cell; width: 60px; margin: 0;"
               - if !item.free? && PurchasedItem.find_by(key: @device.key, item_id: item.id).nil? && item.purchasable?
-                a href="purchase:///movie?btitle=120円で見る&rtitle=無料アプリDLして無料で見る&aid=#{@artist.id}&iid=#{ item.id }&pid=#{item.pid}#{in_review? ? '' : '&rwd=1'}"
+                /a href="purchase:///movie?btitle=120円で見る&rtitle=無料アプリDLして無料で見る&aid=#{@artist.id}&iid=#{ item.id }&pid=#{item.pid}#{in_review? ? '' : '&rwd=1'}"
+                a href="purchase:///movie?btitle=120円で見る&rtitle=無料アプリDLして無料で見る&aid=#{@artist.id}&iid=#{ item.id }&pid=#{item.pid}"
                   = image_tag 'get.png', style: "height: 35px;", class: 'blink'
 
               - elsif item.free?
