@@ -140,7 +140,7 @@ javascript:
       = image_tag "video-title.png", width: "100%"
   - if @artist.item.available.any? { |i| i.media_type == 'video' }
 
-    - @artist.item.available.each do |item|
+    - @artist.item.available.reverse.each do |item|
       - if item.media_type == 'video'
         div.ribbon-box  style="padding: 18px 10px; box-sizing: border-box; background-color: rgba(0,0,0,.6); color: #fff; font-size: 1.5rem;"
 
