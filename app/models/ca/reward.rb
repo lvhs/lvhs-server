@@ -70,9 +70,9 @@ class CA
 
     def cache_option
       {
-        namespace: "ca/reward/list/#{@user_id}",
+        namespace: "ca/reward/list/#{@page}",
         compress: true,
-        expires_in: 3600 * 3
+        expires_in: 60*5
       }
     end
 
