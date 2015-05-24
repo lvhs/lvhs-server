@@ -16,4 +16,6 @@ Rails.application.config.assets.precompile += %w(
   active_admin/active_admin.js
 
   okvideo.js
+  jquery.confirm.js
+  jquery.cookie.js
 )
