@@ -34,7 +34,7 @@ namespace :jasrac do
         device = Device.find_by(key: pi.key)
         rhs = RewardHistory.where(device_id: device.id)
         id = i.id
-        dt = pi.updated_at < Time.new(2015, 5, 20) ? Time.new(2015,5,20).strftime("%Y-%m") : pi.updated_at.strftime("%Y-%m")
+        dt = pi.updated_at <= Time.new(2015, 4, 30) ? Time.new(2015, 4, 30).strftime("%Y-%m") : pi.updated_at.strftime("%Y-%m")
 
         data[id] ||= {}
 
@@ -65,7 +65,7 @@ namespace :jasrac do
               data1[:reward][:s],
               0,
               item.artist.artist_group.name,
-              dt,
+              d,
             ]
           end
         else

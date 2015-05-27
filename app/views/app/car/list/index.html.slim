@@ -16,12 +16,12 @@
   - else
     - @ads.each do |ad|
         .row style="margin: 10px 0; padding: 10px; background: rgba(0,0,0,.5); color: #fff;"
-          a.pull-left href="#{ ad.ad_tag_of_point_back }" style="margin-right: 10px; margin-bottom: 8px;"
+          a.pull-left href="#{ ad.ad_tag_of_point_back }" style="margin-right: 10px; margin-bottom: 8px; display: box;"
             img src="#{ ad.banner_img_1 }" alt="#{ ad.banner_img_alt }" style="width: 80px;"
           div
             a href="#{ ad.ad_tag_of_point_back }"
               p style="font-weight: bold; font-size: 120%; text-decoration: underline; color: #fff;" = ad.banner_text_1
-            == ad.count_type_for_user
+            == ad.cate_name
           /.col-xs-12
           /  == ad.content_exp
           /.col-xs-12

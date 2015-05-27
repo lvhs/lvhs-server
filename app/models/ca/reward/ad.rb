@@ -9,7 +9,8 @@ class CA
                   :site_name, :point_unit, :is_app, :is_install_action,
                   :charge_type, :charge_exp, :action_cate_id, :ranking_update_date,
                   :delivery_target, :has_video, :video_ad_c_id,
-                  :video_point, :content_manage_category, :total_p_cnt, :cv_points
+                  :video_point, :content_manage_category, :total_p_cnt, :cv_points,
+                  :cate_name
 
       def initialize(data = {})
         data.each do |k, v|
