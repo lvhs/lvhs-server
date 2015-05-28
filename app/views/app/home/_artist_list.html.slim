@@ -1,0 +1,8 @@
+- artists.each do |artist|
+  .col-md-12
+    a href="/app/artists/#{ artist.id }"
+      - if artist.image_path.blank?
+        = image_tag 'common/loading.png', 'data-original' => image_url("artist/#{ artist.key }.jpg"), width: "100%", class: "lazy blink#{rest.nil? ? '' : ' rest'}"
+      - else
+        = image_tag 'common/loading.png', 'data-original' => image_url(static_url(artist.image_path)), width: "100%", class: "lazy blink#{rest.nil? ? '' : ' rest'}"
+    h3 style="color: #fff; position: absolute; bottom: 5%; left: 10%; text-shadow: 0 0 2px #333; " #{ artist.name }
