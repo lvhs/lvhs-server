@@ -14,12 +14,6 @@ class App::Car::ListController < App::BaseController
     params.permit(:aid, :iid, :yid)
   end
 
-  def encure_device_id
-    if Rails.env.development?
-      @device ||= Device.find_by(key: '165F5CAC-1469-45DC-8CFB-16CAF36D3248')
-    end
-  end
-
   def already_rewarded?(iid)
     !PurchasedItem.find_by(key: @device.key, item_id: iid).nil?
   end
