@@ -21,7 +21,6 @@ class App::BaseController < ApplicationController
   end
 
   def in_review?
-    puts "#{bundle_version} == #{Settings.review_bundle_version} = #{bundle_version == Settings.review_bundle_version}"
     bundle_version == Settings.review_bundle_version
   end
 
