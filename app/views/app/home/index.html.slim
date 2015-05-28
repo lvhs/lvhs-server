@@ -1,13 +1,22 @@
 .container-fluid style="padding-left:0; padding-right: 0; overflow: hidden;"
   .row
-    - @artists.available.each do |artist|
-      .col-md-12
-        a href="/app/artists/#{ artist.id }"
-          - if artist.image_path.blank?
-            = image_tag 'common/loading.png', 'data-original' => image_url("artist/#{ artist.key }.jpg"), width: "100%", class: 'lazy blink'
-          - else
-            = image_tag 'common/loading.png', 'data-original' => image_url(static_url(artist.image_path)), width: "100%", class: 'lazy blink'
-        h3 style="color: #fff; position: absolute; bottom: 5%; left: 10%; text-shadow: 0 0 2px #333; " #{ artist.name }
+    = render partial: 'artist_list', locals: { artists: @artists, rest: @rest }
+
+    div#rest-placeholder
+    coffee:
+      $.ajax(
+        url: '/app'
+        data:
+          rest: true
+        dataType: 'html'
+      ).done((html)->
+        $("#rest-placeholder").replaceWith(html)
+        $('img.lazy.rest').lazyload?()
+        $('.blink.rest')
+          .on 'touchstart', -> $(@).css opacity: 0.5
+          .on 'touchend', -> $(@).css opacity: 1
+      )
+
   .row
     .col-md-12
       p.text-center style="margin-top: 10px; font-size: small;"
