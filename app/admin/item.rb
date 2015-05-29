@@ -120,7 +120,8 @@ ActiveAdmin.register Item do
   form do |f|
     f.inputs '動画情報を入力してください' do
       f.input :artist,
-              collection: Artist.where(artist_group_id: current_staff.artist_group.id),
+              collection: current_staff.admin? ? Artist.all :
+                Artist.where(artist_group_id: current_staff.artist_group.id),
               label: 'アーティスト *',
               include_blank: false
       f.input :name, label: 'タイトル *'
