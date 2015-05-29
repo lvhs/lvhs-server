@@ -1,3 +1,8 @@
+css:
+  .hidden {
+    display: none;
+  }
+
 .container-fluid
   .row style="margin: 10px 0; padding: 10px; background: rgba(0,0,0,.5); color: #fff; text-align: center; font-weight: bold;"
     p style="margin: 0;" 無料アプリのダウンロードや会員登録で<br>無料で動画を視聴出来ます
@@ -28,3 +33,14 @@
           /  = ad.platform == 1 ? 'Web' : ad.platform == 2 ? 'iOS' : ad.platform == 3 ? 'Android' : ''
           /.col-xs-12
           /  = ad.charge_exp
+coffee:
+  $("a").on 'click', ->
+    $.confirm.options.confirmButton = "はい"
+    $.confirm(
+      text: "成果の確認中です<br />しばらく時間をおいて再度お試しください<br />※一度インストールしたアプリは成果対象外です"
+      confirm: ->
+      cancel: ->
+      cancelButtonClass: "hidden"
+    )
+    true
+
