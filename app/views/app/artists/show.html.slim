@@ -201,5 +201,9 @@ javascript:
         a href="#{ @artist.official_url }" style="color: #fff; line-height: 74px; font-size: 2rem;" = @artist.official_url
 
 coffee:
-  $(".trigger").on 'click', ->
+  $("a").on 'click', (e) ->
+    e.stopPropagation()
+    true
+
+  $(".trigger").on 'click', (e) ->
     location.href = $(@).find('a').attr('href')
