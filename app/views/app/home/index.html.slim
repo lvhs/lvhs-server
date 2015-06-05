@@ -17,6 +17,14 @@
           .on 'touchend', -> $(@).css opacity: 1
       )
 
+    - if @bundle_version != '0.0.4'
+      coffee:
+        if $.cookie('version') isnt '0.0.4' and confirm('最新版のアプリに更新してください')
+          setTimeout ->
+            location.href = 'http://itunes.apple.com/jp/app/livehouse-qing-bao-xian-xing/id923819273?mt=8'
+          , 300
+        $.cookie('version', '0.0.4', { path: '/', domain: '.lvhs.jp', expires: 1 })
+
   .row
     .col-md-12
       p.text-center style="margin-top: 10px; font-size: small;"
