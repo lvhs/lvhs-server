@@ -45,7 +45,7 @@ ActiveAdmin.register Item do
           '公開'
         elsif item.published_at > Time.now
           '公開前'
-        elsif item.finished_at <= Time.now
+        elsif !item.finished_at.nil? && item.finished_at <= Time.now
           '販売終了'
         else
           '公開'
