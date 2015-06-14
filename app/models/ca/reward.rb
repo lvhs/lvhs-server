@@ -26,7 +26,7 @@ class CA
       @api_key     = Settings.car.api_key
       @media_id    = Settings.car.media_id
       @enc_user_id = encode_user_id "#{@api_key}#{@user_id}"
-      @base_url    = "#{ BASE_URL }?user_id=USER_ID&enc_user_id=ENC_USER_ID&m_id=#{ @media_id }&api_key=#{ @api_key }&page_limit=50&attribute=8"
+      @base_url    = "#{BASE_URL}?user_id=USER_ID&enc_user_id=ENC_USER_ID&m_id=#{@media_id}&api_key=#{@api_key}&page_limit=50&attribute=8"
       @page        = 1
     end
 
@@ -118,7 +118,7 @@ class CA
     end
 
     def append_param!(url, key, params)
-      url << "&#{ key }=#{ params[key] }" if params.key?(key)
+      url << "&#{key}=#{params[key]}" if params.key?(key)
       url
     end
   end

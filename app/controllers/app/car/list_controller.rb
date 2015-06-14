@@ -19,7 +19,6 @@ class App::Car::ListController < App::BaseController
   end
 
   def reward_and_redirect(iid, aid)
-    item = Item.find_by(id: iid)
     pi = PurchasedItem.where(key: @device.key, item_id: nil).first
     pi.update_attributes! item_id: iid
     redirect_to app_artist_path(id: aid, player: true)

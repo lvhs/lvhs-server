@@ -11,7 +11,7 @@ class CA
 
         res = json['response']
         %w(total_cnt data_cnt m_owner_id).each do |key|
-          instance_variable_set("@#{ key }", res[key]) unless res[key].nil?
+          instance_variable_set("@#{key}", res[key]) unless res[key].nil?
         end
 
         *ads = res['list_view']['ad']
