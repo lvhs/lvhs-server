@@ -1,6 +1,8 @@
 domain: 'lvhs.jp'
 static_host: 'http://static.lvhs.jp'
+
 review_bundle_version: '0.0.5'
+latest_bundle_version: '0.0.4'
 
 car:
   api_key:  '4245437727b92542'
