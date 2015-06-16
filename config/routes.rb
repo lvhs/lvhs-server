@@ -30,6 +30,8 @@ Lvhs::Application.routes.draw do
 
       resources :menu, only: [:index]
 
+      resources :version, only: [:index]
+
       resources :artists, only: [:show]
 
       resources :products, only: [:index]

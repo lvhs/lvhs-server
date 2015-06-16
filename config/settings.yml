@@ -3,6 +3,7 @@ static_host: 'http://static.lvhs.jp'
 
 review_bundle_version: '0.0.5'
 latest_bundle_version: '0.0.4'
+app_store_url: 'http://itunes.apple.com/jp/app/livehouse-qing-bao-xian-xing/id923819273?mt=8'
 
 car:
   api_key:  '4245437727b92542'
