@@ -38,6 +38,12 @@ Lvhs::Application.routes.draw do
 
       resources :purchase, only: [:create]
 
+      resources :users, only: [:new, :create, :show, :edit, :update]
+
+      resources :events do
+        resources :comments
+      end
+
       # CA Reward
       namespace :car do
         resources :list, only: [:index]
