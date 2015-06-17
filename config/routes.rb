@@ -39,6 +39,7 @@ Lvhs::Application.routes.draw do
       resources :purchase, only: [:create]
 
       resources :users, only: [:new, :create, :show, :edit, :update]
+      resources :profile, only: [:index]
 
       resources :events do
         resources :comments

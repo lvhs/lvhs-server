@@ -1,0 +1,19 @@
+.container-fluid
+  .row style="display: box; display: -webkit-box; margin-top: 10px;"
+    div style="border: 3px solid #fff; border-radius: 80px; width: 160px; height: 160px; margin-left: 10px;"
+      span.glyphicon.glyphicon-user style="font-size: 120px; color: #fff; margin: 8px 16px;"
+
+    div style="border: 3px solid #fff; border-radius: 22px; width: 44px; height: 44px; position: absolute; left: 110px; top: 120px; box-shadow: 0px 0px 3px #000, 0px 0px 3px #000 inset; background-color: rgba(0,0,0,.5);"
+      a.glyphicon.glyphicon-camera style="font-size: 30px; color: #fff; margin: 2px 4px; text-shadow: 0px 0px 3px #000;" href="#"
+
+    div style="color: #fff; margin-top: 50px; font-size: 18px; -webkit-box-flex: 1; padding-left: 30px;"
+      div
+        = @user.name || '名前が設定されていません'
+
+      div style="margin-top: 10px;"
+        div.pull-right style="border: 3px solid #fff; border-radius: 10px; width: 44px; height: 44px; box-shadow: 0px 0px 3px #000, 0px 0px 3px #000 inset; margin-right: 10px;"
+          a.glyphicon.glyphicon-pencil style="font-size: 30px; color: #fff; margin: 2px 4px; text-shadow: 0px 0px 3px #000;" href="#{edit_app_user_path(@user)}"
+
+  hr
+  .row style="color: #fff;"
+    = @user.description

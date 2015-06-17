@@ -1,12 +1,13 @@
-class App::HomeController < App::BaseController
-  def index
-    first_view_items = 3
-    if params[:rest]
-      @artists = Artist.available[first_view_items..-1]
-      @rest = true
-      render partial: 'artist_list', layout: false, locals: { artists: @artists, rest: @rest }
-    else
-      @artists = Artist.available.take(first_view_items)
-    end
+class App::UsersController < App::BaseController
+  def show
+    @user = User.find(params[:id])
+  end
+
+  def edit
+    @user = User.find(params[:id])
+  end
+
+  def update
+
   end
 end

@@ -1,0 +1,22 @@
+.container-fluid
+  .row style="display: box; display: -webkit-box; margin-bottom: 20px"
+    div style="margin-left: 20px; margin-top: 18px;"
+      .btn-group.btn-group-lg[role="group" aria-label="..."]
+        button.btn.btn-default type="button" style="width: 100px;"
+          | 日付
+        button.btn.btn-default type="button" style="width: 100px;"
+          | 参加
+    div style="-webkit-box-flex: 1; margin-top: 18px;"
+      div.pull-right style="border: 3px solid #fff; border-radius: 10px; width: 44px; height: 44px; box-shadow: 0px 0px 3px #000, 0px 0px 3px #000 inset; margin-right: 20px;"
+        a.glyphicon.glyphicon-pencil style="font-size: 30px; color: #fff; margin: 2px 4px; text-shadow: 0px 0px 3px #000;" href="#{new_app_event_path}"
+  - @events.each do |event|
+    .row style="color: #fff; padding: 10px; border-top: 1px solid #fff;" onclick="location.href='#{app_event_path(event)}'"
+      div style="font-size: 14px;"
+        span 2015/04/06
+        span.glyphicon.glyphicon-check style="margin-left: 10px;"
+      div style="font-size: 20px;"
+        span artist_name
+
+      div style="font-size: 16px;"
+        | #{EventSite.first.name} (#{EventSite.first.prefecture})
+
