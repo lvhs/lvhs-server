@@ -42,6 +42,9 @@ Lvhs::Application.routes.draw do
 
       resources :events do
         resources :comments
+        collection do
+          get :welcome
+        end
       end
 
       # CA Reward
