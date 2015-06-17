@@ -1,3 +1,26 @@
-.container-fluid
-  .row.span6.offset3 style="color: #fff;"
-
+.container-fluid style="color: #fff; padding-top: 10px;"
+  form.form-horizontal action="#{app_events_url}"
+    .form-group
+      label.col-sm-2.control-label[for="inputEmail3"]
+        | 日付
+      .col-sm-10
+        input#inputEmail3.form-control[type="date" placeholder="Date"]
+    .form-group
+      label.col-sm-2.control-label[for="inputPassword3"]
+        | バンド
+      .col-sm-10
+        select#inputPassword3.form-control
+    .form-group
+      label.col-sm-2.control-label[for="inputPassword3"]
+        | 場所/都道府県
+      .col-sm-10
+        select#inputPassword3.form-control
+    .form-group
+      label.col-sm-2.control-label[for="inputPassword3"]
+        | 場所/ライブハウス
+      .col-sm-10
+        select#inputPassword3.form-control
+    .form-group
+      .col-sm-offset-2.col-sm-10
+        button.btn.btn-primary[type="submit"]
+          | OK
