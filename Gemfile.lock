@@ -627,3 +627,6 @@ DEPENDENCIES
   venice
   web-console (~> 2.0)
   yaml_db
+
+BUNDLED WITH
+   1.10.3
