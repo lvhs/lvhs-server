@@ -2,7 +2,7 @@ class App::MenuController < App::BaseController
   def index
     render json: [
       {
-        title: "掲示板",
+        title: "ライブ掲示板",
         type: "url",
         data: "http://stage.lvhs.jp/app/events"
       },
