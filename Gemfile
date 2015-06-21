@@ -48,11 +48,6 @@ gem 'foreman'
 # error handring
 gem 'rambulance'
 
-# performance
-gem 'escape_utils'
-gem 'fast_blank'
-gem 'oj'
-
 # request session (https://github.com/steveklabnik/request_store)
 gem 'request_store'
 
@@ -89,14 +84,13 @@ gem 'nokogiri'
 
 # Ope
 gem 'activeadmin', github: 'activeadmin'
+gem 'just-datetime-picker'
 gem 'devise'
 gem 'cancancan'
 gem 'aws-sdk-core'
-
 gem 'rmagick', '2.13.2', require: 'RMagick'
 
 gem 'rails_12factor', group: :production
-gem 'just-datetime-picker'
 
 gem 'yaml_db'
 gem 'httpclient'
@@ -141,11 +135,15 @@ group :development, :test do
   gem 'better_errors'
 
   gem 'factory_girl'
+  gem 'factory_girl_rails'
+  gem 'faker'
 end
 
 group :development do
   gem 'pry-rails'
   gem 'quiet_assets'
+  gem 'meta_request'
+  gem 'bullet'
 end
 
 group :test do
