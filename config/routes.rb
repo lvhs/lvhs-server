@@ -60,4 +60,6 @@ Lvhs::Application.routes.draw do
     devise_for :staffs, ActiveAdmin::Devise.config
     ActiveAdmin.routes(self)
   end
+
+  mount Peek::Railtie => '/peek'
 end
