@@ -1,18 +1,15 @@
-.container-fluid style="color: #fff; padding-top: 10px;"
-  form.form-horizontal
+.container-fluid style=" padding-top: 10px;"
+  = form_for @user, url: app_user_path(@user), html: { class: 'form-horizontal' } do |f|
     .form-group
-      label.col-sm-2.control-label[for="inputEmail3"]
-        | 名前
+      = f.label '名前', class: 'col-sm-2 control-label', style: 'color: #fff;'
       .col-sm-10
-        input#inputEmail3.form-control[type="text" placeholder="Date"]
+        = f.text_field :name, placeholder: '名前'
 
     .form-group
-      label.col-sm-2.control-label[for="inputPassword3"]
-        | プロフィール
+      = f.label 'プロフィール', class: 'col-sm-2 control-label', style: 'color: #fff;'
       .col-sm-10
-        textarea#inputPassword3.form-control
+        = f.text_area :description, placeholder: 'プロフィール'
 
     .form-group
       .col-sm-offset-2.col-sm-10
-        button.btn.btn-primary[type="submit"]
-          | OK
+        = f.submit 'OK'
