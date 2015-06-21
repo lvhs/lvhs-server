@@ -1,5 +1,5 @@
 class App::EventsController < App::BaseController
-  before_action :check_confirmation, except: [:welcome]
+  before_action :set_user
 
   def index
     @events = Event.all
@@ -27,18 +27,9 @@ class App::EventsController < App::BaseController
 
   end
 
-  def welcome
-    redirect_to :app_events unless first_time?
-    @user = User.create! device_id: @device.id
-  end
-
   private
 
-  def check_confirmation
-    redirect_to :welcome_app_events if first_time?
-  end
-
-  def first_time?
-    User.find_by(@device.id).nil?
+  def set_user
+    @user = User.find_or_create_by_device_id(@device.id)
   end
 end
