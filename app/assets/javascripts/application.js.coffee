@@ -13,13 +13,8 @@
 #= require jquery
 #= require jquery_ujs
 #= require turbolinks
+#= require_tree ./lvhs
 #= require_tree ./application
 #= require bootstrap-sprockets
 #= require nprogress
 #= require nprogress-turbolinks
-
-#$ ->
-#  $('img.lazy').lazyload?()
-#  $('.blink')
-#    .on 'touchstart', -> $(@).css opacity: 0.5
-#    .on 'touchend', -> $(@).css opacity: 1
