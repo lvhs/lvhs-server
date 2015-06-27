@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 ruby '2.2.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.1'
+gem 'rails', '4.2.3'
 # Use mysql as the database for Active Record
 gem 'mysql2'
 # Use SCSS for stylesheets
@@ -121,7 +121,6 @@ group :development, :test do
   # https://www.infinum.co/the-capsized-eight/articles/top-8-tools-for-ruby-on-rails-code-optimization-and-cleanup
   gem 'traceroute'
   # gem 'rack-mini-profiler'
-  gem 'bullet'
   # gem 'brakeman', :require => false
   gem 'rails_best_practices'
   gem 'rubycritic', require: false
