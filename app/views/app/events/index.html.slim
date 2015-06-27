@@ -19,6 +19,6 @@
         span artist_name
 
       div style="font-size: 16px;"
-        | #{EventSite.first.name} (#{EventSite.first.prefecture})
+        | #{EventSite.first.name} (#{EventSite.first.prefecture.name})
 
   /- @events.each do |event|

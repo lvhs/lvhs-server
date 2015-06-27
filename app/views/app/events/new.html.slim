@@ -1,25 +1,25 @@
-.container-fluid style="color: #fff; padding-top: 10px;"
-  form.form-horizontal action="#{app_events_url}"
+.container-fluid style="padding-top: 10px;"
+  = form_for @event, url: app_events_path(@event), html: { class: 'form-horizontal' } do |f|
     .form-group
-      label.col-sm-2.control-label[for="inputEmail3"]
-        | 日付
+      = f.label '日付', class: 'col-sm-2 control-label', style: 'color: #fff;'
       .col-sm-10
-        input#inputEmail3.form-control[type="date" placeholder="Date"]
+        = f.date_select :scheduled_at, class: 'form-control'
+
     .form-group
-      label.col-sm-2.control-label[for="inputPassword3"]
-        | バンド
+      = f.label 'バンド', class: 'col-sm-2 control-label', style: 'color: #fff;'
       .col-sm-10
-        select#inputPassword3.form-control
+        = f.collection_select :artist_id, @artists, :id, :name, class: 'form-control'
+
+    /.form-group
+      = f.label '場所/都道府県', class: 'col-sm-2 control-label', style: 'color: #fff;'
+      .col-sm-10
+        = f.collection_select :artist_id, @prefecture, :id, :name, class: 'form-control'
+
     .form-group
-      label.col-sm-2.control-label[for="inputPassword3"]
-        | 場所/都道府県
+      = f.label '場所/ライブハウス', class: 'col-sm-2 control-label', style: 'color: #fff;'
       .col-sm-10
-        select#inputPassword3.form-control
-    .form-group
-      label.col-sm-2.control-label[for="inputPassword3"]
-        | 場所/ライブハウス
-      .col-sm-10
-        select#inputPassword3.form-control
+        = f.collection_select :event_site_id, @event_sites, :id, :name, class: 'form-control'
+
     .form-group
       .col-sm-offset-2.col-sm-10
         button.btn.btn-primary[type="submit"]

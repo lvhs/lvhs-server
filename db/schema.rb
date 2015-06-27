@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150617021928) do
+ActiveRecord::Schema.define(version: 20150621160108) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -72,16 +72,16 @@ ActiveRecord::Schema.define(version: 20150617021928) do
   add_index "event_entries", ["user_id", "event_id"], name: "index_event_entries_on_user_id_and_event_id", unique: true, using: :btree
 
   create_table "event_sites", force: :cascade do |t|
-    t.string   "name",        limit: 255,   null: false
-    t.string   "prefecture",  limit: 255,   null: false
-    t.string   "postal_code", limit: 255
-    t.text     "address",     limit: 65535
-    t.string   "phone",       limit: 255
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.string   "name",          limit: 255,   null: false
+    t.string   "postal_code",   limit: 255
+    t.text     "address",       limit: 65535
+    t.string   "phone",         limit: 255
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "prefecture_id", limit: 4,     null: false
   end
 
-  add_index "event_sites", ["name", "prefecture"], name: "index_event_sites_on_name_and_prefecture", unique: true, using: :btree
+  add_index "event_sites", ["name", "prefecture_id"], name: "index_event_sites_on_name_and_prefecture_id", unique: true, using: :btree
 
   create_table "events", force: :cascade do |t|
     t.string   "name",          limit: 255
@@ -113,6 +113,14 @@ ActiveRecord::Schema.define(version: 20150617021928) do
     t.string   "apple_product_id", limit: 255
   end
 
+  create_table "prefectures", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "prefectures", ["name"], name: "index_prefectures_on_name", unique: true, using: :btree
+
   create_table "purchased_items", force: :cascade do |t|
     t.string   "key",        limit: 255
     t.integer  "item_id",    limit: 4
@@ -138,15 +146,6 @@ ActiveRecord::Schema.define(version: 20150617021928) do
   end
 
   add_index "reward_histories", ["cid", "device_id", "action_date", "pid"], name: "conversion", unique: true, using: :btree
-
-  create_table "reward_notifications", force: :cascade do |t|
-    t.integer  "device_id",  limit: 4, null: false
-    t.integer  "item_id",    limit: 4, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "reward_notifications", ["device_id", "item_id"], name: "index_reward_notifications_on_device_id_and_item_id", unique: true, using: :btree
 
   create_table "staffs", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
