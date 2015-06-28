@@ -18,4 +18,14 @@ Rails.application.config.assets.precompile += %w(
   okvideo.js
   jquery.confirm.js
   jquery.cookie.js
+
+  picker.js
+  picker.date.js
+  picker.time.js
+
+  picker.css
+  picker.date.css
+  picker.time.css
+
+  underscore.js
 )

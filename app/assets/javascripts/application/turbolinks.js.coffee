@@ -1,4 +1,4 @@
-$(document).on 'ready page:load page:restore', ->
+Lvhs.onLoad ->
   Lvhs.Libs.Layzr.init_or_update()
   $('.blink')
     .on 'touchstart', -> $(@).css opacity: 0.5

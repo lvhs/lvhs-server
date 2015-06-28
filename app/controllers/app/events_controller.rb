@@ -6,7 +6,30 @@ class App::EventsController < App::BaseController
   end
 
   def show
+    @event = Event.find(params[:id])
+  end
 
+  def new
+    @event = Event.new
+    @artists = Artist.all
+    @event_sites = EventSite.all
+    @prefectures = Prefecture.all
+  end
+
+  def create
+    event_params = params.require(:event).permit(:artist_id, :event_site_id, :scheduled_at)
+    event_params[:scheduled_at] = Date.parse(event_params[:scheduled_at]).in_time_zone
+
+    @event = Event.find_or_initialize_by event_params
+    if !Event.find_by(event_params) && @event.save
+      redirect_to app_events_url(@event)
+    else
+      puts @event.errors.as_json
+      @artists = Artist.all
+      @event_sites = EventSite.all
+      @prefectures = Prefecture.all
+      render :new
+    end
   end
 
   def edit
@@ -14,16 +37,6 @@ class App::EventsController < App::BaseController
   end
 
   def update
-
-  end
-
-  def new
-    @event = Event.new
-    @artists = Artist.all
-    @event_sites = EventSite.all
-  end
-
-  def create
 
   end
 

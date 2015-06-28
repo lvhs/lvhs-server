@@ -10,15 +10,16 @@
       div.pull-right style="border: 3px solid #fff; border-radius: 10px; width: 44px; height: 44px; box-shadow: 0px 0px 3px #000, 0px 0px 3px #000 inset; margin-right: 20px;"
         a.glyphicon.glyphicon-pencil style="font-size: 30px; color: #fff; margin: 2px 4px; text-shadow: 0px 0px 3px #000;" href="#{new_app_event_path}"
 
-  - 10.times.each do
-    .row style="color: #fff; padding: 10px; border-top: 1px solid #fff;" onclick="location.href='#{app_event_url(1)}'"
+  - @events.each do |event|
+    .row style="color: #fff; padding: 10px; border-top: 1px solid #fff;" onclick="location.href='#{app_event_url(event)}'"
+
       div style="font-size: 14px;"
-        span 2015/04/06
+        span = event.scheduled_at.strftime('%Y/%m/%d')
         span.glyphicon.glyphicon-check style="margin-left: 10px;"
+
       div style="font-size: 20px;"
-        span artist_name
+        span = event.artist.name
 
       div style="font-size: 16px;"
-        | #{EventSite.first.name} (#{EventSite.first.prefecture.name})
+        | #{event.event_site.name} (#{event.prefecture.name})
 
-  /- @events.each do |event|

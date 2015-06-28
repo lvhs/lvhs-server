@@ -1,26 +1,78 @@
+= javascript_include_tag 'picker.js', 'data-turbolinks-track' => true
+= javascript_include_tag 'picker.date.js', 'data-turbolinks-track' => true
+= javascript_include_tag 'picker.js', 'data-turbolinks-track' => true
+= stylesheet_link_tag    'picker.css', media: 'all', 'data-turbolinks-track' => true
+= stylesheet_link_tag    'picker.date.css', media: 'all', 'data-turbolinks-track' => true
+= stylesheet_link_tag    'picker.time.css', media: 'all', 'data-turbolinks-track' => true
+
 .container-fluid style="padding-top: 10px;"
   = form_for @event, url: app_events_path(@event), html: { class: 'form-horizontal' } do |f|
+
+    = f.hidden_field :event_site_id
+    = f.hidden_field :scheduled_at
+
     .form-group
       = f.label '日付', class: 'col-sm-2 control-label', style: 'color: #fff;'
       .col-sm-10
-        = f.date_select :scheduled_at, class: 'form-control'
+        input#datetimepicker.form-control[type="text" data-value="#{Time.current.strftime("%Y/%m/%d")}" style="margin-bottom: 0;"]
 
     .form-group
       = f.label 'バンド', class: 'col-sm-2 control-label', style: 'color: #fff;'
       .col-sm-10
-        = f.collection_select :artist_id, @artists, :id, :name, class: 'form-control'
-
-    /.form-group
-      = f.label '場所/都道府県', class: 'col-sm-2 control-label', style: 'color: #fff;'
-      .col-sm-10
-        = f.collection_select :artist_id, @prefecture, :id, :name, class: 'form-control'
+        = f.collection_select :artist_id, @artists, :id, :name, {}, class: 'form-control'
 
     .form-group
-      = f.label '場所/ライブハウス', class: 'col-sm-2 control-label', style: 'color: #fff;'
+      = f.label '場所/都道府県', class: 'col-sm-2 control-label', style: 'color: #fff;'
       .col-sm-10
-        = f.collection_select :event_site_id, @event_sites, :id, :name, class: 'form-control'
+        select#prefecture.form-control
+          - @prefectures.each do |prefecture|
+            option[value="#{prefecture.id}"] = prefecture.name
+
+    .form-group
+      = f.label '場所/ライブハウス', class: 'col-sm-2 control-label', style: 'color: #fff;', for: 'event_site_select'
+      .col-sm-10
+        select#event_site.form-control
 
     .form-group
       .col-sm-offset-2.col-sm-10
-        button.btn.btn-primary[type="submit"]
+        button.btn.btn-primary[type="submit" style="width: 100%; margin-top: 8px;"]
           | OK
+
+script#template[type="text/template"]
+  <% _.each(sites, function(site) { %>
+  <option value="<%= site.id %>"><%= site.name %></option>
+  <% }) %>
+
+javascript:
+  var prefectures = #{raw @prefectures.to_json};
+  var event_sites = #{raw @event_sites.to_json};
+
+coffee:
+  Lvhs.onLoad ->
+    template = _.template $("#template").text()
+    $datepicker = $("#datetimepicker")
+    $prefecture = $("#prefecture")
+    $event_site = $("#event_site")
+    $event_site_id = $("#event_event_site_id")
+    $event_scheduled_at = $("#event_scheduled_at")
+
+    $datepicker.on 'change', ->
+      $event_scheduled_at.val($(@).val())
+    $datepicker.pickadate(
+      min: true
+      format: 'yyyy/mm/dd'
+    )
+    $event_scheduled_at.val $datepicker.val()
+
+    updateEventSite = ->
+      pref_id = parseInt $prefecture.val()
+      sites = _.where(event_sites, { prefecture_id: pref_id })
+      $event_site.html(template(sites: sites))
+      $event_site_id.val sites[0].id
+
+    updateEventSite()
+    $prefecture.on 'change', updateEventSite
+    $event_site.on 'change', ->
+      $event_site_id.val $event_site.val()
+
+
