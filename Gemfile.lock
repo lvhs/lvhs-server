@@ -94,6 +94,8 @@ GEM
     bourbon (4.2.3)
       sass (~> 3.4)
       thor
+    browserify-rails (0.9.3)
+      sprockets (~> 2.2)
     bugspots (0.2.1)
       rainbow
       rugged (>= 0.21.0)
@@ -101,6 +103,7 @@ GEM
     bullet (4.14.7)
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.9.0)
+    bundler-auto-update (0.1.0)
     byebug (5.0.0)
       columnize (= 0.9.0)
     callsite (0.0.11)
@@ -266,6 +269,9 @@ GEM
       thor (>= 0.14, < 2.0)
     jquery-ui-rails (5.0.5)
       railties (>= 3.2.16)
+    js-routes (1.0.1)
+      railties (>= 3.2)
+      sprockets-rails
     json (1.8.3)
     just-datetime-picker (0.0.6)
       activeadmin (>= 0.4.4)
@@ -567,8 +573,10 @@ DEPENDENCIES
   better_errors
   bootstrap-sass
   bourbon
+  browserify-rails (~> 0.7)
   bugspots
   bullet
+  bundler-auto-update
   byebug
   cancancan
   capybara
@@ -593,6 +601,7 @@ DEPENDENCIES
   httpclient
   jbuilder (~> 2.0)
   jquery-rails
+  js-routes
   just-datetime-picker
   kaminari
   letter_opener_web

@@ -20,6 +20,8 @@ gem 'coffee-rails'
 # gem 'therubyracer',  platforms: :ruby
 gem 'slim-rails'
 
+gem 'browserify-rails', '~> 0.7'
+gem 'js-routes'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
@@ -136,6 +138,8 @@ group :development, :test do
   gem 'factory_girl'
   gem 'factory_girl_rails'
   gem 'faker'
+
+  gem 'bundler-auto-update'
 end
 
 group :development do
