@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150621160108) do
+ActiveRecord::Schema.define(version: 20150628165317) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(version: 20150621160108) do
   create_table "event_comments", force: :cascade do |t|
     t.integer  "user_id",    limit: 4,     null: false
     t.integer  "event_id",   limit: 4,     null: false
-    t.text     "comment",    limit: 65535, null: false
+    t.text     "body",       limit: 65535, null: false
     t.string   "image_path", limit: 255
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
@@ -146,6 +146,15 @@ ActiveRecord::Schema.define(version: 20150621160108) do
   end
 
   add_index "reward_histories", ["cid", "device_id", "action_date", "pid"], name: "conversion", unique: true, using: :btree
+
+  create_table "reward_notifications", force: :cascade do |t|
+    t.integer  "device_id",  limit: 4, null: false
+    t.integer  "item_id",    limit: 4, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "reward_notifications", ["device_id", "item_id"], name: "index_reward_notifications_on_device_id_and_item_id", unique: true, using: :btree
 
   create_table "staffs", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
