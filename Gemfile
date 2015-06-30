@@ -138,6 +138,7 @@ group :development, :test do
   gem 'factory_girl'
   gem 'factory_girl_rails'
   gem 'faker'
+  gem 'gimei'
 
   gem 'bundler-auto-update'
 end

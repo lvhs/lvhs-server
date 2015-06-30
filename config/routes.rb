@@ -42,7 +42,7 @@ Lvhs::Application.routes.draw do
       resources :profile, only: [:index]
 
       resources :events do
-        resources :comments
+        resources :comments, module: :events
       end
 
       # CA Reward

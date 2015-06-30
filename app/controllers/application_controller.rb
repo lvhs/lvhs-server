@@ -3,12 +3,17 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   skip_before_action :verify_authenticity_token, if: -> { controller_name == 'sessions' && action_name == 'create' }
+  after_action :set_csrf_cookie_for_ng
 
   # 例外ハンドル
   unless Rails.env.development?
     rescue_from Exception,                        with: :render_500
     rescue_from ActiveRecord::RecordNotFound,     with: :render_404
     rescue_from ActionController::RoutingError,   with: :render_404
+  end
+
+  def set_csrf_cookie_for_ng
+    cookies['XSRF-TOKEN'] = form_authenticity_token if protect_against_forgery?
   end
 
   def authenticate_admin_user!
@@ -40,5 +45,11 @@ class ApplicationController < ActionController::Base
       # render template: 'errors/error_500', status: 500, layout: 'application', content_type: 'text/html'
       render file: "#{Rails.root}/public/500.html", status: 500, layout: false, content_type: 'text/html'
     end
+  end
+
+  protected
+
+  def verified_request?
+    super || valid_authenticity_token?(session, request.headers['X-XSRF-TOKEN'])
   end
 end

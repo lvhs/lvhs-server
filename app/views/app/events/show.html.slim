@@ -103,7 +103,7 @@ css:
           div[style="position: relative"]
             .bubble-top-left
           .panel.panel-default[style="margin: 0 10px;"]
-            .panel-body[style="color: #333;" ng-bind-html="comment.body"]
+            .panel-body[style="color: #333; padding: 8px 15px;" ng-bind-html="comment.body"]
 
       /- own comment
       .row[ng-if="chat.my(comment)" style="display: flex; margin-bottom: 10px;"]
@@ -112,14 +112,14 @@ css:
           div[style="position: relative;"]
             .bubble-top-right
           .panel.panel-default[style="margin: 0 10px;"]
-            .panel-body[style="color: #333;" ng-bind-html="comment.body"]
+            .panel-body[style="color: #333; padding: 8px 15px;" ng-bind-html="comment.body"]
         .chat-image-right
           img[ng-src="{{ comment.user.image_path }}"]
 
     /- submit button
     .row[style="position: fixed; bottom: 0; width: 100%;"]
       .input-group
-        textarea.form-control[style="border-radius: 0;" rows="1" ng-model="chat.comment"]
+        textarea.form-control[style="border-radius: 0;" rows="1" ng-model="chat.body"]
         span.input-group-btn
           button.btn.btn-default[style="border-radius: 0;" ng-click="chat.post()"] 投稿
 
@@ -130,7 +130,7 @@ javascript:
     .controller('EventEntryController', [function() {
 
     }])
-    .controller('EventChatController', [function() {
+    .controller('EventChatController', ['$http', function($http) {
       this.comments = [
         {
           body: 'comment',
@@ -153,13 +153,24 @@ javascript:
       };
 
       this.post = function () {
-        if (!this.comment) {
+        if (!this.body) {
           return;
         }
-        this.comments.push({
-          body: this.comment.replace(/\n/g, '<br/>'),
-          user: this.user
-        });
-        this.comment = "";
+        $http
+          .post(Routes.app_event_comments_path(#{@event.id}), {
+            event_id: #{@event.id},
+            user_id: #{@user.id},
+            body: this.body
+          })
+          .success(_.bind(function() {
+            this.comments.push({
+              body: this.comment.replace(/\n/g, '<br/>'),
+              user: this.user
+            });
+            this.comment = "";
+          }, this))
+          .error(function () {
+
+          });
       };
     }]);

@@ -18,3 +18,4 @@
 #= require bootstrap-sprockets
 #= require nprogress
 #= require nprogress-turbolinks
+#= require ./routes
