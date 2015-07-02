@@ -7,6 +7,6 @@ window.Lvhs =
         else
           @layzr = new Layzr()
 
-  onLoad: ->
-    $(document).on 'ready page:load page:restore'
+  onLoad: (cb) ->
+    $(document).on 'ready page:load page:restore', cb
 
