@@ -9,4 +9,3 @@ window.Lvhs =
 
   onLoad: (cb) ->
     $(document).on 'ready page:load page:restore', cb
-

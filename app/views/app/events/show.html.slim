@@ -1,10 +1,16 @@
 css:
+  html, body, .container-fluid {
+    min-height: 100%;
+  }
+
   #event-entry {
+    display: -webkit-flex;
     display: flex;
     margin-bottom: 20px;
   }
 
   .event-info {
+    -webkit-flex-grow: 1;
     flex-grow: 1;
     margin-top: 18px;
     margin-left: 10px;
@@ -17,6 +23,7 @@ css:
 
   .chat-image-block {
     /*border-top: 1px solid #fff;*/
+    display: -webkit-flex;
     display: flex;
     padding-top: 10px;
   }
@@ -40,7 +47,6 @@ css:
     height: 40px;
     margin-left: 10px;
     overflow: hidden;
-    line-height: 30px;
   }
 
   .chat-name-left {
@@ -72,10 +78,9 @@ css:
     color: #fff;
     padding-right: 10px;
     text-align: right;
-    line-height: 30px;
   }
 
-.container-fluid[style="color: #fff;" ng-app="chat"]
+.container-fluid[style="color: #fff; " ng-app="chat"]
   #event-entry.row[ng-controller="EventEntryController as entry"]
     .event-info
       = @event.scheduled_at.strftime('%Y/%m/%d')
@@ -91,30 +96,36 @@ css:
         button.btn.btn-default type="button"
           span.glyphicon.glyphicon-remove
 
-  #event-chat[ng-controller="EventChatController as chat"]
+  #event-chat[ng-controller="EventChatController as chat" style="margin-bottom: 50px;"]
+    div[ng-if="chat.hasNoComment"]
+
     div[ng-repeat="comment in chat.comments"]
 
       / other user comment
-      .row[ng-if="!chat.my(comment)" style="display: flex; margin-bottom: 10px;"]
+      .row[ng-if="!chat.my(comment)" style="display: -webkit-flex; display: flex; margin-bottom: 10px;"]
         .chat-image-left
-          img[ng-src="{{ comment.user.image_path }}"]
-        div[style="flex-grow: 1;"]
-          .chat-name-left[ng-bind="comment.user.name"]
+          img[ng-src="{{ comment.user.image_url }}"]
+
+        div[style="-webkit-flex-grow: 1; flex-grow: 1;"]
+          .chat-name-left
+            a[ng-href="{{ Routes.app_profile_path(comment.user) }}" ng-bind="comment.user.name"]
+            span[ng-bind="comment.deco_created_at" style="float: right; font-size: 80%; color: #eee; margin-right: 20px;"]
           div[style="position: relative"]
             .bubble-top-left
           .panel.panel-default[style="margin: 0 10px;"]
             .panel-body[style="color: #333; padding: 8px 15px;" ng-bind-html="comment.body"]
 
       /- own comment
-      .row[ng-if="chat.my(comment)" style="display: flex; margin-bottom: 10px;"]
-        div[style="flex-grow: 1;"]
+      .row[ng-if="chat.my(comment)" style="display: -webkit-flex; display: flex; margin-bottom: 10px;"]
+        div[style="-webkit-flex-grow: 1; flex-grow: 1;"]
+          span[ng-bind="comment.deco_created_at" style="float: left; font-size: 80%; color: #eee; margin-left: 20px;"]
           .chat-name-right[ng-bind="comment.user.name"]
           div[style="position: relative;"]
             .bubble-top-right
           .panel.panel-default[style="margin: 0 10px;"]
             .panel-body[style="color: #333; padding: 8px 15px;" ng-bind-html="comment.body"]
         .chat-image-right
-          img[ng-src="{{ comment.user.image_path }}"]
+          img[ng-src="{{ comment.user.image_url }}"]
 
     /- submit button
     .row[style="position: fixed; bottom: 0; width: 100%;"]
@@ -130,26 +141,21 @@ javascript:
     .controller('EventEntryController', [function() {
 
     }])
-    .controller('EventChatController', ['$http', function($http) {
-      this.comments = [
-        {
-          body: 'comment',
-          user: {
-            id: #{@user.id},
-            name: 'Blendan',
-            image_path: "#{image_url(@user.image_path)}"
-          }
-        }
-      ];
+    .controller('EventChatController', ['$http', '$window', function($http, $window) {
+      this.comments = #{raw @event_comments.to_json};
+
+      this.hasNoComment = function () {
+        return this.comments.length === 0;
+      };
 
       this.user = {
         id: #{@user.id},
         name: "#{@user.name}",
-        image_path: "#{image_url(@user.image_path)}"
+        image_url: "#{image_url(@user.image_path)}"
       };
 
       this.my = function (comment) {
-        return comment.user.id = this.user.id;
+        return comment.user.id === this.user.id;
       };
 
       this.post = function () {
@@ -164,10 +170,13 @@ javascript:
           })
           .success(_.bind(function() {
             this.comments.push({
-              body: this.comment.replace(/\n/g, '<br/>'),
+              body: this.body.replace(/\n/g, '<br/>'),
               user: this.user
             });
-            this.comment = "";
+            this.body = "";
+            setTimeout(function() {
+              $window.scrollTo(0, angular.element(document).height())
+            }, 300);
           }, this))
           .error(function () {
 

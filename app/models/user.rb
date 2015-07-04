@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
 
   class << self
     def random_image_path
-      "profile/%03d.jpg" % RANDOM_PROF_IMAGES.sample
+      'profile/%03d.jpg' % RANDOM_PROF_IMAGES.sample
     end
 
     def random_name

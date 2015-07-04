@@ -49,6 +49,7 @@ javascript:
 
 coffee:
   Lvhs.onLoad ->
+    console.log 'triggered!'
     template = _.template $("#template").text()
     $datepicker = $("#datetimepicker")
     $prefecture = $("#prefecture")

@@ -1,25 +1,41 @@
-.container-fluid
-  .row style="display: box; display: -webkit-box; margin-bottom: 20px"
-    div style="margin-left: 20px; margin-top: 18px;"
+.container-fluid[ng-app="events" ng-controller="EventListController as events" style="padding-right: 0; padding-left:0;"]
+  .row[style="display: -webkit-flex; display: flex; margin-bottom: 20px; margin-left: 0; margin-right: 0;"]
+    div[style="margin-left: 20px; margin-top: 18px;"]
       .btn-group.btn-group-lg[role="group" aria-label="..."]
         button.btn.btn-default type="button" style="width: 100px;"
           | 日付
         button.btn.btn-default type="button" style="width: 100px;"
           | 参加
-    div style="-webkit-box-flex: 1; margin-top: 18px;"
+    div style="-webkit-flex: 1; flex: 1; margin-top: 18px;"
       div.pull-right style="border: 3px solid #fff; border-radius: 10px; width: 44px; height: 44px; box-shadow: 0px 0px 3px #000, 0px 0px 3px #000 inset; margin-right: 20px;"
         a.glyphicon.glyphicon-pencil style="font-size: 30px; color: #fff; margin: 2px 4px; text-shadow: 0px 0px 3px #000;" href="#{new_app_event_path}"
 
-  - @events.each do |event|
-    .row style="color: #fff; padding: 10px; border-top: 1px solid #fff;" onclick="location.href='#{app_event_url(event)}'"
+  .row[ng-repeat="event in events.list" style="color: #fff; margin: 0; padding: 18px 10px; min-height: 114px; background-color: rgba(0,0,0,.6); border-top: 1px solid #333" ng-click="events.go(event)"]
+    div
+      span[ng-bind="event.deco_scheduled_at"]
+      span.glyphicon.glyphicon-check[ng-if="joined(event)" style="margin-left: 10px;"]
+    div[style="display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center;"]
+      div[style="overflow: hidden; padding: 0; width: 20%;"]
+        img[ng-src="{{ event.artist.image_url }}" style="width: 50px;"]
 
-      div style="font-size: 14px;"
-        span = event.scheduled_at.strftime('%Y/%m/%d')
-        span.glyphicon.glyphicon-check style="margin-left: 10px;"
+      div[style="flex-grow: 1; padding-left: 10px;"]
+        div style="font-size: 20px;"
+          span[ng-bind="event.artist.name"]
+        div[ng-bind="event.event_site.name + '(' + event.prefecture.name + ')'" style="font-size: 16px;"]
 
-      div style="font-size: 20px;"
-        span = event.artist.name
+script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular.min.js"
+script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular-sanitize.js"
+javascript:
+  angular.module('events', ['ngSanitize'])
+    .controller('EventListController', [function() {
+      this.list = #{raw @events.to_json};
+      this.event_entries = #{raw(@event_entries.to_json)};
 
-      div style="font-size: 16px;"
-        | #{event.event_site.name} (#{event.prefecture.name})
+      this.go = function (event) {
+        location.href = Routes.app_event_path(event);
+      };
 
+      this.joined = function (event) {
+        return _.findWhere(this.event_entries, { id: event.id });
+      };
+    }]);

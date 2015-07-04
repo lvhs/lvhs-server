@@ -2,11 +2,13 @@ class App::EventsController < App::BaseController
   before_action :set_user
 
   def index
-    @events = Event.all
+    @events = EventDecorator.decorate_collection Event.includes(:prefecture).includes(:artist).all
+    @event_entries = EventDecorator.decorate_collection Event.joins(:event_entries).merge(EventEntry.where(user_id: @user.id))
   end
 
   def show
     @event = Event.find(params[:id])
+    @event_comments = EventCommentDecorator.decorate_collection @event.comments.includes(:user)
   end
 
   def new
