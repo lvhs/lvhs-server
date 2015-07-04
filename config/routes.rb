@@ -43,6 +43,7 @@ Lvhs::Application.routes.draw do
 
       resources :events do
         resources :comments, module: :events
+        resources :entry, module: :events, only: [:create, :destroy]
       end
 
       # CA Reward
