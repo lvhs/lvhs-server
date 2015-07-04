@@ -9,6 +9,7 @@ class App::EventsController < App::BaseController
   def show
     @event = Event.find(params[:id])
     @event_comments = EventCommentDecorator.decorate_collection @event.comments.includes(:user)
+    @event_entry = EventEntry.find_by(event_id: @event.id, user_id: @user.id)
   end
 
   def new

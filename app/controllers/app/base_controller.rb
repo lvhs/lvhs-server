@@ -9,6 +9,7 @@ class App::BaseController < ApplicationController
 
   # TODO: 暗号化
   def init_device
+    ensure_device_id
     return if uiid.nil?
     @device = find_or_create_device(uiid)
   end
@@ -58,5 +59,11 @@ class App::BaseController < ApplicationController
 
   def find_or_create_device(uiid)
     Device.find_or_create_by!(key: uiid)
+  end
+
+  def ensure_device_id
+    if Rails.env.development?
+      @device ||= Device.find_by(key: '165F5CAC-1469-45DC-8CFB-16CAF36D3248')
+    end
   end
 end

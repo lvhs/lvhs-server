@@ -6,7 +6,11 @@ css:
   #event-entry {
     display: -webkit-flex;
     display: flex;
+    align-items: center;
+    -webkit-align-items: center;
     margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #333;
   }
 
   .event-info {
@@ -14,10 +18,11 @@ css:
     flex-grow: 1;
     margin-top: 18px;
     margin-left: 10px;
+    max-width: 180px;
   }
 
   .entry-block {
-    margin-left: 20px;
+    margin-left: 10px;
     margin-top: 18px;
   }
 
@@ -80,7 +85,23 @@ css:
     text-align: right;
   }
 
-.container-fluid[style="color: #fff; " ng-app="chat"]
+  button.btn.btn-default {
+    border-radius: 0;
+  }
+  button.btn.btn-default.inactive {
+    background-color: transparent;
+    color: #fff;
+  }
+
+  .glyphicon-ok.active {
+    color: green;
+  }
+
+  .glyphicon-remove.active {
+    color: red;
+  }
+
+.container-fluid[style="color: #fff; " ng-app="chat" data-no-turbolink="true"]
   #event-entry.row[ng-controller="EventEntryController as entry"]
     .event-info
       = @event.scheduled_at.strftime('%Y/%m/%d')
@@ -91,10 +112,10 @@ css:
 
     .entry-block
       .btn-group.btn-group-lg[role="group" aria-label="..."]
-        button.btn.btn-default type="button"
-          span.glyphicon.glyphicon-ok
-        button.btn.btn-default type="button"
-          span.glyphicon.glyphicon-remove
+        button.btn.btn-default[type="button" ng-class="{ inactive: !entry.joined }" ng-click="entry.updateEntryButton(true)"]
+          span.glyphicon.glyphicon-ok[ng-class="{ active: entry.joined }"]
+        button.btn.btn-default[type="button" ng-class="{ inactive: entry.joined }" ng-click="entry.updateEntryButton(false)"]
+          span.glyphicon.glyphicon-remove[ng-class="{ active: !entry.joined }"]
 
   #event-chat[ng-controller="EventChatController as chat" style="margin-bottom: 50px;"]
     div[ng-if="chat.hasNoComment"]
@@ -138,8 +159,45 @@ script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular.min.js"
 script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular-sanitize.js"
 javascript:
   angular.module('chat', ['ngSanitize'])
-    .controller('EventEntryController', [function() {
+    .controller('EventEntryController', ['$http', function($http) {
+      this.joined = #{@event_entry.present?};
+      var event_entry = #{raw @event_entry.to_json},
+          user_id = #{@user.id},
+          event_id = #{@event.id};
 
+      this.updateEntryButton = function (entry) {
+        if ((this.joined && entry) || !this.joined && !entry) {
+          return;
+        }
+        if (entry) {
+          $http
+            .post(Routes.app_event_entry_index_path(event_id), {
+              event_id: event_id,
+              user_id: user_id
+            }, {
+              responseType: 'json'
+            })
+            .success(_.bind(function (data) {
+              event_entry = data;
+              this.joined = entry;
+            }, this))
+            .error(function(){
+
+            });
+        } else {
+          $http
+            .delete(Routes.app_event_entry_path(event_id, event_entry.id), {
+              responseType: 'json'
+            })
+            .success(_.bind(function () {
+              event_entry = null;
+              this.joined = entry;
+            }, this))
+            .error(function(){
+
+            });
+        }
+      };
     }])
     .controller('EventChatController', ['$http', '$window', function($http, $window) {
       this.comments = #{raw @event_comments.to_json};

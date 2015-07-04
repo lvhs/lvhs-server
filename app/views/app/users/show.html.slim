@@ -1,10 +1,10 @@
 .container-fluid style="color: #fff;"
   .row style="padding-top: 20px;"
     .col-xs-6.col-xs-offset-3
-      div style="border: 3px solid #fff; border-radius: 80px; width: 100%; height: 100%; overflow:hidden;"
+      div[style="border: 3px solid #fff; border-radius: 80px; width: 100%; height: 100%; overflow:hidden;"]
         = image_tag @user.image_path
     .col-xs-3.text-right style="font-size: 32px;"
-      a.glyphicon.glyphicon-edit href="#{edit_app_user_url(@user)}"
+      a.glyphicon.glyphicon-edit[href="#{edit_app_user_url(@user)}" style="color: #fff;"]
 
   .row
     h4.text-center

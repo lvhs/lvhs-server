@@ -383,6 +383,12 @@
 // app_event_comments => /app/events/:event_id/comments(.:format)
   // function(event_id, options)
   app_event_comments_path: Utils.route(["event_id"], ["format"], [2,[7,"/",false],[2,[6,"app",false],[2,[7,"/",false],[2,[6,"events",false],[2,[7,"/",false],[2,[3,"event_id",false],[2,[7,"/",false],[2,[6,"comments",false],[1,[2,[8,".",false],[3,"format",false]],false]]]]]]]]], arguments),
+// app_event_entry => /app/events/:event_id/entry/:id(.:format)
+  // function(event_id, id, options)
+  app_event_entry_path: Utils.route(["event_id","id"], ["format"], [2,[7,"/",false],[2,[6,"app",false],[2,[7,"/",false],[2,[6,"events",false],[2,[7,"/",false],[2,[3,"event_id",false],[2,[7,"/",false],[2,[6,"entry",false],[2,[7,"/",false],[2,[3,"id",false],[1,[2,[8,".",false],[3,"format",false]],false]]]]]]]]]]], arguments),
+// app_event_entry_index => /app/events/:event_id/entry(.:format)
+  // function(event_id, options)
+  app_event_entry_index_path: Utils.route(["event_id"], ["format"], [2,[7,"/",false],[2,[6,"app",false],[2,[7,"/",false],[2,[6,"events",false],[2,[7,"/",false],[2,[3,"event_id",false],[2,[7,"/",false],[2,[6,"entry",false],[1,[2,[8,".",false],[3,"format",false]],false]]]]]]]]], arguments),
 // app_events => /app/events(.:format)
   // function(options)
   app_events_path: Utils.route([], ["format"], [2,[7,"/",false],[2,[6,"app",false],[2,[7,"/",false],[2,[6,"events",false],[1,[2,[8,".",false],[3,"format",false]],false]]]]], arguments),
