@@ -16,14 +16,14 @@ css:
   .event-info {
     -webkit-flex-grow: 1;
     flex-grow: 1;
-    margin-top: 18px;
-    margin-left: 10px;
-    max-width: 180px;
+    padding-top: 18px;
+    padding-left: 20px;
   }
 
   .entry-block {
     margin-left: 10px;
     margin-top: 18px;
+    width: 60px;
   }
 
   .chat-image-block {
@@ -94,26 +94,23 @@ css:
   button.btn.btn-default {
     border-radius: 0;
   }
-  .glyphicon-ok.active {
-    color: #111;
-  }
-  button.btn.join-btn.active {
-    background-color: #0095dd;
+  .entry-block.active {
     border-color: #0095dd;
-    opacity: 0.8;
   }
-
-  .glyphicon-remove.active {
-    color: #111;
+  .entry-btn.active {
+    color: #0095dd;
+    border-radius: 80px;
+    border: 3px solid #0095dd;
+    padding: 8px;
   }
-  button.btn.leave-btn.active {
-    background-color: rgba(255,255,255,.5);
-    border-color: #aaa;
+  .entry-block.inactive {
+    border-color: #999;
   }
-
-  .join-btn.inactive, .leave-btn.inactive {
-    background-color: transparent;
-    color: #fff;
+  .entry-btn.inactive {
+    color: #999;
+    border-radius: 80px;
+    border: 3px solid #999;
+    padding: 8px;
   }
 
 .container-fluid[style="color: #fff; " ng-app="chat" data-no-turbolink="true"]
@@ -126,11 +123,7 @@ css:
       span[style="font-size: 12px; font-weight: lighter;"] #{@event.event_site.name} (#{@event.prefecture.name})
 
     .entry-block
-      .btn-group.btn-group-lg[role="group"]
-        button.btn.btn-default.join-btn[type="button" ng-class="{ active: entry.joined, inactive: !entry.joined }" ng-click="entry.updateEntryButton(true)"]
-          span.glyphicon.glyphicon-ok[ng-class="{ active: entry.joined, inactive: !entry.joined }"]
-        button.btn.btn-default.leave-btn[type="button" ng-class="{ active: !entry.joined, inactive: entry.joined }" ng-click="entry.updateEntryButton(false)"]
-          span.glyphicon.glyphicon-remove[ng-class="{ active: !entry.joined, inactive: entry.joined }"]
+      span.glyphicon.glyphicon-ok.entry-btn[ng-class="{ active: entry.joined, inactive: !entry.joined }" ng-click="entry.toggleEntry()" style=""]
 
   #event-chat[ng-controller="EventChatController as chat" style="margin-bottom: 50px;"]
     div[ng-if="chat.hasNoComment"]
@@ -180,11 +173,8 @@ javascript:
           user_id = #{@user.id},
           event_id = #{@event.id};
 
-      this.updateEntryButton = function (entry) {
-        if ((this.joined && entry) || !this.joined && !entry) {
-          return;
-        }
-        if (entry) {
+      this.toggleEntry = function () {
+        if (!this.joined) {
           $http
             .post(Routes.app_event_entry_index_path(event_id), {
               event_id: event_id,
@@ -194,7 +184,7 @@ javascript:
             })
             .success(_.bind(function (data) {
               event_entry = data;
-              this.joined = entry;
+              this.joined = true;
             }, this))
             .error(function(){
 
@@ -206,7 +196,7 @@ javascript:
             })
             .success(_.bind(function () {
               event_entry = null;
-              this.joined = entry;
+              this.joined = false;
             }, this))
             .error(function(){
 
