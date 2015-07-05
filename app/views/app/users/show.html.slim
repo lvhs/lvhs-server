@@ -4,12 +4,14 @@
       div[style="border: 3px solid #fff; border-radius: 80px; width: 100%; height: 100%; overflow:hidden;"]
         = image_tag @user.image_path
 
-      span.glyphicon.glyphicon-edit[onclick="location.href='#{image_app_user_url(@user)}';" style="background-color: #111; position: absolute; top: 75%; right: 15%; border: 3px solid #fff; border-radius: 50px; width: 30px; height: 30px; overflow:hidden; padding-top: 5px; padding-left: 5px;"]
+      - if @user.id == @visitor.id
+        span.glyphicon.glyphicon-edit[onclick="location.href='#{image_app_user_url(@user)}';" style="background-color: #111; position: absolute; top: 75%; right: 15%; border: 3px solid #fff; border-radius: 50px; width: 30px; height: 30px; overflow:hidden; padding-top: 5px; padding-left: 5px;"]
 
   .row[style="margin-top: 10px;"]
     h4.text-center
       = @user.name
-      a.glyphicon.glyphicon-edit[href="#{edit_app_user_url(@user)}" style="color: #fff; margin-left: 10px; font-size: smaller;"]
+      - if @user.id == @visitor.id
+        a.glyphicon.glyphicon-edit[href="#{edit_app_user_url(@user)}" style="color: #fff; margin-left: 10px; font-size: smaller;"]
 
   .row
     p.text-center == @user.description.gsub(/\n/, '<br/>')

@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  has_one :device
+
   PROF_IMAGE_PATTERN = 'profile/%03d.jpg'
 
   RANDOM_PROF_IMAGES = (0..15).to_a
