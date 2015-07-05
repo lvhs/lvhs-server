@@ -1,6 +1,7 @@
 class App::UsersController < App::BaseController
   def show
     @user = User.find(params[:id])
+    @visitor = User.find_or_create_by_device_id(@device.id)
   end
 
   def edit
@@ -16,4 +17,5 @@ class App::UsersController < App::BaseController
       redirect_to edit_app_user_path(@user)
     end
   end
+
 end

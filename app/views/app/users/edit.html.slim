@@ -8,8 +8,8 @@
     .form-group
       = f.label 'プロフィール', class: 'col-sm-2 control-label', style: 'color: #fff;'
       .col-sm-10
-        = f.text_area :description, placeholder: 'プロフィール'
+        = f.text_area :description, placeholder: 'プロフィール', rows: 8
 
     .form-group
       .col-sm-offset-2.col-sm-10
-        = f.submit 'OK'
+        = f.submit 'OK', class: 'btn-lg btn-block'

@@ -18,6 +18,7 @@ Rails.application.config.assets.precompile += %w(
   okvideo.js
   jquery.confirm.js
   jquery.cookie.js
+  jquery.imgcheckbox.js
 
   picker.js
   picker.date.js

@@ -7,7 +7,7 @@ class EventCommentDecorator < Draper::Decorator
   end
 
   def deco_created_at
-    object.created_at.strftime('%Y/%m/%d %T')
+    object.created_at.strftime('%m/%d %H:%M')
   end
 
   private

@@ -6,8 +6,7 @@ class App::Events::EntryController < App::BaseController
   end
 
   def destroy
-    entry_params = params.permit(:event_id, :user_id)
-    EventEntry.find_by(entry_params).delete
+    EventEntry.find(params[:id]).delete
     render json: { status: 'OK' }
   end
 end

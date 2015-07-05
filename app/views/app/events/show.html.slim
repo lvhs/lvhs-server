@@ -33,6 +33,10 @@ css:
     padding-top: 10px;
   }
 
+  .panel.panel-default {
+    background-color: rgba(255,255,255,.85);
+  }
+
   .bubble-top-left {
     position: absolute;
     width: 0;
@@ -41,12 +45,13 @@ css:
     left: -4px;
     border: 5px solid transparent;
     border-right: 10px solid #fff;
+    opacity: .85;
     border-top: 0;
     border-bottom: 8px solid transparent;
   }
 
   .chat-image-left {
-    border: 3px solid #fff;
+    border: 1.5px solid #fff;
     border-radius: 80px;
     width: 40px;
     height: 40px;
@@ -66,12 +71,13 @@ css:
     top: 10px;
     right: 1px;
     border-left: 10px solid #fff;
+    opacity: .85;
     border-top: 0;
     border-bottom: 8px solid transparent;
   }
 
   .chat-image-right {
-    border: 3px solid #fff;
+    border: 3px solid #fff;G
     border-radius: 80px;
     width: 40px;
     height: 40px;
@@ -88,34 +94,43 @@ css:
   button.btn.btn-default {
     border-radius: 0;
   }
-  button.btn.btn-default.inactive {
-    background-color: transparent;
-    color: #fff;
-  }
-
   .glyphicon-ok.active {
-    color: green;
+    color: #111;
+  }
+  button.btn.join-btn.active {
+    background-color: #0095dd;
+    border-color: #0095dd;
+    opacity: 0.8;
   }
 
   .glyphicon-remove.active {
-    color: red;
+    color: #111;
+  }
+  button.btn.leave-btn.active {
+    background-color: rgba(255,255,255,.5);
+    border-color: #aaa;
+  }
+
+  .join-btn.inactive, .leave-btn.inactive {
+    background-color: transparent;
+    color: #fff;
   }
 
 .container-fluid[style="color: #fff; " ng-app="chat" data-no-turbolink="true"]
   #event-entry.row[ng-controller="EventEntryController as entry"]
     .event-info
-      = @event.scheduled_at.strftime('%Y/%m/%d')
+      span[style="font-size: 12px; font-weight: lighter;"] = @event.scheduled_at.strftime('%Y/%m/%d')
       br
-      = @event.artist.name
+      span = @event.artist.name
       br
-      | #{@event.event_site.name} (#{@event.prefecture.name})
+      span[style="font-size: 12px; font-weight: lighter;"] #{@event.event_site.name} (#{@event.prefecture.name})
 
     .entry-block
-      .btn-group.btn-group-lg[role="group" aria-label="..."]
-        button.btn.btn-default[type="button" ng-class="{ inactive: !entry.joined }" ng-click="entry.updateEntryButton(true)"]
-          span.glyphicon.glyphicon-ok[ng-class="{ active: entry.joined }"]
-        button.btn.btn-default[type="button" ng-class="{ inactive: entry.joined }" ng-click="entry.updateEntryButton(false)"]
-          span.glyphicon.glyphicon-remove[ng-class="{ active: !entry.joined }"]
+      .btn-group.btn-group-lg[role="group"]
+        button.btn.btn-default.join-btn[type="button" ng-class="{ active: entry.joined, inactive: !entry.joined }" ng-click="entry.updateEntryButton(true)"]
+          span.glyphicon.glyphicon-ok[ng-class="{ active: entry.joined, inactive: !entry.joined }"]
+        button.btn.btn-default.leave-btn[type="button" ng-class="{ active: !entry.joined, inactive: entry.joined }" ng-click="entry.updateEntryButton(false)"]
+          span.glyphicon.glyphicon-remove[ng-class="{ active: !entry.joined, inactive: entry.joined }"]
 
   #event-chat[ng-controller="EventChatController as chat" style="margin-bottom: 50px;"]
     div[ng-if="chat.hasNoComment"]
@@ -124,12 +139,12 @@ css:
 
       / other user comment
       .row[ng-if="!chat.my(comment)" style="display: -webkit-flex; display: flex; margin-bottom: 10px;"]
-        .chat-image-left
+        .chat-image-left[ng-click="chat.go_profile_path(comment.user)"]
           img[ng-src="{{ comment.user.image_url }}"]
 
         div[style="-webkit-flex-grow: 1; flex-grow: 1;"]
           .chat-name-left
-            a[ng-href="{{ Routes.app_profile_path(comment.user) }}" ng-bind="comment.user.name"]
+            a[ng-href="{{ chat.profile_path(comment.user) }}" ng-bind="comment.user.name" style="color: #fff;"]
             span[ng-bind="comment.deco_created_at" style="float: right; font-size: 80%; color: #eee; margin-right: 20px;"]
           div[style="position: relative"]
             .bubble-top-left
@@ -149,7 +164,7 @@ css:
           img[ng-src="{{ comment.user.image_url }}"]
 
     /- submit button
-    .row[style="position: fixed; bottom: 0; width: 100%;"]
+    .row[style="position: fixed; bottom: 0; width: 100%; opacity: .85;"]
       .input-group
         textarea.form-control[style="border-radius: 0;" rows="1" ng-model="chat.body"]
         span.input-group-btn
@@ -210,6 +225,14 @@ javascript:
         id: #{@user.id},
         name: "#{@user.name}",
         image_url: "#{image_url(@user.image_path)}"
+      };
+
+      this.profile_path = function (user) {
+        return Routes.app_user_path(user);
+      };
+
+      this.go_profile_path = function (user) {
+        location.href = Routes.app_user_path(user);
       };
 
       this.my = function (comment) {
