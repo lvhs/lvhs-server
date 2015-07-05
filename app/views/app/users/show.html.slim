@@ -14,4 +14,4 @@
         a.glyphicon.glyphicon-edit[href="#{edit_app_user_url(@user)}" style="color: #fff; margin-left: 10px; font-size: smaller;"]
 
   .row
-    p.text-center == @user.description.gsub(/\n/, '<br/>')
+    p.text-center == @user.description.try(:gsub, /\n/, '<br/>')
