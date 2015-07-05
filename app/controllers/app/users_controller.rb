@@ -1,7 +1,10 @@
 class App::UsersController < App::BaseController
   def show
+    puts params
     @user = User.find(params[:id])
+    puts @user
     @visitor = User.find_or_create_by_device_id(@device.id)
+    puts @visitor
   end
 
   def edit
