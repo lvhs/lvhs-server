@@ -1,6 +1,6 @@
 class App::UsersController < App::BaseController
   def show
-    @user = User.find(params[:id])
+    @user = User.find(params[:id]).decorate
     @visitor = User.find_or_create_by_device_id(@device.id)
   end
 
