@@ -20,16 +20,12 @@ css:
   }
 
 .container-fluid[ng-app="events" ng-controller="EventListController as events" style="padding-right: 0; padding-left:0;" data-no-turbolink="true"]
-  .row[style="display: -webkit-flex; display: flex; margin-bottom: 20px; margin-left: 0; margin-right: 0;"]
-    div[style="margin-left: 20px; margin-top: 18px;"]
-      .btn-group.btn-group-lg[role="group" aria-label="..."]
-        button.btn.btn-default[ng-class="{ active: events.sort_key == 'date', inactive: events.sort_key == 'entry' }" ng-click="events.updateSortButton('date')" type="button" style="width: 100px; border-radius: 0;"]
-          | 日付
-        button.btn.btn-default[ng-class="{ active: events.sort_key == 'entry', inactive: events.sort_key == 'date' }" ng-click="events.updateSortButton('entry')" type="button" style="width: 100px; border-radius: 0; "]
-          | 参加
-    div style="-webkit-flex: 1; flex: 1; margin-top: 18px;"
-      div.pull-right style="border: 3px solid rgba(255,255,255,.7); width: 44px; height: 44px; box-shadow: 0px 0px 3px #000, 0px 0px 3px #000 inset; margin-right: 20px;"
-        a.glyphicon.glyphicon-pencil[style="font-size: 30px; color: rgba(255,255,255,.7); margin: 2px 4px; text-shadow: 0px 0px 3px #000;" href="#{new_app_event_path}"]
+  .row.text-center[style="margin-top: 10px; margin-bottom: 20px;"]
+    .btn-group.btn-group-lg[style="width: 80%;"]
+      button.btn.btn-default[ng-class="{ active: events.sort_key == 'date', inactive: events.sort_key == 'entry' }" ng-click="events.updateSortButton('date')" type="button" style="width: 50%; border-radius: 0;"]
+        | 日付
+      button.btn.btn-default[ng-class="{ active: events.sort_key == 'entry', inactive: events.sort_key == 'date' }" ng-click="events.updateSortButton('entry')" type="button" style="width: 50%; border-radius: 0; "]
+        | 参加
 
   .row.event-item[ng-repeat="event in events.list" ng-click="events.go(event)"]
     div[style="overflow: hidden; padding: 0; width: 30%;"]
