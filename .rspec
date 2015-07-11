@@ -1,6 +1,5 @@
 --color
 --format progress
---warnings
 --require spec_helper
 --fail-fast
 --require turnip/rspec

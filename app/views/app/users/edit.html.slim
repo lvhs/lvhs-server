@@ -1,0 +1,15 @@
+.container-fluid[style=" padding-top: 10px;" data-no-turbolink="true"]
+  = form_for @user, url: app_user_path(@user), html: { class: 'form-horizontal' } do |f|
+    .form-group
+      = f.label '蜷榊燕', class: 'col-sm-2 control-label', style: 'color: #fff;'
+      .col-sm-10
+        = f.text_field :name, placeholder: '蜷榊燕'
+
+    .form-group
+      = f.label '繝励Ο繝輔ぅ繝ｼ繝ｫ', class: 'col-sm-2 control-label', style: 'color: #fff;'
+      .col-sm-10
+        = f.text_area :description, placeholder: '繝励Ο繝輔ぅ繝ｼ繝ｫ', rows: 8
+
+    .form-group
+      .col-sm-offset-2.col-sm-10
+        = f.submit 'OK', class: 'btn-lg btn-block'

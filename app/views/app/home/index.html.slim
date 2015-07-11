@@ -11,7 +11,7 @@
         dataType: 'html'
       ).done((html)->
         $("#rest-placeholder").replaceWith(html)
-        $('img.lazy.rest').lazyload?()
+        Lvhs.Libs.Layzr.init_or_update()
         $('.blink.rest')
           .on 'touchstart', -> $(@).css opacity: 0.5
           .on 'touchend', -> $(@).css opacity: 1

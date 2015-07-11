@@ -1,0 +1,253 @@
+css:
+  html, body, .container-fluid {
+    min-height: 100%;
+  }
+
+  #event-entry {
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    -webkit-align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #333;
+  }
+
+  .event-info {
+    -webkit-flex-grow: 1;
+    flex-grow: 1;
+    padding-top: 18px;
+    padding-left: 20px;
+  }
+
+  .entry-block {
+    margin-left: 10px;
+    margin-top: 18px;
+    width: 60px;
+  }
+
+  .chat-image-block {
+    /*border-top: 1px solid #fff;*/
+    display: -webkit-flex;
+    display: flex;
+    padding-top: 10px;
+  }
+
+  .panel.panel-default {
+    background-color: rgba(255,255,255,.7);
+    border: none;
+  }
+
+  .bubble-top-left {
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: 10px;
+    left: -5px;
+    border: 5px solid transparent;
+    border-right: 10px solid rgba(255,255,255,.7);
+    border-top: 0;
+    border-bottom: 8px solid transparent;
+  }
+
+  .chat-image-left {
+    border: 1.5px solid rgba(255,255,255,.7);
+    border-radius: 80px;
+    width: 40px;
+    height: 40px;
+    margin-left: 10px;
+    overflow: hidden;
+  }
+
+  .chat-name-left {
+    color: #fff;
+    padding-left: 10px;
+  }
+
+  .bubble-top-right {
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: 10px;
+    right: 0;
+    border-left: 10px solid rgba(255,255,255,.7);
+    border-top: 0;
+    border-bottom: 8px solid transparent;
+  }
+
+  .chat-image-right {
+    border: 1.5px solid rgba(255,255,255,.7);
+    border-radius: 80px;
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    overflow: hidden;
+  }
+
+  .chat-name-right {
+    color: #fff;
+    padding-right: 10px;
+    text-align: right;
+  }
+
+  button.btn.btn-default {
+    border-radius: 0;
+  }
+  .entry-block.active {
+    border-color: #0095dd;
+  }
+  .entry-btn.active {
+    color: #0095dd;
+    border-radius: 80px;
+    border: 3px solid #0095dd;
+    padding: 8px;
+  }
+  .entry-block.inactive {
+    border-color: #999;
+  }
+  .entry-btn.inactive {
+    color: #999;
+    border-radius: 80px;
+    border: 3px solid #999;
+    padding: 8px;
+  }
+
+.container-fluid[style="color: #fff; " ng-app="chat" data-no-turbolink="true"]
+  #event-entry.row[ng-controller="EventEntryController as entry"]
+    .event-info
+      span[style="font-size: 12px; font-weight: lighter;"] = @event.scheduled_at.strftime('%Y/%m/%d')
+      br
+      span = @event.artist.name
+      br
+      span[style="font-size: 12px; font-weight: lighter;"] #{@event.event_site.name} (#{@event.prefecture.name})
+
+    .entry-block
+      span.glyphicon.glyphicon-ok.entry-btn[ng-class="{ active: entry.joined, inactive: !entry.joined }" ng-click="entry.toggleEntry()" style=""]
+
+  #event-chat[ng-controller="EventChatController as chat" style="margin-bottom: 50px;"]
+    div[ng-if="chat.hasNoComment"]
+
+    div[ng-repeat="comment in chat.comments"]
+
+      / other user comment
+      .row[ng-if="!chat.my(comment)" style="display: -webkit-flex; display: flex; margin-bottom: 10px;"]
+        .chat-image-left[ng-click="chat.go_profile_path(comment.user)" style="background-image: url({{ comment.user.image_url }}); background-size: cover; background-position: 50%;"]
+
+        div[style="-webkit-flex-grow: 1; flex-grow: 1;"]
+          .chat-name-left
+            a[ng-href="{{ chat.profile_path(comment.user) }}" ng-bind="comment.user.name" style="color: #fff;"]
+            span[ng-bind="comment.deco_created_at" style="float: right; font-size: 80%; color: #eee; margin-right: 20px;"]
+          div[style="position: relative"]
+            .bubble-top-left
+          .panel.panel-default[style="margin: 0 10px;"]
+            .panel-body[style="color: #333; padding: 8px 15px;" ng-bind-html="comment.body"]
+
+      /- own comment
+      .row[ng-if="chat.my(comment)" style="display: -webkit-flex; display: flex; margin-bottom: 10px;"]
+        div[style="-webkit-flex-grow: 1; flex-grow: 1;"]
+          span[ng-bind="comment.deco_created_at" style="float: left; font-size: 80%; color: #eee; margin-left: 20px;"]
+          .chat-name-right[ng-bind="comment.user.name"]
+          div[style="position: relative;"]
+            .bubble-top-right
+          .panel.panel-default[style="margin: 0 10px;"]
+            .panel-body[style="color: #333; padding: 8px 15px;" ng-bind-html="comment.body"]
+        .chat-image-right[style="background-image: url({{ comment.user.image_url }}); background-size: cover; background-position: 50%;"]
+
+    /- submit button
+    .row[style="position: fixed; bottom: 0; width: 100%;"]
+      .input-group
+        textarea.form-control[style="border-radius: 0; opacity: .7;" rows="1" ng-model="chat.body"]
+        span.input-group-btn
+          button.btn.btn-default[style="border-radius: 0;" ng-click="chat.post()"] 謚慕ｨｿ
+
+script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular.min.js"
+script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular-sanitize.js"
+javascript:
+  angular.module('chat', ['ngSanitize'])
+    .controller('EventEntryController', ['$http', function($http) {
+      this.joined = #{@event_entry.present?};
+      var event_entry = #{raw @event_entry.to_json},
+          user_id = #{@user.id},
+          event_id = #{@event.id};
+
+      this.toggleEntry = function () {
+        if (!this.joined) {
+          $http
+            .post(Routes.app_event_entry_index_path(event_id), {
+              event_id: event_id,
+              user_id: user_id
+            }, {
+              responseType: 'json'
+            })
+            .success(_.bind(function (data) {
+              event_entry = data;
+              this.joined = true;
+            }, this))
+            .error(function(){
+
+            });
+        } else {
+          $http
+            .delete(Routes.app_event_entry_path(event_id, event_entry.id), {
+              responseType: 'json'
+            })
+            .success(_.bind(function () {
+              event_entry = null;
+              this.joined = false;
+            }, this))
+            .error(function(){
+
+            });
+        }
+      };
+    }])
+    .controller('EventChatController', ['$http', '$window', function($http, $window) {
+      this.comments = #{raw @event_comments.to_json};
+
+      this.hasNoComment = function () {
+        return this.comments.length === 0;
+      };
+
+      this.user = {
+        id: #{@user.id},
+        name: "#{@user.name}",
+        image_url: "#{image_url(@user.image_path)}"
+      };
+
+      this.profile_path = function (user) {
+        return Routes.app_user_path(user);
+      };
+
+      this.go_profile_path = function (user) {
+        location.href = Routes.app_user_path(user);
+      };
+
+      this.my = function (comment) {
+        return comment.user.id === this.user.id;
+      };
+
+      this.post = function () {
+        if (!this.body) {
+          return;
+        }
+        $http
+          .post(Routes.app_event_comments_path(#{@event.id}), {
+            event_id: #{@event.id},
+            user_id: #{@user.id},
+            body: this.body
+          })
+          .success(_.bind(function() {
+            this.comments.push({
+              body: this.body.replace(/\n/g, '<br/>'),
+              user: this.user
+            });
+            this.body = "";
+            setTimeout(function() {
+              $window.scrollTo(0, angular.element(document).height())
+            }, 300);
+          }, this))
+          .error(function () {
+
+          });
+      };
+    }]);

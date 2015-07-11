@@ -38,6 +38,19 @@ Lvhs::Application.routes.draw do
 
       resources :purchase, only: [:create]
 
+      resources :users, only: [:new, :create, :show, :edit, :update] do
+        member do
+          get 'image', to: 'users/image#edit'
+          patch 'image', to: 'users/image#update'
+        end
+      end
+      resources :profile, only: [:index]
+
+      resources :events do
+        resources :comments, module: :events
+        resources :entry, module: :events, only: [:create, :destroy]
+      end
+
       # CA Reward
       namespace :car do
         resources :list, only: [:index]
@@ -50,4 +63,6 @@ Lvhs::Application.routes.draw do
     devise_for :staffs, ActiveAdmin::Devise.config
     ActiveAdmin.routes(self)
   end
+
+  mount Peek::Railtie => '/peek'
 end

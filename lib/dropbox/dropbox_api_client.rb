@@ -42,7 +42,7 @@ class DropboxApiClient
     end
 
     def url(path)
-      "#{ BASE_URL }#{ ID }/lvhs/#{ path }"
+      "#{BASE_URL}#{ID}/lvhs/#{path}"
     end
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150419145309) do
+ActiveRecord::Schema.define(version: 20150711113814) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -53,6 +53,48 @@ ActiveRecord::Schema.define(version: 20150419145309) do
     t.datetime "updated_at"
   end
 
+  create_table "event_comments", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4,     null: false
+    t.integer  "event_id",   limit: 4,     null: false
+    t.text     "body",       limit: 65535, null: false
+    t.string   "image_path", limit: 255
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  create_table "event_entries", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4, null: false
+    t.integer  "event_id",   limit: 4, null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "event_entries", ["user_id", "event_id"], name: "index_event_entries_on_user_id_and_event_id", unique: true, using: :btree
+
+  create_table "event_sites", force: :cascade do |t|
+    t.string   "name",          limit: 255,   null: false
+    t.string   "postal_code",   limit: 255
+    t.text     "address",       limit: 65535
+    t.string   "phone",         limit: 255
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "prefecture_id", limit: 4,     null: false
+  end
+
+  add_index "event_sites", ["name", "prefecture_id"], name: "index_event_sites_on_name_and_prefecture_id", unique: true, using: :btree
+
+  create_table "events", force: :cascade do |t|
+    t.string   "name",          limit: 255
+    t.text     "description",   limit: 65535
+    t.datetime "scheduled_at",                null: false
+    t.integer  "event_site_id", limit: 4,     null: false
+    t.integer  "artist_id",     limit: 4,     null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  add_index "events", ["artist_id", "event_site_id", "scheduled_at"], name: "index_events_on_artist_id_and_event_site_id_and_scheduled_at", unique: true, using: :btree
+
   create_table "items", force: :cascade do |t|
     t.string   "name",             limit: 255
     t.integer  "media_type",       limit: 4,     default: 1, null: false
@@ -70,6 +112,14 @@ ActiveRecord::Schema.define(version: 20150419145309) do
     t.string   "vimeo_id",         limit: 255
     t.string   "apple_product_id", limit: 255
   end
+
+  create_table "prefectures", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "prefectures", ["name"], name: "index_prefectures_on_name", unique: true, using: :btree
 
   create_table "purchased_items", force: :cascade do |t|
     t.string   "key",        limit: 255
@@ -97,6 +147,15 @@ ActiveRecord::Schema.define(version: 20150419145309) do
 
   add_index "reward_histories", ["cid", "device_id", "action_date", "pid"], name: "conversion", unique: true, using: :btree
 
+  create_table "reward_notifications", force: :cascade do |t|
+    t.integer  "device_id",  limit: 4, null: false
+    t.integer  "item_id",    limit: 4, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "reward_notifications", ["device_id", "item_id"], name: "index_reward_notifications_on_device_id_and_item_id", unique: true, using: :btree
+
   create_table "staffs", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
     t.string   "encrypted_password",     limit: 255, default: "", null: false
@@ -116,5 +175,18 @@ ActiveRecord::Schema.define(version: 20150419145309) do
 
   add_index "staffs", ["email"], name: "index_staffs_on_email", unique: true, using: :btree
   add_index "staffs", ["reset_password_token"], name: "index_staffs_on_reset_password_token", unique: true, using: :btree
+
+  create_table "users", force: :cascade do |t|
+    t.string   "name",        limit: 255
+    t.string   "lead",        limit: 255
+    t.text     "description", limit: 65535
+    t.integer  "device_id",   limit: 4,                 null: false
+    t.string   "image_path",  limit: 255
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.integer  "role",        limit: 4,     default: 0
+  end
+
+  add_index "users", ["device_id"], name: "index_users_on_device_id", unique: true, using: :btree
 
 end

@@ -1,10 +1,11 @@
 AllCops:
   Exclude:
-    - 'vendor/bundler/**/*'
+    - 'vendor/**/*'
     - 'db/**/*'
     - 'config/**/*'
     - 'script/**/*'
   RunRailsCops: true
+  DisplayCopNames: true
 
 # Configuration parameters: AllowSafeAssignment.
 Lint/AssignmentInCondition:
@@ -19,4 +20,11 @@ Lint/ShadowingOuterLocalVariable:
 Lint/UnderscorePrefixedVariableName:
   Enabled: true
 
-inherit_from: .rubocop_todo.yml
+# FIXME
+Rails/TimeZone:
+  Enabled: false
+
+# FIXME
+
+inherit_from: .rubocop_fast.yml
+#inherit_from: .rubocop_todo.yml

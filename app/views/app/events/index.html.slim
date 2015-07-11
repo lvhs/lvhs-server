@@ -1,0 +1,98 @@
+css:
+  button.active {
+    background-color: rgba(255,255,255,.7);
+  }
+  button.inactive {
+    background-color: transparent;
+    color: rgba(255,255,255,.7);
+  }
+  .event-item {
+    display: -webkit-flex;
+    display: flex;
+    color: rgba(255,255,255,.7);
+    margin: 0;
+    padding: 18px 10px 18px 10px;
+    min-height: 114px;
+    background-color: rgba(0,0,0,.6);
+    border-top: 1px solid #333;
+    -webkit-align-items: center;
+    align-items: center;
+  }
+
+.container-fluid[ng-app="events" ng-controller="EventListController as events" style="padding-right: 0; padding-left:0;" data-no-turbolink="true"]
+  .row.text-center[style="margin-top: 10px; margin-bottom: 20px;"]
+    .btn-group.btn-group-lg[style="width: 80%;"]
+      button.btn.btn-default[ng-class="{ active: events.sort_key == 'date', inactive: events.sort_key == 'entry' }" ng-click="events.updateSortButton('date')" type="button" style="width: 50%; border-radius: 0;"]
+        | 日付
+      button.btn.btn-default[ng-class="{ active: events.sort_key == 'entry', inactive: events.sort_key == 'date' }" ng-click="events.updateSortButton('entry')" type="button" style="width: 50%; border-radius: 0; "]
+        | 参加
+
+  .row.event-item[ng-repeat="event in events.list" ng-click="events.go(event)"]
+    div[style="overflow: hidden; padding: 0; width: 30%;"]
+      img[ng-src="{{ event.artist.image_url }}" style="width: 100%;"]
+
+    div[style="padding-left: 10px;"]
+      div
+        span[ng-bind="event.deco_scheduled_at" style="color: rgba(255,255,255,.6);"]
+        span.glyphicon.glyphicon-check[ng-if="events.joined(event)" style="margin-left: 5px; color: #0095dd; opacity: 0.7;"]
+
+      div[style="flex-grow: 1;"]
+        div style="font-size: 20px;"
+          span[ng-bind="event.artist.name"]
+        div[ng-bind="event.event_site.name + '(' + event.prefecture.name + ')'" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-size: 12px; font-weight: lighter; color: rgba(255,255,255,.6);"]
+
+script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular.min.js"
+script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular-sanitize.js"
+javascript:
+  angular.module('events', ['ngSanitize'])
+    .controller('EventListController', [function() {
+      this.raw_list = #{raw @events.to_json};
+      this.list = [].concat(this.raw_list);
+      this.event_entries = #{raw(@event_entries.to_json)};
+
+      this.go = function (event) {
+        location.href = Routes.app_event_path(event);
+      };
+
+      this.updateSortButton = function (key) {
+        this.sort_key = key;
+        this.sort(key);
+      };
+
+      this.alert = _.once(function () {
+        alert([
+          '参加ボタンを押したら',
+          '参加するライブが一覧で表示されます。',
+          '参加前に盛り上がろう!'
+        ].join('\n'));
+      });
+
+      this.sort_key = 'date'; // or 'entry'
+      this.sort = function () {
+        if (this.sort_key == 'date') {
+          this.list = _.chain(this.raw_list)
+            .sortBy('scheduled_at')
+            .reverse()
+            .value();
+        } else {
+          this.list = _.chain(this.raw_list)
+            .filter(_.bind(function(event){
+              return this.joined(event);
+            }, this))
+            .sortBy('scheduled_at')
+            .reverse()
+            .value();
+          if (_.isEmpty(this.list)) {
+            setTimeout(_.bind(function(){
+              this.alert();
+            }, this), 300);
+          }
+        }
+      };
+
+      this.joined = function (event) {
+        return _.findWhere(this.event_entries, { id: event.id });
+      };
+
+      this.sort();
+    }]);

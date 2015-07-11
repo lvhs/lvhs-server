@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 ruby '2.2.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.1'
+gem 'rails', '4.2.3'
 # Use mysql as the database for Active Record
 gem 'mysql2'
 # Use SCSS for stylesheets
@@ -20,6 +20,8 @@ gem 'coffee-rails'
 # gem 'therubyracer',  platforms: :ruby
 gem 'slim-rails'
 
+gem 'browserify-rails', '~> 0.7'
+gem 'js-routes'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
@@ -47,11 +49,6 @@ gem 'foreman'
 
 # error handring
 gem 'rambulance'
-
-# performance
-gem 'escape_utils'
-gem 'fast_blank'
-gem 'oj'
 
 # request session (https://github.com/steveklabnik/request_store)
 gem 'request_store'
@@ -89,14 +86,13 @@ gem 'nokogiri'
 
 # Ope
 gem 'activeadmin', github: 'activeadmin'
+gem 'just-datetime-picker'
 gem 'devise'
 gem 'cancancan'
 gem 'aws-sdk-core'
-
 gem 'rmagick', '2.13.2', require: 'RMagick'
 
 gem 'rails_12factor', group: :production
-gem 'just-datetime-picker'
 
 gem 'yaml_db'
 gem 'httpclient'
@@ -107,6 +103,7 @@ gem 'peek'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  gem 'rb-readline'
 
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
@@ -126,7 +123,6 @@ group :development, :test do
   # https://www.infinum.co/the-capsized-eight/articles/top-8-tools-for-ruby-on-rails-code-optimization-and-cleanup
   gem 'traceroute'
   # gem 'rack-mini-profiler'
-  gem 'bullet'
   # gem 'brakeman', :require => false
   gem 'rails_best_practices'
   gem 'rubycritic', require: false
@@ -140,11 +136,18 @@ group :development, :test do
   gem 'better_errors'
 
   gem 'factory_girl'
+  gem 'factory_girl_rails'
+  gem 'faker'
+  gem 'gimei'
+
+  gem 'bundler-auto-update'
 end
 
 group :development do
   gem 'pry-rails'
   gem 'quiet_assets'
+  gem 'meta_request'
+  gem 'bullet'
 end
 
 group :test do
