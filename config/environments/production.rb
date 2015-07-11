@@ -77,7 +77,7 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  config.domain = 'lvhs.jp'
+  config.domain = 'app.lvhs.jp'
 
   config.gem 'rmagick', lib: 'RMagick'
 end
