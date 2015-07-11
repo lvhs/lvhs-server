@@ -20,7 +20,7 @@ css:
   }
 
 .container-fluid[ng-app="events" ng-controller="EventListController as events" style="padding-right: 0; padding-left:0;" data-no-turbolink="true"]
-  .row.text-center[style="margin-top: 10px; margin-bottom: 20px;"]
+  .row.text-center[style="margin: 10px 0 20px;"]
     .btn-group.btn-group-lg[style="width: 80%;"]
       button.btn.btn-default[ng-class="{ active: events.sort_key == 'date', inactive: events.sort_key == 'entry' }" ng-click="events.updateSortButton('date')" type="button" style="width: 50%; border-radius: 0;"]
         | 日付
