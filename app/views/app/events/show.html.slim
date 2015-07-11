@@ -131,8 +131,7 @@ css:
 
       / other user comment
       .row[ng-if="!chat.my(comment)" style="display: -webkit-flex; display: flex; margin-bottom: 10px;"]
-        .chat-image-left[ng-click="chat.go_profile_path(comment.user)"]
-          img[ng-src="{{ comment.user.image_url }}"]
+        .chat-image-left[ng-click="chat.go_profile_path(comment.user)" style="background-image: url({{ comment.user.image_url }}); background-size: cover; background-position: 50%;"]
 
         div[style="-webkit-flex-grow: 1; flex-grow: 1;"]
           .chat-name-left
@@ -152,15 +151,14 @@ css:
             .bubble-top-right
           .panel.panel-default[style="margin: 0 10px;"]
             .panel-body[style="color: #333; padding: 8px 15px;" ng-bind-html="comment.body"]
-        .chat-image-right
-          img[ng-src="{{ comment.user.image_url }}"]
+        .chat-image-right[style="background-image: url({{ comment.user.image_url }}); background-size: cover; background-position: 50%;"]
 
     /- submit button
     .row[style="position: fixed; bottom: 0; width: 100%;"]
       .input-group
         textarea.form-control[style="border-radius: 0; opacity: .7;" rows="1" ng-model="chat.body"]
         span.input-group-btn
-          button.btn.btn-default[style="border-radius: 0;" ng-click="chat.post()"] 投稿
+          button.btn.btn-default[style="border-radius: 0;" ng-click="chat.post()"] 謚慕ｨｿ
 
 script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular.min.js"
 script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular-sanitize.js"

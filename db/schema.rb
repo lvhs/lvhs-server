@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150628165317) do
+ActiveRecord::Schema.define(version: 20150711113814) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -180,10 +180,11 @@ ActiveRecord::Schema.define(version: 20150628165317) do
     t.string   "name",        limit: 255
     t.string   "lead",        limit: 255
     t.text     "description", limit: 65535
-    t.integer  "device_id",   limit: 4,     null: false
+    t.integer  "device_id",   limit: 4,                 null: false
     t.string   "image_path",  limit: 255
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.integer  "role",        limit: 4,     default: 0
   end
 
   add_index "users", ["device_id"], name: "index_users_on_device_id", unique: true, using: :btree

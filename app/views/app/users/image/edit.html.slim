@@ -30,7 +30,7 @@ javascript:
 
   $('img').imgCheckbox({
     radio: true,
-    preselect: [#{@user.image_no}],
+    preselect: #{@user.image_path[/^profile/] ? [@user.image_no] : []},
     styles: {
       "span.imgChked": {
         "border-radius": "80px",

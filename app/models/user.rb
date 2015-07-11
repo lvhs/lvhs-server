@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_one :device
+  enum role: { user: 0 }
 
   PROF_IMAGE_PATTERN = 'profile/%03d.jpg'
 
