@@ -40,7 +40,7 @@ Lvhs::Application.routes.draw do
 
       resources :users, only: [:new, :create, :show, :edit, :update] do
         member do
-          get 'image', to: 'users/image#edit'
+          get   'image', to: 'users/image#edit'
           patch 'image', to: 'users/image#update'
         end
       end
