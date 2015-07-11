@@ -22,6 +22,8 @@
 = javascript_include_tag 'jquery.imgcheckbox', 'data-turbolinks-track' => true
 javascript:
   $('.image-input').on('change', function (e) {
+    console.log('image-input changed');
+    console.dir(e);
     var file = e.target.files[0];
     if (!file) {
       return;
@@ -30,6 +32,7 @@ javascript:
   });
 
   $('.image-btn').on('click', function () {
+    console.log('image-btn clicked');
     $('.image-input').trigger('click');
   });
 
