@@ -146,7 +146,7 @@ css:
       .row[ng-if="chat.my(comment)" style="display: -webkit-flex; display: flex; margin-bottom: 10px;"]
         div[style="-webkit-flex-grow: 1; flex-grow: 1;"]
           span[ng-bind="comment.deco_created_at" style="float: left; font-size: 80%; color: #eee; margin-left: 20px;"]
-          .chat-name-right[ng-bind="comment.user.name"]
+          .chat-name-right[ng-click="chat.go_profile_path(comment.user)" ng-bind="comment.user.name"]
           div[style="position: relative;"]
             .bubble-top-right
           .panel.panel-default[style="margin: 0 10px;"]
