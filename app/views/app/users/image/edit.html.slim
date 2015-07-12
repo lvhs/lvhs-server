@@ -12,7 +12,7 @@
       .col-xs-12
         = f.submit 'OK', class: 'btn-lg btn-block'
 
-  = form_for @user, url: image_app_user_path(@user), method: :patch, html: { class: 'form-horizontal', enctype: 'multipart/form-data' } do |f|
+  /= form_for @user, url: image_app_user_path(@user), method: :patch, html: { class: 'form-horizontal', enctype: 'multipart/form-data' } do |f|
     .form-group
       .col-xs-12
         input[type="hidden" name="file" value="true"]
