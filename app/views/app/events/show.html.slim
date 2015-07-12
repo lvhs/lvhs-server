@@ -119,7 +119,11 @@ css:
       br
       span = @event.artist.name
       br
-      span[style="font-size: 12px; font-weight: lighter;"] #{@event.event_site.name} (#{@event.prefecture.name})
+      /- FIXME:
+      - if @event.id != 71
+        span[style="font-size: 12px; font-weight: lighter;"] #{@event.event_site.name} (#{@event.prefecture.name})
+      - else
+        span[style="font-size: 12px; font-weight: lighter;"] DIAMOND HALL&APOLLO BASE (#{@event.prefecture.name})
 
     .entry-block
       span.glyphicon.glyphicon-ok.entry-btn[ng-class="{ active: entry.joined, inactive: !entry.joined }" ng-click="entry.toggleEntry()" style=""]
