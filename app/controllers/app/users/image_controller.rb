@@ -14,6 +14,7 @@ class App::Users::ImageController < App::BaseController
       image = params[:image]
       /^image\/(?<ext>\w+)/ =~ image.content_type
       img = Magick::Image.from_blob(image.tempfile.read).first
+      img.auto_orient!
       img.resize_to_fit!(150, 150)
       path = "user/#{user_id}/profile.#{ext}"
       Aws::S3::Client.put_object(path, img.to_blob)
