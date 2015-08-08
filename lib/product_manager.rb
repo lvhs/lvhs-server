@@ -26,6 +26,7 @@ module ProductManager
     411 => 'jp.lvhs.livehouse.m00000024',
     421 => 'jp.lvhs.livehouse.m00000025',
     431 => 'jp.lvhs.livehouse.m00000026',
+    451 => 'jp.lvhs.livehouse.m00000027',
   }
 
   class << self
