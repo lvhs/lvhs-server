@@ -27,6 +27,7 @@ Lvhs::Application.routes.draw do
   constraints Routes::Constraints::Subdomain::APP do
     namespace :app do
       root to: 'home#index'
+      get 'callback', to: 'home#callback'
 
       resources :menu, only: [:index]
 

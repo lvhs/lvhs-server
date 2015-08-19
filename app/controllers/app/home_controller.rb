@@ -9,4 +9,9 @@ class App::HomeController < App::BaseController
       @artists = Artist.available.take(first_view_items)
     end
   end
+
+  def callback
+    puts params
+    render json: { status: :ok }
+  end
 end
