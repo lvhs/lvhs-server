@@ -1,5 +1,4 @@
 require 'csv'
-require 'pry'
 
 namespace :jasrac do
   dt = Time.current.strftime("%Y-%m")
