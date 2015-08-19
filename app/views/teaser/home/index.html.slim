@@ -1,80 +1,45 @@
-doctype html
-html
-  head
-    meta charset="utf-8"
-    meta name="google-site-verification" content="nu7eoaTRfz7ikkf508cj0f9Ba1CfrQ4lV_VXSULdrA0"
-    meta name="apple-itunes-app" content="app-id=923819273"
-    meta name="viewport" content="width=device-width, initial-scale=1"
-    title
-      | LIVEHOUSE ~情報先行公開！音楽動画アプリ~
-    link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"
-    = stylesheet_link_tag 'teaser/main'
-    javascript:
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+#content
+  #chevron.fa.fa-chevron-down
+  #splash
+    #left
+      .inner
+        h1.tac
+          | LIVEHOUSE
+        p.tac
+          | ~情報先行公開！音楽動画アプリ~
+        p[style="margin-top: 16px; margin-bottom: 16px;"]
+          |  人気アーティストのライブ動画やプライベート動画、ミュージックビデオ、新曲などがどこよりも早く見れる！！
+        p
+          |  【 LIVEHOUSEの特徴 】
+        p[style="margin-left: 8px;"]
+          |  ■ 無料で見れる
+        p[style="margin-left: 10px;"]
+          |  LIVEHOUSEは完全無料のアプリです！
+        p[style="margin-left: 8px;"]
+          |  ■ 人気アーティスト集合
+        p[style="margin-left: 10px;"]
+          |  今音楽チャートを賑わせているバンドが大集合！
+      a[href="https://itunes.apple.com/app/id923819273"]
+        = image_tag 'teaser/appstore.svg', class: 'appstore', alt: 'Download on the Apple App Store'
+    #right
+      .iphone
+        = image_tag 'teaser/01.png'
+  #icon-row
+    #icon-container
+      = image_tag 'teaser/icon.png'
+  #screenshots.text-center
+    = image_tag 'teaser/02.png'
+  p#description
+  p.text-center
+    a[href="https://itunes.apple.com/app/id923819273"]
+      = image_tag 'teaser/appstore.svg', class: 'appstore', alt: 'Download on the Apple App Store'
+  p
+  #like-container
+    .fb-like[data-share="true" data-width="450" data-show-faces="true"]
 
-      ga('create', 'UA-55278022-2', 'auto');
-      ga('send', 'pageview');
-  body
-    javascript:
-      window.fbAsyncInit = function() {
-        FB.init({
-          appId      : '658555114258291',
-          xfbml      : true,
-          version    : 'v2.2'
-        });
-      };
-      (function(d, s, id){
-        var js, fjs = d.getElementsByTagName(s)[0];
-         if (d.getElementById(id)) {return;}
-           js = d.createElement(s); js.id = id;
-         js.src = "//connect.facebook.net/en_US/sdk.js";
-         fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));
-    #content
-      #chevron.fa.fa-chevron-down
-      #splash
-        #left
-          .inner
-            h1.tac
-              | LIVEHOUSE
-            p.tac
-              | ~情報先行公開！音楽動画アプリ~
-            p[style="margin-top: 16px; margin-bottom: 16px;"]
-              |  人気アーティストのライブ動画やプライベート動画、ミュージックビデオ、新曲などがどこよりも早く見れる！！
-            p
-              |  【 LIVEHOUSEの特徴 】
-            p[style="margin-left: 8px;"]
-              |  ■ 無料で見れる
-            p[style="margin-left: 10px;"]
-              |  LIVEHOUSEは完全無料のアプリです！
-            p[style="margin-left: 8px;"]
-              |  ■ 人気アーティスト集合
-            p[style="margin-left: 10px;"]
-              |  今音楽チャートを賑わせているバンドが大集合！
-          a[href="https://itunes.apple.com/app/id923819273"]
-            = image_tag 'teaser/appstore.svg', class: 'appstore', alt: 'Download on the Apple App Store'
-        #right
-          .iphone
-            = image_tag 'teaser/01.png'
-      #icon-row
-        #icon-container
-          = image_tag 'teaser/icon.png'
-      #screenshots.text-center
-        = image_tag 'teaser/02.png'
-      p#description
-      p.text-center
-        a[href="https://itunes.apple.com/app/id923819273"]
-          = image_tag 'teaser/appstore.svg', class: 'appstore', alt: 'Download on the Apple App Store'
-      p
-      #like-container
-        .fb-like[data-share="true" data-width="450" data-show-faces="true"]
-
-      = javascript_include_tag 'okvideo'
-      javascript:
-        $.okvideo({ video: 'https://www.youtube.com/watch?v=pRG7FJobkv4' });
-      p
-      p#copyright.text-center
-        | ©Japan Music System
+  = javascript_include_tag 'okvideo'
+  javascript:
+    $.okvideo({ video: 'https://www.youtube.com/watch?v=pRG7FJobkv4' });
+  p
+  p#copyright.text-center
+    | ©Japan Music System
