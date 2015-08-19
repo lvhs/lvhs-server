@@ -11,6 +11,7 @@ Rails.application.config.assets.version = '1.0'
 # Rails.application.config.assets.precompile += %w( search.js )
 Rails.application.config.assets.precompile += %w(
   teaser/main.css
+  teaser.js
 
   active_admin/active_admin.css
   active_admin/active_admin.js
