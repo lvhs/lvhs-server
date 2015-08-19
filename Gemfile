@@ -96,7 +96,6 @@ gem 'rails_12factor', group: :production
 
 gem 'yaml_db'
 gem 'httpclient'
-
 gem 'peek'
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
@@ -148,6 +147,7 @@ group :development do
   gem 'quiet_assets'
   gem 'meta_request'
   gem 'bullet'
+  gem 'activerecord-cause'
 end
 
 group :test do
