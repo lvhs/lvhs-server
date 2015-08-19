@@ -37,9 +37,13 @@
   #like-container
     .fb-like[data-share="true" data-width="450" data-show-faces="true"]
 
-  = javascript_include_tag 'okvideo'
-  javascript:
-    $.okvideo({ video: 'https://www.youtube.com/watch?v=pRG7FJobkv4' });
+  - if smartphone?
+    css:
+      body { background-color: rgba(0,0,0,.9); }
+  - else
+    = javascript_include_tag 'okvideo'
+    javascript:
+      $.okvideo({ video: 'https://www.youtube.com/watch?v=pRG7FJobkv4' });
   p
   p#copyright.text-center
     | ©Japan Music System
