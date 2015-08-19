@@ -1,5 +1,5 @@
 require 'csv'
-require 'mail'
+require 'gmail/client'
 
 data = {}
 
@@ -45,23 +45,9 @@ CSV.open(filename, "w") do |csv|
   end
 end
 
-mail = Mail.new
-
-options = {
-  :address              => 'smtp.gmail.com',
-  :port                 => 587,
-  :domain               => 'smtp.gmail.com',
-  :user_name            => 'project.livehouse@gmail.com',
-  :password             => 'P?MHGuME.2o3Fh',
-  :authentication       => :plain,
-  :enable_starttls_auto => true
-}
-
-mail.charset = 'utf-8'
-mail.from "project.livehouse@gmail.com"
-mail.to ["myfirststory.nori@gmail.com", "project.livehouse@gmail.com"]
-mail.subject "[LIVEHOUSE] #{target_date} 売上情報"
-mail.body "添付のcsvを確認してください"
-mail.add_file filename.to_s
-mail.delivery_method(:smtp, options)
-mail.deliver
+mail = Gmail::Client.new
+mail.deliver from: "project.livehouse@gmail.com",
+  to: ["myfirststory.nori@gmail.com", "project.livehouse@gmail.com"],
+  subject: "[LIVEHOUSE] #{target_date} 売上情報",
+  body: "添付のcsvを確認してください",
+  file: filename
