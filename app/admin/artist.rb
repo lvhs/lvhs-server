@@ -111,6 +111,7 @@ ActiveAdmin.register Artist, label: 'アーティスト' do
       else
         Artist.where(artist_group_id: current_staff.artist_group.id)
       end
+      Artist.includes :artist_group
     end
   end
 end

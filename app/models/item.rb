@@ -20,7 +20,6 @@
 #  vimeo_thumb_id   :integer
 #
 
-require 'video_manager'
 require 'product_manager'
 
 class Item < ActiveRecord::Base
@@ -50,10 +49,6 @@ class Item < ActiveRecord::Base
 
   def pid
     ProductManager.pid id
-  end
-
-  def vid
-    VideoManager.vid(id)
   end
 
   def new?

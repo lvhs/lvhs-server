@@ -76,15 +76,11 @@ ActiveAdmin.register Item do
             th '更新日'
             td item.updated_at
           end
+
           tr class: 'row' do
             th '動画画像'
-            td item.image_path.nil? ? '' : image_tag(static_url(item.image_path), height: '100%')
+            td item.image_path.present? ? image_tag(static_url(item.image_path), height: '100%') : item.vimeo_thumb_id.present? ? image_tag("//i.vimeocdn.com/video/#{ item.vimeo_thumb_id }_200x150.jpg", width: '100%') : ''
           end
-
-          # tr class: 'row' do
-          #   th 'youtube'
-          #   td link_to("https://www.youtube.com/watch?v=#{item.youtube_id}", "https://www.youtube.com/watch?v=#{item.youtube_id}")
-          # end
 
           tr class: 'row' do
             th 'vimeo'
@@ -139,6 +135,9 @@ ActiveAdmin.register Item do
       f.input :vimeo_id,
               placeholder: 'https://vimeo.com/125334173',
               label: 'vimeo動画URL *'
+      f.input :vimeo_thumb_id,
+        placeholder: '',
+        label: 'vimeoサムネID'
       f.input :apple_product_id,
               label: 'Apple 製品 ID'
       f.input :status, label: '公開設定 *', as: :radio, collection: { '公開' => :available, '非公開' => :unavailable }, default: :unavailable
@@ -153,6 +152,7 @@ ActiveAdmin.register Item do
       else
         Item.artist(artist_group_id: current_staff.artist_group.id)
       end
+      Item.includes(:artist)
     end
 
     def create
