@@ -7,7 +7,7 @@ namespace :vimeo do
       next q.delete if q.obsoleted?
       next if q.status == 'created'
       vimeo = Vimeo::Client.new
-      item = Item.find_by vimeo_id: q.vimeo_id
+      item = Item.find_by vimeo_id: q.vimeo_id.to_i
       video_data = vimeo.get_videos(q.vimeo_id)
       next if video_data[:status] != 'available'
       item.thumb_uri = video_data[:pictures][:uri]
