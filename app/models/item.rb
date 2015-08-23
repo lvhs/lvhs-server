@@ -54,4 +54,14 @@ class Item < ActiveRecord::Base
   def new?
     [published_at, created_at].compact.max > Time.current - 1.week
   end
+
+  def thumb_uri=(uri)
+    self.vimeo_thumb_id = thumb_id_from_uri(uri)
+  end
+
+  private
+
+  def thumb_id_from_uri(uri)
+    uri[/(\d+)$/].to_i
+  end
 end

@@ -4,7 +4,7 @@ css:
   h3
     | MY FIRST STORY 動画アップロード
   p
-    | (今週は残り#{@ticket[:user][:upload_quota][:space][:free] / (1024.0 ** 3)}GBアップロードできます)
+    | (今週は残り#{"%.1f" % (@ticket[:user][:upload_quota][:space][:free] / (1024.0 ** 3))}GBアップロードできます)
   form#form.form-horizontal[action="#{@ticket[:upload_link_secure]}" method="POST" enctype="multipart/form-data"]
     input#queue_id[type="hidden" name="queue_id" value="#{@queue.id}"]
     .form-group

@@ -46,6 +46,10 @@ module Vimeo
       get "/videos/#{video_id}", {}, follow_redirect: true
     end
 
+    def put_videos(video_id, params = {})
+      put "/videos/#{video_id}", params, follow_redirect: true
+    end
+
     def generate_upload_ticket(params = {})
       redirect_url = URI('http://dev.lvhs.jp/app/videos/callback')
       query = [].tap do |q|
