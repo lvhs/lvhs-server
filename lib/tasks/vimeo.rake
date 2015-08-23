@@ -4,12 +4,12 @@ require 'gmail/client'
 namespace :vimeo do
   task publish: :environment do
     VimeoQueue.all.each do |q|
-      return q.delete if q.obsoleted?
-      return if q.status == 'created'
+      next q.delete if q.obsoleted?
+      next if q.status == 'created'
       vimeo = Vimeo::Client.new
       item = Item.find_by vimeo_id: q.vimeo_id
       video_data = vimeo.get_videos(q.vimeo_id)
-      return if video_data[:status] != 'available'
+      next if video_data[:status] != 'available'
       item.thumb_uri = video_data[:pictures][:uri]
       item.status = 'available'
       item.save!
