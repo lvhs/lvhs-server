@@ -37,13 +37,23 @@ module Vimeo
  :content_filter=>["language", "drugs", "violence", "nudity", "safe", "unrated"],
  :upload_quota=>{:space=>{:free=>21474836480, :max=>21474836480, :used=>0}, :quota=>{:hd=>true, :sd=>true}}}
 =end
+
     def me
      get '/me', {}, follow_redirect: true
     end
 
-    def generate_upload_ticket
+    def get_videos(video_id)
+      get "/videos/#{video_id}", {}, follow_redirect: true
+    end
+
+    def generate_upload_ticket(params = {})
+      redirect_url = URI('http://dev.lvhs.jp/app/videos/callback')
+      query = [].tap do |q|
+        params.each_pair { |k, v| q << [k, v] }
+      end
+      redirect_url.query = URI.encode_www_form query
       post '/me/videos', {
-        redirect_url: 'http://dev.lvhs.jp/app/callback'
+        redirect_url: redirect_url.to_s
       }, follow_redirect: true
     end
 

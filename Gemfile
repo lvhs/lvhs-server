@@ -73,7 +73,7 @@ gem 'newrelic_rpm'
 gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
 
-gem 'rails_config'
+gem 'config'
 
 gem 'draper'
 gem 'cells'
@@ -98,6 +98,8 @@ gem 'yaml_db'
 gem 'httpclient'
 gem 'peek'
 gem 'woothee'
+
+gem 'whenever', require: false
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 group :development, :test do

@@ -1,0 +1,36 @@
+css:
+  * { color: #fff; }
+.container-fluid[style=" padding-top: 10px;" data-no-turbolink="true"]
+  h3
+    | MY FIRST STORY 動画アップロード
+  p (今週は残り#{@ticket[:user][:upload_quota][:free] / (1024.0 ** 3)}GBアップロードできます)
+  form#form.form-horizontal[action="#{@ticket[:upload_link_secure]}" method="POST" enctype="multipart/form-data"]
+    input#queue_id[type="hidden" name="queue_id" value="#{@queue.id}"]
+    .form-group
+      label.col-sm-2.control-label 動画のタイトル
+      .col-sm-10
+        input#title[type="text" placeholder="タイトル" required="true"]
+
+    .form-group
+      label.col-sm-2.control-label 動画
+      .col-sm-10
+        input[type="file" accept="video/*" name="file_data" required="true"]
+
+    .form-group
+      .col-sm-offset-2.col-sm-10
+        input.btn-lg.btn-block[type="submit" value="OK"]
+
+coffee:
+  $("#form").on('submit', ->
+    queue_id = parseInt $("#queue_id").val()
+    title = $("#title").val()
+    if title
+      $.ajax(
+        url: "/app/videos/title"
+        async: false
+        data:
+          queue_id: queue_id
+          title: title
+        method: 'PUT'
+      )
+  )

@@ -27,7 +27,6 @@ Lvhs::Application.routes.draw do
   constraints Routes::Constraints::Subdomain::APP do
     namespace :app do
       root to: 'home#index'
-      get 'callback', to: 'home#callback'
 
       resources :menu, only: [:index]
 
@@ -45,6 +44,7 @@ Lvhs::Application.routes.draw do
           patch 'image', to: 'users/image#update'
         end
       end
+
       resources :profile, only: [:index]
 
       resources :events do
@@ -56,6 +56,13 @@ Lvhs::Application.routes.draw do
       namespace :car do
         resources :list, only: [:index]
         resources :error, only: [:index]
+      end
+
+      resources :videos do
+        collection do
+          put :title, to: 'videos#title'
+          get :callback, to: 'videos#callback'
+        end
       end
     end
   end
