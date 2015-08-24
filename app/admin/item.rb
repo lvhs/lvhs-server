@@ -8,7 +8,7 @@ ActiveAdmin.register Item do
   permit_params %i(
     artist_id name description media_type billing_method
     published_at status youtube_id image_path image_url
-    vimeo_id apple_product_id
+    vimeo_id vimeo_thumb_id apple_product_id
   )
   # belongs_to :label
 
@@ -159,6 +159,7 @@ ActiveAdmin.register Item do
       item = params[:item]
       item[:youtube_id] = get_youtube_id(item[:youtube_id]) unless item[:youtube_id].blank?
       item[:vimeo_id] = get_vimeo_id(item[:vimeo_id]) unless item[:vimeo_id].blank?
+      item[:vimeo_thumb_id] = get_vimeo_thumb_id(item[:vimeo_thumb_id]) unless item[:vimeo_thumb_id].blank?
       create!
     end
 
@@ -166,6 +167,7 @@ ActiveAdmin.register Item do
       item = params[:item]
       item[:youtube_id] = get_youtube_id(item[:youtube_id]) unless item[:youtube_id].blank?
       item[:vimeo_id] = get_vimeo_id(item[:vimeo_id]) unless item[:vimeo_id].blank?
+      item[:vimeo_thumb_id] = get_vimeo_thumb_id(item[:vimeo_thumb_id]) unless item[:vimeo_thumb_id].blank?
       update!
     end
 
