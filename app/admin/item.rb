@@ -7,8 +7,8 @@ ActiveAdmin.register Item do
 
   permit_params %i(
     artist_id name description media_type billing_method
-    published_at status youtube_id image_path image_url
-    vimeo_id apple_product_id
+    published_at status image_path image_url
+    vimeo_id vimeo_thumb_id apple_product_id
   )
   # belongs_to :label
 
@@ -129,9 +129,6 @@ ActiveAdmin.register Item do
       f.input :published_at, label: '公開日時 *', as: :just_datetime_picker
       f.input :finished_at, label: '有料販売 終了日時 *', as: :just_datetime_picker
       f.input :image, as: :file, label: 'ジャケット画像 *'
-      # f.input :youtube_id,
-      #         placeholder: 'https://www.youtube.com/watch?v=v6kwUZQN7mU',
-      #         label: 'youtube動画URL *'
       f.input :vimeo_id,
               placeholder: 'https://vimeo.com/125334173',
               label: 'vimeo動画URL *'
@@ -157,28 +154,16 @@ ActiveAdmin.register Item do
 
     def create
       item = params[:item]
-      item[:youtube_id] = get_youtube_id(item[:youtube_id]) unless item[:youtube_id].blank?
       item[:vimeo_id] = get_vimeo_id(item[:vimeo_id]) unless item[:vimeo_id].blank?
+      item[:vimeo_thumb_id] = item[:vimeo_thumb_id] unless item[:vimeo_thumb_id].blank?
       create!
     end
 
     def update
       item = params[:item]
-      item[:youtube_id] = get_youtube_id(item[:youtube_id]) unless item[:youtube_id].blank?
       item[:vimeo_id] = get_vimeo_id(item[:vimeo_id]) unless item[:vimeo_id].blank?
+      item[:vimeo_thumb_id] = item[:vimeo_thumb_id] unless item[:vimeo_thumb_id].blank?
       update!
-    end
-
-    def get_youtube_id(url)
-      if %r{youtube\.com/watch\?.*v=(?<id>[a-zA-Z0-9\-_]+)} =~ url
-        id
-      elsif %r{youtu\.be/(?<id>[a-zA-Z0-9\-_]+)} =~ url
-        id
-      elsif id_format?(url)
-        url
-      else
-        nil
-      end
     end
 
     def get_vimeo_id(url)
