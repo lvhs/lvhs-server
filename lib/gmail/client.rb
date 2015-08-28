@@ -7,12 +7,12 @@ module Gmail
       end
     end
 
-    def deliver(from: 'project.livehouse@gmail.com', to:, body:, subject:, file:)
+    def deliver(from: 'project.livehouse@gmail.com', to:, body:, subject:, file: '')
       @mail.from from
       @mail.to to
       @mail.body body
       @mail.subject subject
-      @mail.add_file file.to_s
+      @mail.add_file file.to_s if file.present?
       @mail.deliver
     end
 
