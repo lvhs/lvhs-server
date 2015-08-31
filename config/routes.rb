@@ -28,6 +28,8 @@ Lvhs::Application.routes.draw do
     namespace :app do
       root to: 'home#index'
 
+      resources :timeline, only: [:index]
+
       resources :menu, only: [:index]
 
       resources :version, only: [:index]

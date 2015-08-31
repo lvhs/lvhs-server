@@ -38,3 +38,27 @@
   }
 }
 
+footer {
+  .footer-inner {
+    display: flex;
+    display: -webkit-flex;
+    height: 50px;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0,0,0,.9);
+    .footer-tab {
+      color: #fff;
+      text-align: center;
+      width: 25%;
+      .footer-tab-icon {
+        padding-top: 8px;
+        font-size: 18px;
+      }
+      .footer-label {
+        font-size: 10px;
+      }
+    }
+  }
+}

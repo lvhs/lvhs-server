@@ -1,0 +1,19 @@
+.container style="padding-left: 0; padding-right: 0; overflow: hidden;"
+  .row
+    - @items.each do |item|
+      .col-xs-12[style="min-height: 180px;"]
+        a[href="player://movie?aid=#{item.artist.id}&iid=#{ item.id }&vid=#{ item.vimeo_id }"]
+          - if item.image_path.blank?
+            - if true # vimeo thumbnail
+              = image_tag "//i.vimeocdn.com/video/#{ item.vimeo_thumb_id }.png", style: "max-height: 200px; min-width: 100%;"
+            - else # default movie thumbnail
+              = image_tag 'no-image.png', width: '100%', style: 'margin: 0;'
+          - else
+            = image_tag static_url(item.image_path), style: "max-height: 300px; min-width: 100%;"
+        a[href="player://movie?aid=#{item.artist.id}&iid=#{ item.id }&vid=#{ item.vimeo_id }"]
+          h4[style="color: #fff; position: absolute; bottom: 0; left: 0; text-shadow: 0 0 2px #333; margin: 0; background-color: rgba(0,0,0,.7); width: 100%; padding: 10px 30px;"] #{ item.name }
+
+
+    //= render partial: 'artist_list', locals: { artists: @artists, rest: @rest }
+
+

@@ -38,8 +38,16 @@ class App::BaseController < ApplicationController
   helper_method :deprecated_app?
   helper_method :latest_bundle_version
 
-  def pro?
-    request.headers['x-app-type'] == 'PRO'
+  def app_type
+    @app_type ||= request.headers['x-app-type']
+  end
+
+  def pro_app?
+   app_type == 'PRO'
+  end
+
+  def dev_app?
+    app_type == 'DEV'
   end
 
   private

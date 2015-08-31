@@ -18,7 +18,7 @@ namespace :vimeo do
       item.thumb_uri = video_data[:pictures][:uri]
       item.status = 'available'
 
-      vimeo.update_videos q.vimeo_id, name: q.title
+      vimeo.update_videos q.vimeo_id, name: q.title, review_link: false
 
       Gmail::Client.new.deliver(
         to: 'project.livehouse@gmail.com',
