@@ -9,7 +9,7 @@ class App::ArtistsController < App::BaseController
       end
     end
     if @artist.id == 1
-      @items = @artist.item.available.to_a.sort_by!{ |item| item.id == 451 ? 462 : item.id }.reverse
+      @items = @artist.item.available.to_a.sort_by!{ |item| item.id == 551 ? 592 : item.id }.reverse
     else
       @items = @artist.item.available.reverse
     end
