@@ -78,7 +78,7 @@ javascript:
       .col-md-12 style="background-color: rgba(0,0,0,.6); padding: 18px; text-align: center; box-sizing: border-box;"
         p style="color: #fff; line-height: 74px; font-size: 2rem;" COMING SOON
 
-  - unless @artist.official_url.nil?
+  - unless @artist.official_url.blank?
     // OFFICIAL INFO
     .row style="margin-top: 18px;"
       .col-md-12 style="margin-bottom: 10px;"
