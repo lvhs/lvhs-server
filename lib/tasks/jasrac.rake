@@ -7,10 +7,13 @@ namespace :jasrac do
   sales_file = Rails.root.join('tmp', 'jasrac', "sales-#{dt}.tsv")
   reward_file = Rails.root.join('tmp', 'jasrac', "reward-#{dt}.tsv")
 
+  APP_PRICE = 111
+
+
   task movie: :environment do
     CSV.open(movie_file, 'w', col_sep: "\t") do |csv|
       Item.find_each do |i|
-        csv << [i.id, i.artist.name, i.name, (i.free? ? 0 : 120), !i.free?, nil, i.updated_at.strftime('%Y/%m/%d')]
+        csv << [i.id, i.artist.name, i.name, (i.free? ? 0 : APP_PRICE), !i.free?, i.updated_at.strftime('%Y/%m/%d')]
       end
     end
   end
@@ -64,23 +67,40 @@ namespace :jasrac do
           data[iid][dt][:reward][:s] += rhs.find_by(item_id: iid).point
         end
       end
+      m = Time.current.prev_month.end_of_day.strftime('%Y-%m')
 
       Item.find_each do |item|
         if data[item.id]
           data[item.id].each_pair do |d, data1|
             csv << [
-              item.id, item.artist.name, item.name, item.free? ? 0 : 120, 0,
+              d, item.id,
+              0, # PV
               data1[:iap][:n],
-              data1[:iap][:s],
+              'N/A',
               data1[:reward][:n],
               data1[:reward][:s],
-              0,
+              'N/A',
+              'N/A',
+              'N/A',
+              'N/A',
+              nil, nil, nil,
+              item.artist.name,
+              item.name,
+              item.free? ? 0 : APP_PRICE,
               item.artist.artist_group.name,
-              d,
             ]
           end
         else
-          csv << [item.id, item.artist.name, item.name, item.free? ? 0 : 120, 0, 0, 0, 0, 0, 0, item.artist.artist_group.name, nil]
+          csv << [
+            m, item.id,
+            0, # PV
+            0, 0, 0, 0, 0, 0, 0, 0,
+            nil, nil, nil,
+            item.artist.name,
+            item.name,
+            item.free? ? 0 : APP_PRICE,
+            item.artist.artist_group.name
+          ]
         end
       end
     end
@@ -137,7 +157,7 @@ namespace :jasrac do
           情報量（税抜）
           所属事務所
       )
-      dt = '2015/06/30'
+      dt = Time.current.prev_month.end_of_month.strftime('%Y/%m/%d')
       Item.find_each do |item|
         if data[item.id]
           data[item.id].each_pair do |d, data1|
@@ -151,13 +171,13 @@ namespace :jasrac do
               '', '', '', # hidden
               item.artist.name,
               item.name,
-              item.free? ? 0 : 111, 0,
+              item.free? ? 0 : APP_PRICE, 0,
               item.artist.artist_group.name,
             ]
           end
         else
           csv << [
-            '2015-06',
+            Time.current.prev_month.end_of_day.strftime('%Y/%m'),
             item.id,
             '',
             '', '',
@@ -166,7 +186,7 @@ namespace :jasrac do
             '', '', '', # hidden
             item.artist.name,
             item.name,
-            item.free? ? 0 : 111,
+            item.free? ? 0 : APP_PRICE,
             item.artist.artist_group.name,
           ]
         end
