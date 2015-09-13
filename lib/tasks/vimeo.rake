@@ -1,9 +1,12 @@
 require 'vimeo/client'
 require 'gmail/client'
+require 'twitter/wrapper'
 
 namespace :vimeo do
   task publish: :environment do
+    puts Time.current
     VimeoQueue.all.each do |q|
+      puts "title: #{q.title}"
       puts "obsoleted?: #{q.obsoleted?}"
       next q.delete if q.obsoleted?
       puts "status: #{q.status}"
@@ -29,9 +32,9 @@ namespace :vimeo do
         vimeo link: #{video_data[:link]}
         EOS
       )
-
       item.save!
       q.delete
+      Twitter::Wrapper.new.update(q.title)
     end
   end
 end

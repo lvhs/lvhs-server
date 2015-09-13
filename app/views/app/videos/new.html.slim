@@ -1,33 +1,61 @@
-css:
-  * { color: #fff; }
-.container-fluid[style=" padding-top: 10px;" data-no-turbolink="true"]
-  h3
-    | MY FIRST STORY 動画アップロード
-  p
-    | (今週は残り#{"%.1f" % (@ticket[:user][:upload_quota][:space][:free] / (1024.0 ** 3))}GBアップロードできます)
-  form#form.form-horizontal[action="#{@ticket[:upload_link_secure]}" method="POST" enctype="multipart/form-data"]
+= content_for :style
+  = stylesheet_link_tag 'dropify'
+
+= content_for :script
+  = javascript_include_tag 'dropify'
+  javascript:
+    $("input[type=file]").dropify({
+    messages: {
+        default: 'タップして動画ファイルを選択してください',
+        replace: ' ',
+        remove:  ' ',
+        error:   ' '
+      }
+    })
+
+.container-fluid[data-no-turbolink="true"]
+  h3[style="color: #fff;"] 動画アップロード
+  = image_tag static_url(@artist.image_path), width: "100%"
+  form#form.form-horizontal[action="#{@ticket[:upload_link_secure]}" method="POST" enctype="multipart/form-data" style="margin-top: 10px;"]
     input#queue_id[type="hidden" name="queue_id" value="#{@queue.id}"]
     .form-group
-      label.col-sm-2.control-label 動画のタイトル
+      label.col-sm-2.control-label[style="color: #fff;"] 動画のタイトル
       .col-sm-10[style="color: #000;"]
         input#title[type="text" placeholder="タイトル" required="true"]
 
     .form-group
-      label.col-sm-2.control-label 動画
+      label.col-sm-2.control-label[style="color: #fff;"] 動画ファイル選択
       .col-sm-10
-        input[type="file" accept="video/*" name="file_data" required="true"]
+        input#file[type="file" accept="video/*" name="file_data" required="true" data-disable-remove="true"]
+
+    small[style="color: #fff;"]
+      | (今週は残り#{"%.1f" % (@ticket[:user][:upload_quota][:space][:free] / (1024.0 ** 3))}GBアップロードできます)
 
     .form-group
       .col-sm-offset-2.col-sm-10
-        input.btn-lg.btn-block[type="submit" value="OK"]
+        input#submit.btn-lg.btn-block[type="submit" value="OK" disabled="true"]
 
 coffee:
-  $("#form").on('submit', ->
-    queue_id = parseInt $("#queue_id").val()
-    title = $("#title").val()
+  $title  = $('#title')
+  $file   = $('#file')
+  $submit = $('#submit')
+  $form   = $('#form')
+
+  $('#title').on('change blur', ->
+    if $file.val()
+      $submit.attr('disabled', false)
+  )
+  $('#file').on('change blur', ->
+    if $title.val()
+      $submit.attr('disabled', false)
+  )
+
+  $form.on('submit', ->
+    queue_id = parseInt $('#queue_id').val()
+    title = $('#title').val()
     if title
       $.ajax(
-        url: "/app/videos/title"
+        url: '/app/videos/title'
         async: false
         data:
           queue_id: queue_id

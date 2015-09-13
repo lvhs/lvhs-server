@@ -2,11 +2,12 @@ require 'vimeo/client'
 
 class App::VideosController < App::BaseController
   def new
-    artist_id = 1
-    @queue = VimeoQueue.create artist_id: artist_id
+    artist_id = params[:aid] || 1
+    @artist = Artist.find artist_id
+    @queue = VimeoQueue.create artist_id: @artist.id
     @ticket = Vimeo::Client.new.generate_upload_ticket(
       queue_id: @queue.id,
-      artist_id: artist_id
+      artist_id: @artist.id
     )
   end
 

@@ -29,5 +29,7 @@ Rails.application.config.assets.precompile += %w(
   picker.date.css
   picker.time.css
 
+  dropify.*
+
   underscore.js
 )

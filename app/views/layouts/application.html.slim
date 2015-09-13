@@ -17,6 +17,9 @@ html
 
       ga('create', 'UA-55278022-2', 'auto');
       ga('send', 'pageview');
+
+    = yield(:style)
+
   body[style="padding-bottom: 50px;"]
 
     = yield
@@ -28,16 +31,16 @@ html
             span.glyphicon.glyphicon-time
           .footer-label
             span タイムライン
-        a.footer-tab[href="/app/events"]
-          .footer-tab-icon
-            span.glyphicon.glyphicon-th-list
-          .footer-label
-            span ライブ
         a.footer-tab[href="/app/"]
           .footer-tab-icon
             span.glyphicon.glyphicon-user
           .footer-label
             span バンド
+        a.footer-tab[href="/app/events"]
+          .footer-tab-icon
+            span.glyphicon.glyphicon-th-list
+          .footer-label
+            span ライブ
         a.footer-tab[href="/app/videos/new"]
           .footer-tab-icon
             span.glyphicon.glyphicon-facetime-video
@@ -46,3 +49,4 @@ html
 
 
 
+    = yield(:script)
