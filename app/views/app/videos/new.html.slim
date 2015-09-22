@@ -14,7 +14,7 @@
     })
 
 .container-fluid[data-no-turbolink="true"]
-  h3[style="color: #fff;"] 動画アップロード
+  /h3[style="color: #fff;"] 動画アップロード
   = image_tag static_url(@artist.image_path), width: "100%"
   form#form.form-horizontal[action="#{@ticket[:upload_link_secure]}" method="POST" enctype="multipart/form-data" style="margin-top: 10px;"]
     input#queue_id[type="hidden" name="queue_id" value="#{@queue.id}"]

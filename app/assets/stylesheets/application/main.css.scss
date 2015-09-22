@@ -38,6 +38,47 @@
   }
 }
 
+.dogear-box {
+  position: relative;
+  border-top: 1px solid #333;
+  @include box-flex(border-box);
+}
+
+.dogear-wrapper {
+  $base-accent-color: #E12228 !default;
+  $dogear-background: $base-accent-color;
+  $dogear-size: 85px;
+
+  @include size($dogear-size);
+  overflow: hidden;
+  position: absolute;
+  left: 10px;
+  top: 0;
+  z-index: 10;
+
+  .dogear {
+    @include transform(rotate(-45deg));
+    background-color: $dogear-background;
+    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
+    color: #fff;
+    font-size: 0.8em;
+    font-weight: 800;
+    left: -45px;
+    line-height: 1.5em;
+    //padding: 2px 7px;
+    position: relative;
+    text-align: center;
+    top: -10px;
+    width: 120px;
+    padding-top: 20px;
+    padding-bottom: 5px;
+
+    &.get {
+      background-color: red;
+    }
+  }
+}
+
 footer {
   .footer-inner {
     display: flex;
@@ -47,6 +88,7 @@ footer {
     position: fixed;
     bottom: 0;
     left: 0;
+    z-index: 99999;
     background-color: rgba(0,0,0,.9);
     .footer-tab {
       color: #fff;
