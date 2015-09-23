@@ -35,7 +35,7 @@ module Vimeo
       me[:upload_quota][:space]
     end
 
-    def patch(path, params = {}, options = {})
+    def patch(path, params = {}, _options = {})
       HTTP.headers(headers).patch(uri_for(path), json: params)
     end
 

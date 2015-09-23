@@ -79,7 +79,7 @@ ActiveAdmin.register Item do
 
           tr class: 'row' do
             th '動画画像'
-            td item.image_path.present? ? image_tag(static_url(item.image_path), height: '100%') : item.vimeo_thumb_id.present? ? image_tag("//i.vimeocdn.com/video/#{ item.vimeo_thumb_id }_200x150.jpg", width: '100%') : ''
+            td item.image_path.present? ? image_tag(static_url(item.image_path), height: '100%') : item.vimeo_thumb_id.present? ? image_tag("//i.vimeocdn.com/video/#{item.vimeo_thumb_id}_200x150.jpg", width: '100%') : ''
           end
 
           tr class: 'row' do
@@ -124,7 +124,7 @@ ActiveAdmin.register Item do
       f.input :media_type, label: '&nbsp;', as: :radio, collection: [:video], value: :video, include_blank: false, disabled: true, input_html: { style: 'display: none;' }
       # f.input :media_type, as: :select, collection: %i(music video), include_blank: false
       # f.input :description, label: '説明文'
-      f.input :billing_method, label: '課金方法 *', as: :radio, collection: { '無料' => :free, '有料' => :both  }
+      f.input :billing_method, label: '課金方法 *', as: :radio, collection: { '無料' => :free, '有料' => :both }
       # f.input :billing_method, as: :select, collection: %i(free in_app_purchase reward both), include_blank: false
       f.input :published_at, label: '公開日時 *', as: :just_datetime_picker
       f.input :finished_at, label: '有料販売 終了日時 *', as: :just_datetime_picker

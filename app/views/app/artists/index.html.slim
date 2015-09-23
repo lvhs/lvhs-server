@@ -17,18 +17,6 @@
           .on 'touchend', -> $(@).css opacity: 1
       )
 
-    - if deprecated_app?
-      javascript:
-        var latest_bundle_version = "#{latest_bundle_version}";
-        var app_store_url = "#{Settings.app_store_url}"
-
-      coffee:
-        if $.cookie('version') isnt latest_bundle_version and confirm('最新版のアプリに更新してください')
-          setTimeout ->
-            location.href = app_store_url
-          , 300
-        $.cookie('version', latest_bundle_version, { path: '/', domain: '.lvhs.jp', expires: 1 })
-
   .row
     .col-md-12
       p.text-center style="margin-top: 10px; font-size: small;"
