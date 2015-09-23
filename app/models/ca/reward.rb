@@ -11,7 +11,7 @@ class CA
     @@optional_params = [
       :page, :order, :carrier, :point_min, :point_max, :change_min, :change_max,
       :attribute, :nac, :compress, :video_type,
-      :action_type,  # 成果承認のタイプ 1: 手動 2: 自動
+      :action_type, # 成果承認のタイプ 1: 手動 2: 自動
       :rank,        # 1: 昇順ソート 2: 降順ソート
       :result_rank, # 1: 昇順ソート 2: 降順ソート
       :point_sort,  # 1: 昇順ソート 2: 降順ソート

@@ -1,14 +1,14 @@
 = javascript_include_tag 'jquery.confirm'
 = javascript_include_tag 'jquery.cookie'
-javascript:
 
+javascript:
   $(function(){
     $("a").on('click', function(e){
       var $el = $(this);
-      var href = $el.attr('href')
+      var href = $el.attr('href');
       if (href.indexOf('purchase') > -1 ) {
-        $.cookie('iid', href.match(/iid=(\d+)/)[1], { path: '/', domain: '.lvhs.jp' })
-        $.cookie('aid', href.match(/aid=(\d+)/)[1], { path: '/', domain: '.lvhs.jp' })
+        $.cookie('iid', href.match(/iid=(\d+)/)[1], { path: '/', domain: '.lvhs.jp' });
+        $.cookie('aid', href.match(/aid=(\d+)/)[1], { path: '/', domain: '.lvhs.jp' });
       }
     });
   });

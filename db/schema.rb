@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150820142113) do
+ActiveRecord::Schema.define(version: 20150823122855) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -113,6 +113,25 @@ ActiveRecord::Schema.define(version: 20150820142113) do
     t.integer  "vimeo_thumb_id",   limit: 4
   end
 
+  create_table "ope_staffs", force: :cascade do |t|
+    t.string   "email",                  limit: 255, default: "", null: false
+    t.string   "encrypted_password",     limit: 255, default: "", null: false
+    t.integer  "role",                   limit: 4,   default: 0
+    t.string   "reset_password_token",   limit: 255
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          limit: 4,   default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip",     limit: 255
+    t.string   "last_sign_in_ip",        limit: 255
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
+  end
+
+  add_index "ope_staffs", ["email"], name: "index_ope_staffs_on_email", unique: true, using: :btree
+  add_index "ope_staffs", ["reset_password_token"], name: "index_ope_staffs_on_reset_password_token", unique: true, using: :btree
+
   create_table "prefectures", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.datetime "created_at",             null: false
@@ -179,5 +198,16 @@ ActiveRecord::Schema.define(version: 20150820142113) do
   end
 
   add_index "users", ["device_id"], name: "index_users_on_device_id", unique: true, using: :btree
+
+  create_table "vimeo_queues", force: :cascade do |t|
+    t.integer  "artist_id",  limit: 4,               null: false
+    t.string   "title",      limit: 255
+    t.integer  "vimeo_id",   limit: 4
+    t.integer  "status",     limit: 4,   default: 0, null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+  end
+
+  add_index "vimeo_queues", ["artist_id", "vimeo_id"], name: "index_vimeo_queues_on_artist_id_and_vimeo_id", unique: true, using: :btree
 
 end

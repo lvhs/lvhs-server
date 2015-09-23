@@ -1,0 +1,6 @@
+- artists.each do |artist|
+  .col-xs-12[style="min-height: 180px;"]
+    a[href="/app/artists/#{ artist.id }"]
+      = image_tag 'common/loading.png', 'data-layzr' => image_url(static_url(artist.image_path)), width: '100%', class: "blink#{rest.nil? ? '' : ' rest'}"
+    a[href="/app/artists/#{ artist.id }"]
+      h3[style="color: #fff; position: absolute; bottom: 0; left: 0; text-shadow: 0 0 2px #333; margin: 0; background-color: rgba(0,0,0,.7); width: 100%; padding: 10px 30px;"] #{ artist.name }

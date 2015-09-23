@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 ruby '2.2.3'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.3'
+gem 'rails', '4.2.4'
 # Use mysql as the database for Active Record
 gem 'mysql2'
 # Use SCSS for stylesheets
@@ -32,6 +32,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'rails-api'
+gem 'twitter'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -73,7 +74,7 @@ gem 'newrelic_rpm'
 gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
 
-gem 'rails_config'
+gem 'config'
 
 gem 'draper'
 gem 'cells'
@@ -98,6 +99,8 @@ gem 'yaml_db'
 gem 'httpclient'
 gem 'peek'
 gem 'woothee'
+
+gem 'whenever', require: false
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 group :development, :test do

@@ -1,37 +1,85 @@
-.container-fluid style="padding-left:0; padding-right: 0; overflow: hidden;"
-  .row
-    = render partial: 'artist_list', locals: { artists: @artists, rest: @rest }
+= content_for :style
+  css:
+    .timeline-title-block {
+      color: #fff;
+      text-shadow: 0 0 1px #333;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      margin: 0;
+      background-color: rgba(0,0,0,.6);
+      width: 100%;
+      padding: 0 30px 5px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .timeline-title {
+      font-size: 15px;
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .timeline-artist-name {
+      color: rgba(255,255,255,.7);
+    }
 
-    div#rest-placeholder
+.container style="padding-left: 0; padding-right: 0; overflow: hidden;"
+  #timeline-container.row
+    = render partial: 'app/home/items', locals: { items: @items, price: @price }
+
+= content_for :script
+  - if deprecated_app?
+    javascript:
+      var latest_bundle_version = "#{latest_bundle_version}";
+      var app_store_url = "#{Settings.app_store_url}";
+
     coffee:
-      $.ajax(
-        url: '/app'
-        data:
-          rest: true
-        dataType: 'html'
-      ).done((html)->
-        $("#rest-placeholder").replaceWith(html)
-        Lvhs.Libs.Layzr.init_or_update()
-        $('.blink.rest')
-          .on 'touchstart', -> $(@).css opacity: 0.5
-          .on 'touchend', -> $(@).css opacity: 1
-      )
+      if $.cookie('version') isnt latest_bundle_version and confirm('最新版のアプリに更新してください')
+        setTimeout ->
+          location.href = app_store_url
+        , 300
+      $.cookie('version', latest_bundle_version, { path: '/', domain: '.lvhs.jp', expires: 1 })
 
-    - if deprecated_app?
-      javascript:
-        var latest_bundle_version = "#{latest_bundle_version}";
-        var app_store_url = "#{Settings.app_store_url}"
+  javascript:
+    var page = 2;
+    $('body').on('click', 'a', function(e){
+      var $el = $(this);
+      var href = $el.attr('href');
+      if (href.indexOf('purchase') > -1 ) {
+        $.cookie('iid', href.match(/iid=(\d+)/)[1], { path: '/', domain: '.lvhs.jp' });
+        $.cookie('aid', href.match(/aid=(\d+)/)[1], { path: '/', domain: '.lvhs.jp' });
+      }
+    });
 
-      coffee:
-        if $.cookie('version') isnt latest_bundle_version and confirm('最新版のアプリに更新してください')
-          setTimeout ->
-            location.href = app_store_url
-          , 300
-        $.cookie('version', latest_bundle_version, { path: '/', domain: '.lvhs.jp', expires: 1 })
+  coffee:
+    getScrollHeight = ->
+      windowHeight = document.documentElement.clientHeight
+      scrollTop    = document.body.scrollTop
+      marginBottom = 200
 
-  .row
-    .col-md-12
-      p.text-center style="margin-top: 10px; font-size: small;"
-        span style="color: #fff;" JASRAC許諾第9016191001Y31015号
-        span style="color: #fff;" &nbsp;|&nbsp;
-        a href="/terms.html" 利用規約
+      scrollTop + windowHeight + marginBottom
+
+    getPageHeight = -> document.body.scrollHeight
+
+    $container = $("#timeline-container")
+    pages = {}
+
+    onScroll = _.throttle(->
+      if getScrollHeight() >= getPageHeight() and not pages[page]
+        pages[page] = true
+        $.ajax(
+          url: '/app'
+          data:
+            p: page
+          dataType: 'html'
+        ).done((data) ->
+          if not data
+            return $(window).off 'scroll'
+          page += 1
+          $container.append(data)
+        )
+    , 100)
+
+    $(window).on('scroll', onScroll)
