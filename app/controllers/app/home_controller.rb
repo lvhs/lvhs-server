@@ -5,12 +5,13 @@ class App::HomeController < App::BaseController
     @items = Item.available.includes(:artist)
                .order(id: :desc).limit(limit).offset(offset(limit, @page))
     @price = build_price
+    @purchased_items = PurchasedItem.where(key: @device.key).pluck(:item_id).compact.uniq
 
     if @page > 1
       if @items.empty?
         render html: ''
       else
-        render partial: 'app/home/items', locals: { items: @items, price: @price }
+        render partial: 'app/home/items', locals: { items: @items, price: @price, purchased_items: @purchased_items }
       end
     end
   end

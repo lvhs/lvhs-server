@@ -27,7 +27,7 @@
 
 .container style="padding-left: 0; padding-right: 0; overflow: hidden;"
   #timeline-container.row
-    = render partial: 'app/home/items', locals: { items: @items, price: @price }
+    = render partial: 'app/home/items', locals: { items: @items, price: @price, purchased_items: @purchased_items }
 
 = content_for :script
   - if deprecated_app?
