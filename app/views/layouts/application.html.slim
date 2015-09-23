@@ -25,7 +25,7 @@ html
     = yield
 
     footer
-      .footer-inner
+      .footer-inner[data-no-turbolink="true"]
         a.footer-tab[class=(pro_app? || dev_app? ? 'pro' : '') href="/app/"]
           .footer-tab-icon
             span.glyphicon.glyphicon-time
@@ -42,7 +42,7 @@ html
           .footer-label
             span ライブ
         - if pro_app? || dev_app?
-          a.footer-tab.pro[href="/app/videos/new" data-no-turbolink="true"]
+          a.footer-tab.pro[href="/app/videos/new"]
             .footer-tab-icon
               span.glyphicon.glyphicon-facetime-video
             .footer-label
