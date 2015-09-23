@@ -1,12 +1,10 @@
 class App::HomeController < App::BaseController
   def index
-    first_view_items = 3
-    if params[:rest]
-      @artists = Artist.available[first_view_items..-1]
-      @rest = true
-      render partial: 'artist_list', layout: false, locals: { artists: @artists, rest: @rest }
-    else
-      @artists = Artist.available.take(first_view_items)
+    @items = Item.available.includes(:artist).reverse
+    @price = {}.tap do |price|
+      @items.each do |item|
+        price[item.id] = item.id == 451 ? 240 : 120
+      end
     end
   end
 end

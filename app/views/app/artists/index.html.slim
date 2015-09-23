@@ -1,0 +1,37 @@
+.container style="padding-left: 0; padding-right: 0; overflow: hidden;"
+  .row
+    = render partial: 'artist_list', locals: { artists: @artists, rest: @rest }
+
+    div#rest-placeholder
+    coffee:
+      $.ajax(
+        url: '/app/artists'
+        data:
+          rest: true
+        dataType: 'html'
+      ).done((html)->
+        $("#rest-placeholder").replaceWith(html)
+        Lvhs.Libs.Layzr.init_or_update()
+        $('.blink.rest')
+          .on 'touchstart', -> $(@).css opacity: 0.5
+          .on 'touchend', -> $(@).css opacity: 1
+      )
+
+    - if deprecated_app?
+      javascript:
+        var latest_bundle_version = "#{latest_bundle_version}";
+        var app_store_url = "#{Settings.app_store_url}"
+
+      coffee:
+        if $.cookie('version') isnt latest_bundle_version and confirm('最新版のアプリに更新してください')
+          setTimeout ->
+            location.href = app_store_url
+          , 300
+        $.cookie('version', latest_bundle_version, { path: '/', domain: '.lvhs.jp', expires: 1 })
+
+  .row
+    .col-md-12
+      p.text-center style="margin-top: 10px; font-size: small;"
+        span style="color: #fff;" JASRAC許諾第9016191001Y31015号
+        span style="color: #fff;" &nbsp;|&nbsp;
+        a href="/terms.html" 利用規約

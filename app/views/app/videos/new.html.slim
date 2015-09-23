@@ -1,17 +1,4 @@
-= content_for :style
-  = stylesheet_link_tag 'dropify'
-
-= content_for :script
-  = javascript_include_tag 'dropify'
-  javascript:
-    $("input[type=file]").dropify({
-    messages: {
-        default: 'タップして動画ファイルを選択してください',
-        replace: ' ',
-        remove:  ' ',
-        error:   ' '
-      }
-    })
+= stylesheet_link_tag 'dropify'
 
 .container-fluid[data-no-turbolink="true"]
   /h3[style="color: #fff;"] 動画アップロード
@@ -33,7 +20,18 @@
 
     .form-group
       .col-sm-offset-2.col-sm-10
-        input#submit.btn-lg.btn-block[type="submit" value="OK" disabled="true"]
+        input#submit.blink.btn-lg.btn-block[type="submit" value="OK" disabled="true" style="box-shadow: 3px 3px 6px rgba(255, 255, 255, .4);"]
+
+= javascript_include_tag 'dropify'
+javascript:
+  $("input[type=file]").dropify({
+  messages: {
+      default: 'タップして動画ファイルを<br/>選択してください',
+      replace: ' ',
+      remove:  ' ',
+      error:   ' '
+    }
+  })
 
 coffee:
   $title  = $('#title')

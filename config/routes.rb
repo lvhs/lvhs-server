@@ -26,15 +26,13 @@ Lvhs::Application.routes.draw do
 
   constraints Routes::Constraints::Subdomain::APP do
     namespace :app do
-      root to: 'home#index'
-
-      resources :timeline, only: [:index]
+      root controller: :home, action: :index
 
       resources :menu, only: [:index]
 
       resources :version, only: [:index]
 
-      resources :artists, only: [:show]
+      resources :artists, only: [:index, :show]
 
       resources :products, only: [:index]
 
