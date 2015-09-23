@@ -93,7 +93,10 @@ footer {
     .footer-tab {
       color: #fff;
       text-align: center;
-      width: 25%;
+      width: 33.3%;
+      &.pro {
+        width: 25%;
+      }
       .footer-tab-icon {
         padding-top: 8px;
         font-size: 18px;

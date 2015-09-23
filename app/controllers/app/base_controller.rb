@@ -2,6 +2,7 @@ require 'version'
 
 class App::BaseController < ApplicationController
   before_action :init_controller
+  helper_method :in_review?, :deprecated_app?, :latest_bundle_version, :pro_app?, :dev_app?
 
   def init_controller
     init_device
@@ -33,10 +34,6 @@ class App::BaseController < ApplicationController
   def deprecated_app?
     app_bundle_version < latest_bundle_version
   end
-
-  helper_method :in_review?
-  helper_method :deprecated_app?
-  helper_method :latest_bundle_version
 
   def app_type
     @app_type ||= request.headers['x-app-type']
