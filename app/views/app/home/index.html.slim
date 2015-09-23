@@ -44,6 +44,14 @@
 
   javascript:
     var page = 2;
+    $('body').on('click', 'a', function(e){
+      var $el = $(this);
+      var href = $el.attr('href');
+      if (href.indexOf('purchase') > -1 ) {
+        $.cookie('iid', href.match(/iid=(\d+)/)[1], { path: '/', domain: '.lvhs.jp' });
+        $.cookie('aid', href.match(/aid=(\d+)/)[1], { path: '/', domain: '.lvhs.jp' });
+      }
+    });
 
   coffee:
     getScrollHeight = ->
