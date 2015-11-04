@@ -15,11 +15,12 @@ class CA
         end
 
         *ads = res['list_view']['ad']
-        @ads = ads.map do |ad_data|
+        @ads = ads.map.with_index do |ad_data, i|
           begin
             CA::Reward::Ad.new(ad_data).tap { |ad| convert_parameters(ad, user_id, enc_user_id) }
           rescue => e
-            puts "CA::Reward::Ad error!"
+            puts "CA::Reward::Ad error!:#{i}: #{e}"
+            print i
             puts ad_data
             nil
           end
