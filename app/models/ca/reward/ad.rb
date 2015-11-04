@@ -14,7 +14,7 @@ class CA
 
       def initialize(data = {})
         data.each do |k, v|
-          instance_variable_set("@#{k}", v) if k != 'p' && k != '1'
+          instance_variable_set("@#{k}", v) if k != 'p'
         end
 
         p = *data['p']

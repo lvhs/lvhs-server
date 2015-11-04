@@ -10,15 +10,18 @@ class CA
         json = parse_response_to_hash(res)
 
         res = json['response']
-        puts res
         %w(total_cnt data_cnt m_owner_id).each do |key|
           instance_variable_set("@#{key}", res[key]) unless res[key].nil?
         end
 
         *ads = res['list_view']['ad']
         @ads = ads.map do |ad_data|
-          CA::Reward::Ad.new(ad_data).tap { |ad| convert_parameters(ad, user_id, enc_user_id) }
-        end
+          begin
+            CA::Reward::Ad.new(ad_data).tap { |ad| convert_parameters(ad, user_id, enc_user_id) }
+          rescue => e
+            nil
+          end
+        end.compact
       end
 
       private
