@@ -13,12 +13,20 @@ class CA
                   :cate_name
 
       def initialize(data = {})
-        data.each do |k, v|
+        data.each_pair do |k, v|
           instance_variable_set("@#{k}", v) if k != 'p'
         end
 
         p = *data['p']
-        @cv_points = p.map { |i| CA::Reward::CvPoint.new i }
+        @cv_points = p.map do |i|
+          begin
+            CA::Reward::CvPoint.new i
+          rescue => e
+            puts e
+            puts i
+            raise e
+          end
+        end
       end
     end
   end
