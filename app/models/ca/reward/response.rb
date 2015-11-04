@@ -20,8 +20,6 @@ class CA
             CA::Reward::Ad.new(ad_data).tap { |ad| convert_parameters(ad, user_id, enc_user_id) }
           rescue => e
             puts "CA::Reward::Ad error!:#{i}: #{e}"
-            print i
-            puts ad_data
             nil
           end
         end.compact
