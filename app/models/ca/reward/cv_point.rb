@@ -5,7 +5,7 @@ class CA
                   :price, :requisite_id
 
       def initialize(data = {})
-        data.each do |k, v|
+        Hash[data].each_pair do |k, v|
           instance_variable_set("@#{k}", v)
         end
       end

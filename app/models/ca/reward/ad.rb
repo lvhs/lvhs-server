@@ -23,7 +23,7 @@ class CA
             CA::Reward::CvPoint.new i
           rescue => e
             puts e
-            puts i
+            p i
             raise e
           end
         end
