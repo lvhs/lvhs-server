@@ -6,7 +6,7 @@ class CA
 
       def initialize(data = {})
         data.each do |k, v|
-          instance_variable_set("@#{k}", v)
+          instance_variable_set("@#{k}", v) if k != '1'
         end
       end
     end

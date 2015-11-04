@@ -10,6 +10,7 @@ class CA
         json = parse_response_to_hash(res)
 
         res = json['response']
+        puts res
         %w(total_cnt data_cnt m_owner_id).each do |key|
           instance_variable_set("@#{key}", res[key]) unless res[key].nil?
         end
