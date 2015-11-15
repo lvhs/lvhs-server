@@ -27,7 +27,7 @@ javascript:
       = image_tag "video-title.png", width: "100%"
   - if @items.any? { |i| i.media_type == 'video' }
 
-    - @items.each do |item|
+    - @items.select(&:free?).each do |item|
       - if item.media_type == 'video'
         div.ribbon-box.blink.trigger style="padding: 18px 10px; box-sizing: border-box; background-color: rgba(0,0,0,.6); color: #fff; font-size: 1.5rem;"
 
