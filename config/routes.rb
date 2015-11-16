@@ -59,6 +59,7 @@ Lvhs::Application.routes.draw do
       end
 
       resources :videos do
+        get ':id', to: 'videos#show'
         collection do
           put :title, to: 'videos#title'
           get :callback, to: 'videos#callback'

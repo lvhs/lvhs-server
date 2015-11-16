@@ -1,4 +1,5 @@
 require 'vimeo/client'
+require 'httphelper'
 
 class App::VideosController < App::BaseController
   def new
@@ -9,6 +10,17 @@ class App::VideosController < App::BaseController
       queue_id: @queue.id,
       artist_id: @artist.id
     )
+  end
+
+  def show
+    res = HTTPHelper.client.get("https://player.vimeo.com/video/#{params[:id]}/config", nil,
+                                {
+                                  "Content-Type": "application/json",
+                                  Referer: "http://lvhs.jp/app"
+                                })
+    profile = JSON.parse(res.body)
+    @video_url = profile['request']['files']['progressive'].first['url']
+    render layout: "empty"
   end
 
   def title

@@ -58,7 +58,9 @@ javascript:
                   = image_tag 'get.png', style: "height: 35px;", class: 'blink'
 
               - elsif item.free?
-                a href="player://movie?btitle=#{@price[item.id]}円で見る&rtitle=アプリをDLして無料で見る&aid=#{@artist.id}&iid=#{ item.id }&vid=#{ item.vimeo_id }"
+                / FIXME!!!
+                /a href="player://movie?btitle=#{@price[item.id]}円で見る&rtitle=アプリをDLして無料で見る&aid=#{@artist.id}&iid=#{ item.id }&vid=#{ item.vimeo_id }"
+                a[href="/app/videos/#{item.vimeo_id}"]
                   = image_tag 'play-icon.png', style: 'height: 35px;', class: 'blink'
 
               /- elsif !@device.nil? && PurchasedItem.find_by(key: @device.key, item_id: item.id)
