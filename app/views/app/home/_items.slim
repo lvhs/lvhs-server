@@ -1,29 +1,57 @@
-- items.select(&:free?).each do |item|
-  .col-xs-12[style="min-height: 180px;"]
-    / FIXME!
-    /- href = item.free? || purchased_items.include?(item.id) ? "player://movie?aid=#{item.artist.id}&iid=#{ item.id }&vid=#{ item.vimeo_id }" \
-     : "purchase://movie?btitle=#{price[item.id]}円で見る&rtitle=アプリをDLして無料で見る&aid=#{item.artist.id}&iid=#{ item.id }&pid=#{item.pid}#{in_review? ? '' : '&rwd=1'}"
-    /a[href="#{href}"]
-    a[href="/app/videos/#{item.vimeo_id}"]
-      .dogear-wrapper
-        - if item.free?
-          .dogear FREE
+- if in_review?
+  - items.each do |item|
+    .col-xs-12[style="min-height: 180px;"]
+      - href = item.free? || purchased_items.include?(item.id) ? "player://movie?aid=#{item.artist.id}&iid=#{ item.id }&vid=#{ item.vimeo_id }" \
+       : "purchase://movie?btitle=#{price[item.id]}円で見る&rtitle=アプリをDLして無料で見る&aid=#{item.artist.id}&iid=#{ item.id }&pid=#{item.pid}#{in_review? ? '' : '&rwd=1'}"
+      a[href="#{href}"]
+        .dogear-wrapper
+          - if item.free?
+            .dogear FREE
+          - else
+            .dogear.get GET
+
+        - if item.image_path.blank?
+          - if true # vimeo thumbnail
+            = image_tag "//i.vimeocdn.com/video/#{ item.vimeo_thumb_id }.png", style: 'max-height: 200px; min-width: 100%;'
+          - else # default movie thumbnail
+            = image_tag 'no-image.png', width: '100%', style: 'margin: 0;'
         - else
-          .dogear.get GET
+          = image_tag static_url(item.image_path), style: 'max-height: 300px; min-width: 100%;'
 
-      - if item.image_path.blank?
-        - if true # vimeo thumbnail
-          = image_tag "//i.vimeocdn.com/video/#{ item.vimeo_thumb_id }.png", style: 'max-height: 200px; min-width: 100%;'
-        - else # default movie thumbnail
-          = image_tag 'no-image.png', width: '100%', style: 'margin: 0;'
-      - else
-        = image_tag static_url(item.image_path), style: 'max-height: 300px; min-width: 100%;'
+      a[href="#{href}" style="color: #fff;"]
+        .timeline-title-block
+          h5.timeline-title #{ item.name }
+          div.timeline-artist-name[style="font-size: 13px;"]
+            | #{item.artist.name}
+            /| (#{item.updated_at.strftime("%Y/%m/%d")})
 
-    / FIXME!
-    /a href="#{href}" style="color: #fff;"
-    a[href="/app/videos/#{item.vimeo_id}"]
-      .timeline-title-block
-        h5.timeline-title #{ item.name }
-        div.timeline-artist-name[style="font-size: 13px;"]
-          | #{item.artist.name}
-          /| (#{item.updated_at.strftime("%Y/%m/%d")})
+- else
+  - items.select(&:free?).each do |item|
+    .col-xs-12[style="min-height: 180px;"]
+      / FIXME!
+      /- href = item.free? || purchased_items.include?(item.id) ? "player://movie?aid=#{item.artist.id}&iid=#{ item.id }&vid=#{ item.vimeo_id }" \
+       : "purchase://movie?btitle=#{price[item.id]}円で見る&rtitle=アプリをDLして無料で見る&aid=#{item.artist.id}&iid=#{ item.id }&pid=#{item.pid}#{in_review? ? '' : '&rwd=1'}"
+      /a[href="#{href}"]
+      a[href="/app/videos/#{item.vimeo_id}"]
+        .dogear-wrapper
+          - if item.free?
+            .dogear FREE
+          - else
+            .dogear.get GET
+
+        - if item.image_path.blank?
+          - if true # vimeo thumbnail
+            = image_tag "//i.vimeocdn.com/video/#{ item.vimeo_thumb_id }.png", style: 'max-height: 200px; min-width: 100%;'
+          - else # default movie thumbnail
+            = image_tag 'no-image.png', width: '100%', style: 'margin: 0;'
+        - else
+          = image_tag static_url(item.image_path), style: 'max-height: 300px; min-width: 100%;'
+
+      / FIXME!
+      /a href="#{href}" style="color: #fff;"
+      a[href="/app/videos/#{item.vimeo_id}"]
+        .timeline-title-block
+          h5.timeline-title #{ item.name }
+          div.timeline-artist-name[style="font-size: 13px;"]
+            | #{item.artist.name}
+            /| (#{item.updated_at.strftime("%Y/%m/%d")})

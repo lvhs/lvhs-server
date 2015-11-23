@@ -27,53 +27,10 @@ javascript:
       = image_tag "video-title.png", width: "100%"
   - if @items.any? { |i| i.media_type == 'video' }
 
-    - @items.select(&:free?).each do |item|
-      - if item.media_type == 'video'
-        div.ribbon-box.blink.trigger style="padding: 18px 10px; box-sizing: border-box; background-color: rgba(0,0,0,.6); color: #fff; font-size: 1.5rem;"
-
-          - if item.new?
-            .ribbon-wrapper
-              .ribbon New
-
-          div style="display: table; width: 100%; overflow: hidden;"
-
-            - if item.image_path.blank?
-              - if true # vimeo thumbnail
-                div style="display: table-cell; width: 46px; overflow: hidden; margin: 0;"
-                  = image_tag "//i.vimeocdn.com/video/#{ item.vimeo_thumb_id }_200x150.jpg", width: '100%'
-              - else # default movie thumbnail
-                div style="display: table-cell; width: 46px; overflow: hidden; margin: 0;"
-                  div style="background-color: #fff; padding: 0 2px 0 2px;"
-                    = image_tag 'no-image.png', width: '100%', style: 'margin: 0;'
-            - else
-              div style="display: table-cell; width: 46px; overflow: hidden; margin: 0;"
-                = image_tag static_url(item.image_path), width: '100%'
-
-            div style="display: table-cell; margin: 0; padding: 0 8px; vertical-align: middle;"
-              span = item.name
-
-            div style="display: table-cell; width: 60px; margin: 0;"
-              - if !item.free? && PurchasedItem.find_by(key: @device.key, item_id: item.id).nil? && item.purchasable?
-                a href="purchase:///movie?btitle=#{@price[item.id]}円で見る&rtitle=アプリをDLして無料で見る&aid=#{@artist.id}&iid=#{ item.id }&pid=#{item.pid}#{in_review? ? '' : '&rwd=1'}"
-                  = image_tag 'get.png', style: "height: 35px;", class: 'blink'
-
-              - elsif item.free?
-                / FIXME!!!
-                /a href="player://movie?btitle=#{@price[item.id]}円で見る&rtitle=アプリをDLして無料で見る&aid=#{@artist.id}&iid=#{ item.id }&vid=#{ item.vimeo_id }"
-                a[href="/app/videos/#{item.vimeo_id}"]
-                  = image_tag 'play-icon.png', style: 'height: 35px;', class: 'blink'
-
-              /- elsif !@device.nil? && PurchasedItem.find_by(key: @device.key, item_id: item.id)
-              - else
-                a.player-btn href="player://movie?btitle=#{@price[item.id]}円で見る&rtitle=アプリをDLして無料で見る&aid=#{@artist.id}&iid=#{ item.id }&vid=#{ item.vimeo_id }"
-                  = image_tag "play-icon.png", style: "height: 35px;", class: 'blink'
-                - if !@player.nil?
-                  javascript:
-                    $(".player-btn").trigger('click')
-
-              /- else
-                a href="/app/car/list?btitle=120円で見る&rtitle=アプリをDLして無料で見る&aid=#{@artist.id}&iid=#{ item.id }&vi=#{ item.vimeo_id }"
-                  = image_tag "get.png", style: "height: 35px;", class: 'blink'
+    - if in_review?
+      = render partial: 'items_for_review'
+    - else
+      = render partial: 'items'
 
   - else
     .row style="margin-top: 18px;"
