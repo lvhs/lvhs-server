@@ -32,29 +32,40 @@ html
     = yield
 
     footer
-      .footer-inner[data-no-turbolink="true"]
-        a.footer-tab[class=(pro_app? || dev_app? ? 'pro' : '') href="/app/"]
-          .footer-tab-icon
-            span.glyphicon.glyphicon-time
-          .footer-label
-            span タイムライン
-        a.footer-tab[class=(pro_app? || dev_app? ? 'pro' : '') href="/app/artists"]
-          .footer-tab-icon
-            span.glyphicon.glyphicon-user
-          .footer-label
-            span バンド
-        a.footer-tab[class=(pro_app? || dev_app? ? 'pro' : '') href="/app/events"]
-          .footer-tab-icon
-            span.glyphicon.glyphicon-th-list
-          .footer-label
-            span ライブ
-        - if pro_app? || dev_app?
-          a.footer-tab.pro[href="/app/videos/new"]
+      - if in_review?
+        .footer-inner[data-no-turbolink="true"]
+          a.footer-tab[href="/app/" style="width: 50%;"]
             .footer-tab-icon
-              span.glyphicon.glyphicon-facetime-video
+              span.glyphicon.glyphicon-time
             .footer-label
-              span 動画UP
-
-
+              span タイムライン
+          a.footer-tab[href="/app/artists" style="width: 50%;"]
+            .footer-tab-icon
+              span.glyphicon.glyphicon-user
+            .footer-label
+              span バンド
+      - else
+        .footer-inner[data-no-turbolink="true"]
+          a.footer-tab[class=(pro_app? || dev_app? ? 'pro' : '') href="/app/"]
+            .footer-tab-icon
+              span.glyphicon.glyphicon-time
+            .footer-label
+              span タイムライン
+          a.footer-tab[class=(pro_app? || dev_app? ? 'pro' : '') href="/app/artists"]
+            .footer-tab-icon
+              span.glyphicon.glyphicon-user
+            .footer-label
+              span バンド
+          a.footer-tab[class=(pro_app? || dev_app? ? 'pro' : '') href="/app/events"]
+            .footer-tab-icon
+              span.glyphicon.glyphicon-th-list
+            .footer-label
+              span ライブ
+          - if pro_app? || dev_app?
+            a.footer-tab.pro[href="/app/videos/new"]
+              .footer-tab-icon
+                span.glyphicon.glyphicon-facetime-video
+              .footer-label
+                span 動画UP
 
     = yield(:script)

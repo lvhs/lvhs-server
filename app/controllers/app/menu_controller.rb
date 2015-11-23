@@ -1,7 +1,26 @@
 class App::MenuController < App::BaseController
   def index
     domain = Rails.configuration.domain
-    render json: [
+
+    menu = in_review? ? [
+      {
+        title: 'ホーム',
+        type: 'url',
+        data: "http://#{domain}/app/"
+      },
+      {
+        title: 'シェア',
+        type: 'share'
+      },
+      {
+        title: 'お問い合わせ',
+        type: 'support'
+      },
+      {
+        title: '購入履歴の復元',
+        type: 'restore'
+      }
+    ] : [
       {
         title: 'ホーム',
         type: 'url',
@@ -30,5 +49,7 @@ class App::MenuController < App::BaseController
         type: 'restore'
       }
     ]
+
+    render json: menu
   end
 end

@@ -40,11 +40,11 @@ class App::BaseController < ApplicationController
   end
 
   def pro_app?
-   app_type == 'PRO'
+    !in_review? && app_type == 'PRO'
   end
 
   def dev_app?
-    app_type == 'DEV'
+    !in_review? && app_type == 'DEV'
   end
 
   private
