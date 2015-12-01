@@ -21,7 +21,7 @@ html
     = yield(:style)
 
   body[style="padding-bottom: 50px;"]
-    - unless in_review?
+    - if deprecated_app?
       div[style="color: #fff; margin: 10px; font-size: smaller;"]
         p ◼おしらせ(11/26更新)
         p 「有料で入手した動画が再生されない」問題が発生しており、ご迷惑をおかけしております。
