@@ -27,7 +27,7 @@ javascript:
       = image_tag "video-title.png", width: "100%"
   - if @items.any? { |i| i.media_type == 'video' }
 
-    - if in_review?
+    - if in_review? || !deprecated_app?
       = render partial: 'items_for_review'
     - else
       = render partial: 'items'

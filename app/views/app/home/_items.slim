@@ -1,4 +1,4 @@
-- if in_review?
+- if in_review? || !deprecated_app?
   - items.each do |item|
     .col-xs-12[style="min-height: 180px;"]
       - href = item.free? || purchased_items.include?(item.id) ? "player://movie?aid=#{item.artist.id}&iid=#{ item.id }&vid=#{ item.vimeo_id }" \
