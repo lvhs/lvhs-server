@@ -7,7 +7,7 @@
         .dogear-wrapper
           - if item.free?
             .dogear FREE
-          - else
+          - elsif !purchased_items.include?(item.id)
             .dogear.get GET
 
         - if item.image_path.blank?
