@@ -35,11 +35,15 @@
 
           /- elsif !@device.nil? && PurchasedItem.find_by(key: @device.key, item_id: item.id)
           - else
-            a.player-btn href="player://movie?btitle=#{@price[item.id]}円で見る&rtitle=アプリをDLして無料で見る&aid=#{@artist.id}&iid=#{ item.id }&vid=#{ item.vimeo_id }"
-              = image_tag "play-icon.png", style: "height: 35px;", class: 'blink'
             - if !@player.nil?
+              a.player-btn href="player://movie?btitle=#{@price[item.id]}円で見る&rtitle=アプリをDLして無料で見る&aid=#{@artist.id}&iid=#{ item.id }&vid=#{ item.vimeo_id }"
+                = image_tag "play-icon.png", style: "height: 35px;", class: 'blink'
               javascript:
                 $(".player-btn").trigger('click')
+
+            - else
+              a href="player://movie?btitle=#{@price[item.id]}円で見る&rtitle=アプリをDLして無料で見る&aid=#{@artist.id}&iid=#{ item.id }&vid=#{ item.vimeo_id }"
+                = image_tag "play-icon.png", style: "height: 35px;", class: 'blink'
 
           /- else
             a href="/app/car/list?btitle=120円で見る&rtitle=アプリをDLして無料で見る&aid=#{@artist.id}&iid=#{ item.id }&vi=#{ item.vimeo_id }"
