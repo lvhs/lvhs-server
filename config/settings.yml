@@ -1,7 +1,8 @@
+---
 domain: 'lvhs.jp'
 static_host: 'http://static.lvhs.jp'
 
-review_bundle_version: '0.0.7'
+review_bundle_version: '0.0.8'
 latest_bundle_version: '0.0.6'
 app_store_url: 'http://itunes.apple.com/jp/app/livehouse-qing-bao-xian-xing/id923819273?mt=8'
 
