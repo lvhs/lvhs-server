@@ -26,6 +26,8 @@
     }
 
 .container style="padding-left: 0; padding-right: 0; overflow: hidden;"
+  h4
+    a[href="/announce" style="font-weight: bold; color: #fff; margin-left: 8px; text-decoration: underline;"] [重要] サービス終了のお知らせ
   #timeline-container.row
     = render partial: 'app/home/items', locals: { items: @items, price: @price, purchased_items: @purchased_items }
 

@@ -6,6 +6,7 @@ Lvhs::Application.routes.draw do
   resources :support, only: [:index], controller: 'teaser/support'
   resources :terms, only: [:index], controller: 'teaser/terms'
   resources :privacy, only: [:index], controller: 'teaser/privacy'
+  resources :announce, only: [:index], controller: 'teaser/announce'
 
   namespace :api do
     namespace :v1 do
