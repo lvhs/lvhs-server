@@ -4,7 +4,7 @@ class Teaser::AnnounceController < Teaser::BaseController
     @text = <<-TEXT.strip_heredoc
     平素より弊社「LIVEHOUSE」をご利用いただき、誠にありがとうございます。
 
-    App Storeで運営する「LIVEHOUSE」のサービスを、2017年5月31日（水）に終了いたします。
+    App Storeで運営する「LIVEHOUSE」のサービスを、2017年5月31日（水）をもって終了いたしました。
 
     弊社では、お客様に満足いただくために開発・運営してまいりましたが、昨今の事業環境や今後の展開を鑑みて、誠に残念ではありますが、サービスを終了させていただくことになりました。
 
